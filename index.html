@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KitabVerse</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital@1&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#020c1b;color:#e6e6e6;font-family:Montserrat,sans-serif}
+.header{display:flex;align-items:center;gap:12px;padding:10px 4%;background:#020c1b;border-bottom:1px solid #d4af3730}
+.logo-circle{width:56px;height:56px;border-radius:50%;border:none;box-shadow:none}
+.brand{color:#d4af37;display:flex;align-items:baseline}
+.big{font-family:'Great Vibes',cursive;font-size:50px}.small{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:34px}
+.tag{font-family:'Cormorant Garamond',serif;color:#e8c873;font-size:12px;letter-spacing:1px}
+.line{width:195px;height:1px;background:#d4af37;margin-top:4px;position:relative}
+.line::before,.line::after{content:'◆';position:absolute;top:-5px;font-size:6px;color:#d4af37}
+.line::before{left:0}.line::after{right:0}
+.hero{text-align:center;padding:45px 20px 30px}
+.hero-circle{width:165px;height:165px;border-radius:50%;border:none;box-shadow:0 0 35px #d4af3740;display:block;margin:0 auto}
+.hero .brand{justify-content:center;margin-top:18px}.hero .big{font-size:88px}.hero .small{font-size:62px}
+.hero-tag{font-size:16px;letter-spacing:2.5px;color:#e8c873}
+.hero .line{width:310px;margin:8px auto}
+.desc{color:#8892b0;max-width:620px;margin:22px auto;line-height:1.7;font-size:14px}
+.search{max-width:500px;margin:24px auto;display:flex;background:#112240;border:1px solid #d4af3760;border-radius:30px;overflow:hidden}
+.search input{flex:1;background:transparent;border:none;padding:15px 20px;color:white;outline:none}
+.search button{background:#d4af37;border:none;padding:0 24px;font-weight:700;color:#020c1b}
+.btn{background:#d4af37;color:#020c1b;padding:14px 32px;border-radius:30px;text-decoration:none;font-weight:700;display:inline-block;margin-top:14px}
+.footer{text-align:center;padding:25px;color:#5a6a8a;font-size:12px;border-top:1px solid #ffffff0d;margin-top:40px}
+</style>
+</head>
+<body>
+<div class="header">
+<img src="logo.png" class="logo-circle">
+<div><div class="brand"><span class="big">K</span><span class="small">itab</span><span class="big" style="margin-left:5px">V</span><span class="small">erse</span></div><div class="tag">Read. Share. Connect.</div><div class="line"></div></div>
+</div>
+<div class="hero">
+<img src="logo.png" class="hero-circle">
+<div class="brand" style="justify-content:center"><span class="big">K</span><span class="small">itab</span><span class="big" style="margin-left:8px">V</span><span class="small">erse</span></div>
+<div class="tag" style="font-size:16px;letter-spacing:2.5px">READ. SHARE. CONNECT.</div>
+<div class="line" style="width:310px;margin:8px auto"></div>
+<div class="desc">The most premium digital library experience. Borrow books from neighbors, share your collection, and connect with readers across Mumbai. Zero cost, pure knowledge.</div>
+<div class="search"><input placeholder="Search 10,000+ books..."><button>Search</button></div>
+<a href="#" class="btn">Explore Library →</a>
+</div>
+<div class="footer">KitabVerse © 2026 · Made for readers in Mumbai</div>
+</body>
+</html>
