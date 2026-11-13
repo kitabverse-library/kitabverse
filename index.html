@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KitabVerse - Read. Share. Connect.</title>
+</head>
+<body style="font-family:sans-serif; text-align:center; padding-top:60px; background:#f8f9ff;">
+<h1>📚 KitabVerse</h1>
+<p>KitabVerse - Read. Share. Connect.</p>
+<button id="googleBtn" style="background:white; border:1px solid #ddd; padding:14px 24px; border-radius:10px; font-weight:bold; cursor:pointer;">Continue with Google</button>
+<p id="msg" style="margin-top:20px;"></p>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
+const firebaseConfig = {
+  apiKey: "AIzaSyA3RtkFn390udz28cGyS0_zGdMmc-YVCu8",
+  authDomain: "kitabverse.firebaseapp.com",
+  projectId: "kitabverse",
+  storageBucket: "kitabverse.firebasestorage.app",
+  messagingSenderId: "918701492498",
+  appId: "1:918701492498:web:f2bdae6a46b1a2b3edcbcb"
+};
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+document.getElementById("googleBtn").onclick = () => {
+  signInWithPopup(auth, provider).then(r => {
+    document.getElementById("msg").innerHTML = "✅ Welcome " + r.user.displayName + " ❤️<br>" + r.user.email;
+  }).catch(e => alert(e.message));
+};
+</script>
+</body>
+</html>
