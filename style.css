@@ -1,0 +1,51 @@
+/* KITABVERSE FINAL v5 - NO SHADOW - ONE LINE */
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#080E1E;color:#E8EAF0;font-family:'Poppins',sans-serif;-webkit-font-smoothing:antialiased}
+
+.header{display:flex;align-items:center;justify-content:space-between;padding:10px 18px;background:#080E1E;border-bottom:1px solid rgba(255,255,255,.06);position:sticky;top:0;z-index:100}
+.header-logo{width:40px;height:40px;border-radius:50%;object-fit:cover;display:block;box-shadow:none!important;filter:none!important;border:none!important;outline:none!important}
+.header-nav{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+.header-nav::-webkit-scrollbar{display:none}
+.header-nav button{flex-shrink:0;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:#C5C9D6;padding:6px 12px;border-radius:100px;font-size:11px;font-weight:500;cursor:pointer;white-space:nowrap}
+
+.welcome-box{text-align:center;padding:20px 0 14px;background:linear-gradient(180deg, rgba(212,175,55,.07), transparent);border-bottom:1px solid rgba(212,175,55,.1)}
+.welcome-box h2{font-size:13px;font-weight:700;letter-spacing:2.2px;color:#D4AF37;text-transform:uppercase}
+.welcome-box p{font-size:12px;color:#8E96AC;margin-top:4px}
+
+.hero{text-align:center;padding:42px 20px 20px}
+.hero-logo{display:inline-block;line-height:0;background:transparent}
+.hero-logo img{width:128px;height:128px;border-radius:50%;display:block;object-fit:cover;box-shadow:none!important;filter:none!important;border:none!important;outline:none!important;background:transparent}
+.hero h1{font-size:22px;font-weight:600;color:#FFF;margin-top:28px;line-height:1.35;max-width:420px;margin-inline:auto}
+.hero-one-line{margin-top:10px;font-size:13px;color:#8E96AC;white-space:nowrap;overflow:visible;text-align:center;letter-spacing:.2px;line-height:1.4}
+
+.search-section{max-width:640px;margin:28px auto 0;padding:0 20px}
+.search-box{position:relative;display:flex;align-items:center;background:#111A2E;border:1px solid rgba(255,255,255,.08);border-radius:100px;padding:5px}
+.search-box input{flex:1;background:transparent;border:none;outline:none;color:#FFF;padding:10px 100px 10px 18px;font-size:13px;font-family:'Poppins',sans-serif}
+.search-box input::placeholder{color:#6B728E}
+.mic-btn{position:absolute;right:82px;top:50%;transform:translateY(-50%);background:#080E1E;border:1px solid rgba(255,255,255,.08);width:32px;height:32px;border-radius:50%;color:#D4AF37;cursor:pointer}
+.search-btn{position:absolute;right:5px;top:50%;transform:translateY(-50%);background:#D4AF37;color:#080E1E;border:none;padding:8px 18px;border-radius:100px;font-size:12px;font-weight:600;cursor:pointer}
+
+.search-chips{display:flex;gap:8px;margin-top:16px;overflow-x:auto;padding:2px 2px 8px;justify-content:center;scrollbar-width:none}
+.search-chips::-webkit-scrollbar{display:none}
+.search-chips span{flex-shrink:0;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:#9AA0B8;padding:6px 14px;border-radius:100px;font-size:11px;font-weight:500;white-space:nowrap}
+
+.footer{text-align:center;padding:32px 20px 20px;margin-top:20px;border-top:1px solid rgba(255,255,255,.06)}
+.footer p{font-size:11px;color:#D4AF37;letter-spacing:1px}
+.footer .powered{font-size:10px;color:#5A637A;margin-top:8px;text-transform:none}
+
+@media (max-width:768px){
+  .header{padding:8px 12px}
+  .header-logo{width:34px;height:34px}
+  .header-nav{gap:6px;margin-left:12px}
+  .header-nav button{font-size:10px;padding:5px 9px}
+  .welcome-box h2{font-size:11px;letter-spacing:1.8px}
+  .hero{padding:32px 12px 16px}
+  .hero-logo img{width:108px;height:108px}
+  .hero h1{font-size:18px;margin-top:22px}
+  .hero-one-line{font-size:10.2px;white-space:nowrap;letter-spacing:0}
+  .search-section{padding:0 14px}
+  .search-chips{justify-content:flex-start}
+}
+@media (max-width:360px){
+  .hero-one-line{font-size:9.2px}
+            }
