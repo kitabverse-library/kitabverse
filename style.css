@@ -1,0 +1,48 @@
+/* KitabVerse - Fixed Mobile + No Double Circle - Official */
+:root {
+  --bg: #0a1020;
+  --bg2: #111a2f;
+  --gold: #FFD700;
+  --text: #e8eefc;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; overflow-x: hidden; }
+
+/* HEADER */
+.header, header { display: flex; align-items: center; justify-content: space-between; padding: 8px 10px; background: #070c1a; border-bottom: 1px solid rgba(255,215,0,0.25); position: sticky; top: 0; z-index: 1000; }
+
+/* FIX: Logo already has circle inside PNG - remove CSS border */
+.header-logo img, .header .logo img, .logo img, #headerLogo {
+  width: 56px !important; height: 56px !important;
+  border: none !important; border-radius: 0 !important;
+  box-shadow: none !important; background: transparent !important;
+  object-fit: contain; padding: 0 !important;
+}
+
+.header nav { display: flex; gap: 16px; overflow-x: auto; scrollbar-width: none; }
+.header nav::-webkit-scrollbar { display: none; }
+
+/* HERO - FIX DOUBLE CIRCLE */
+.hero-logo-container, .main-logo, .hero { display: flex; flex-direction: column; align-items: center; margin: 24px auto 10px auto; }
+.hero-logo-container img, .main-logo img, #mainLogo, img.hero-logo {
+  width: 280px !important; height: 280px !important;
+  border: none !important; box-shadow: none !important;
+  background: transparent !important; border-radius: 50% !important;
+  object-fit: contain; filter: drop-shadow(0 0 28px rgba(255,215,0,0.55));
+}
+
+/* SEARCH - FIX OVERLAP */
+.search-container, .search-box { position: relative; width: 92%; max-width: 720px; margin: 26px auto 40px auto !important; z-index: 10; }
+.search-container input { width: 100%; padding: 15px 110px 15px 20px; border-radius: 999px; border: 1.5px solid var(--gold); background: var(--bg2); color: white; font-size: 15px; }
+.cast-btn, .cast-to-tv { position: relative !important; bottom: auto !important; display: flex !important; margin: 16px auto !important; z-index: 20; }
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .header-logo img { width: 48px !important; height: 48px !important; }
+  .hero-logo-container img, #mainLogo { width: 210px !important; height: 210px !important; }
+  .header { padding: 6px 8px; } .header nav { gap: 10px; font-size: 11px; }
+  .search-container { margin-bottom: 20px !important; }
+}
+@media (max-width: 480px) {
+  .hero-logo-container img, #mainLogo { width: 185px !important; height: 185px !important; }
+}
