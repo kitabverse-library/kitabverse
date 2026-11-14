@@ -1,0 +1,134 @@
+/* KitabVerse - PROFESSIONAL FINAL - No Double Circle, No Overlap */
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@400;600&family=Inter:wght@300;400;500;600&display=swap');
+
+:root{
+  --bg:#080e1f;
+  --card:#121d36;
+  --gold:#FFD700;
+  --gold-dim:#d4b400;
+  --text:#e8eefc;
+  --muted:#9aa8c7;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden}
+
+/* HEADER - Fix jammed text */
+.header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 20px;background:#060c1a;
+  border-bottom:1px solid rgba(255,215,0,.18);
+  position:sticky;top:0;z-index:1000;
+}
+.header-left{display:flex;align-items:center;gap:12px}
+.header-logo{
+  width:48px!important;height:48px!important;
+  border:none!important;box-shadow:none!important;
+  background:transparent!important;border-radius:0!important;
+  object-fit:contain;
+}
+.brand{display:flex;flex-direction:column;line-height:1}
+.brand-name{
+  font-family:'Great Vibes',cursive;
+  font-size:26px;color:var(--gold);
+  letter-spacing:.5px;
+}
+.brand-tagline{
+  font-family:'Cinzel',serif;
+  font-size:9px;letter-spacing:2.2px;
+  color:var(--gold);opacity:.9;
+  margin-top:-2px;
+}
+.header-nav{display:flex;gap:14px;overflow-x:auto;white-space:nowrap}
+.header-nav::-webkit-scrollbar{display:none}
+.header-nav button{
+  background:transparent;border:1px solid rgba(255,215,0,.25);
+  color:var(--text);padding:6px 12px;border-radius:999px;
+  font-size:12px;cursor:pointer;
+}
+
+/* WELCOME BAR */
+.welcome-bar{
+  background:#0e1a33;color:var(--gold);
+  font-family:'Cinzel',serif;
+  font-size:11px;letter-spacing:1.8px;
+  text-align:center;padding:10px 12px;
+  border-bottom:1px solid rgba(255,215,0,.15);
+  line-height:1.6;
+}
+
+/* HERO - FIX BLACK CIRCLE BEHIND */
+.hero{
+  display:flex;flex-direction:column;align-items:center;
+  padding:36px 16px 20px;text-align:center;
+}
+.hero-logo-wrap{
+  background:transparent!important;
+  padding:0!important;margin:0 auto 20px;
+  border:none!important;box-shadow:none!important;
+  border-radius:0!important;
+}
+.hero-logo-wrap img, #mainLogo{
+  width:320px!important;height:320px!important;
+  border:none!important;outline:none!important;
+  box-shadow:none!important;background:transparent!important;
+  border-radius:50%!important;
+  object-fit:contain;
+  filter:drop-shadow(0 0 28px rgba(255,215,0,.5));
+  display:block;
+}
+.hero h1{
+  font-family:'Inter',sans-serif;font-weight:600;
+  font-size:28px;line-height:1.25;max-width:700px;
+}
+.hero-desc{
+  color:var(--muted);max-width:700px;
+  font-size:14.5px;line-height:1.8;margin-top:14px;
+}
+
+/* SEARCH - NO OVERLAP EVER */
+.search-section{
+  display:flex;flex-direction:column;align-items:center;
+  gap:18px;width:92%;max-width:760px;
+  margin:30px auto 40px;
+}
+.search-features{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.search-features span{
+  background:var(--card);border:1px solid rgba(255,215,0,.2);
+  color:var(--text);font-size:11px;padding:6px 10px;border-radius:999px;
+}
+.search-box{width:100%}
+.search-box input{
+  width:100%;height:48px;border-radius:999px;
+  border:1.5px solid var(--gold);background:var(--card);
+  color:white;padding:0 22px;font-size:15px;outline:none;
+}
+.cast-btn{
+  background:var(--card);border:1px solid rgba(255,215,0,.3);
+  color:var(--gold);padding:8px 16px;border-radius:999px;
+  font-size:12px;
+}
+
+.footer{
+  text-align:center;color:var(--muted);
+  font-size:11px;padding:30px 16px;
+  border-top:1px solid rgba(255,215,0,.12);
+  line-height:1.7;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .header{padding:10px 12px}
+  .header-logo{width:40px!important;height:40px!important}
+  .brand-name{font-size:20px}
+  .brand-tagline{font-size:7.5px;letter-spacing:1.5px}
+  .header-nav{gap:8px}
+  .header-nav button{font-size:10px;padding:5px 9px}
+  .hero-logo-wrap img,#mainLogo{width:230px!important;height:230px!important}
+  .hero h1{font-size:20px}
+  .hero-desc{font-size:13px}
+  .welcome-bar{font-size:9px;letter-spacing:1px}
+}
+@media(max-width:480px){
+  .hero-logo-wrap img,#mainLogo{width:200px!important;height:200px!important}
+  }
