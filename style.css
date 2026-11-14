@@ -1,0 +1,41 @@
+/* KitabVerse - Professional + No Glow + Tagline Below */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Poppins:wght@300;400;500&family=Playfair+Display:wght@600&display=swap');
+
+:root{--bg:#080e1f;--card:#121d36;--gold:#FFD700;--text:#e8eefc;--muted:#9aa8c7}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;overflow-x:hidden}
+
+/* HEADER - Logo font kept same as logo */
+.header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#060c1a;border-bottom:1px solid rgba(255,215,0,.2);position:sticky;top:0;z-index:1000;gap:8px}
+.header-left{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.header-logo{width:42px!important;height:42px!important;background:transparent!important;border:none!important;box-shadow:none!important;filter:none!important;border-radius:50%!important;object-fit:contain}
+.brand{display:flex;flex-direction:column;align-items:flex-start;line-height:1.1}
+.brand-name{font-family:'Cinzel',serif!important;font-size:20px;font-weight:700;color:var(--gold);white-space:nowrap;letter-spacing:.5px}
+.brand-tagline{font-family:'Poppins',sans-serif!important;font-size:8px;font-weight:500;letter-spacing:2px;color:var(--gold);white-space:nowrap!important;display:block;margin-top:2px;text-transform:uppercase;opacity:.9}
+.header-nav{display:flex;gap:7px;overflow-x:auto;flex-shrink:0}
+.header-nav::-webkit-scrollbar{display:none}
+.header-nav button{font-family:'Poppins',sans-serif;border:1px solid rgba(255,215,0,.25);background:transparent;color:var(--text);padding:5px 10px;border-radius:999px;font-size:11px;white-space:nowrap}
+
+.welcome-bar{font-family:'Poppins',sans-serif;background:#0e1a33;color:var(--gold);text-align:center;padding:10px;font-size:10.5px;letter-spacing:1px;line-height:1.6;border-bottom:1px solid rgba(255,215,0,.15)}
+
+/* HERO - REMOVE ALL OUTER CIRCLE & SHADOW */
+.hero{display:flex;flex-direction:column;align-items:center;padding:32px 16px;text-align:center}
+.hero-logo-wrap{background:none!important;border:none!important;box-shadow:none!important;filter:none!important;padding:0!important;margin-bottom:20px!important}
+.hero-logo-wrap img{width:280px!important;height:280px!important;background:transparent!important;border:none!important;box-shadow:none!important;filter:none!important;outline:none!important;border-radius:0!important;object-fit:contain}
+.hero h1{font-family:'Playfair Display',serif;font-weight:600;font-size:26px;line-height:1.35;max-width:700px}
+.hero-desc{font-family:'Poppins',sans-serif;color:var(--muted);font-size:14px;font-weight:300;line-height:1.7;max-width:700px;margin-top:10px}
+
+.search-section{display:flex;flex-direction:column;align-items:center;gap:16px;width:92%;max-width:760px;margin:28px auto 40px}
+.search-features{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.search-features span{font-family:'Poppins',sans-serif;background:var(--card);border:1px solid rgba(255,215,0,.2);padding:6px 12px;border-radius:999px;font-size:12px}
+.search-box{width:100%}.search-box input{font-family:'Poppins',sans-serif;width:100%;height:48px;border-radius:999px;border:1.5px solid var(--gold);background:var(--card);color:#fff;padding:0 18px;font-size:14px;outline:none}
+.footer{font-family:'Poppins',sans-serif;text-align:center;color:var(--muted);font-size:11px;padding:28px 16px;border-top:1px solid rgba(255,215,0,.12)}
+
+@media(max-width:768px){
+  .brand-name{font-size:16px}
+  .brand-tagline{font-size:6.5px!important;letter-spacing:1.4px!important}
+  .header-nav button{font-size:10px;padding:4px 8px}
+  .hero-logo-wrap img{width:200px!important;height:200px!important}
+  .hero h1{font-size:20px}
+      }
