@@ -1,0 +1,209 @@
+/* KitabVerse - FINAL - Single Circle Logo + No Overlap - 14 Nov 2026 */
+
+:root {
+  --bg: #080e1e;
+  --bg-card: #111a2f;
+  --gold: #FFD700;
+  --text: #e8eefc;
+  --text-dim: #aab7d8;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { overflow-x: hidden; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+/* ===== HEADER ===== */
+header, .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: #070c1a;
+  border-bottom: 1px solid rgba(255,215,0,0.2);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  gap: 10px;
+}
+
+/* LOGO - FIX DOUBLE CIRCLE - Your PNG already has single circle */
+.header-logo img,
+header img,
+#headerLogo,
+img[alt*="KitabVerse"] {
+  width: 52px !important;
+  height: 52px !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+header nav, .header nav, .top-nav {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+}
+header nav::-webkit-scrollbar { display: none; }
+
+/* ===== WELCOME BAR ===== */
+.welcome-bar, .marquee {
+  background: #0f1c35;
+  color: var(--gold);
+  text-align: center;
+  padding: 7px 10px;
+  font-size: 11px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255,215,0,0.15);
+}
+
+/* ===== HERO - SINGLE CIRCLE ONLY ===== */
+.hero, .main, .hero-section, .logo-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 28px 16px 10px 16px;
+}
+
+.hero-logo, .main-logo, #mainLogo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.hero-logo img,
+.main-logo img,
+#mainLogo,
+img.hero-logo,
+.hero img {
+  width: 280px !important;
+  height: 280px !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  border-radius: 50% !important;
+  object-fit: contain;
+  /* Only soft glow, no border */
+  filter: drop-shadow(0 0 22px rgba(255,215,0,0.45));
+}
+
+.hero h1, .main h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 10px 0 8px 0;
+}
+.hero p, .tagline {
+  color: var(--text-dim);
+  max-width: 680px;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* ===== BUTTONS ===== */
+.btn-group, .pills, .action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px auto;
+  padding: 0 12px;
+  max-width: 800px;
+}
+.btn-group button, .pill {
+  background: var(--bg-card);
+  border: 1px solid rgba(255,215,0,0.35);
+  color: var(--gold);
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+/* ===== SEARCH + CAST - FIX OVERLAP ===== */
+.search-section, .search-wrapper, .search-container {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 14px !important;
+  width: 92% !important;
+  max-width: 720px !important;
+  margin: 28px auto 30px auto !important;
+  position: relative !important;
+  z-index: 10;
+}
+
+.search-section input,
+.search-wrapper input,
+.search-container input,
+input[type="search"],
+input[placeholder*="Search"] {
+  width: 100% !important;
+  height: 48px !important;
+  padding: 0 20px !important;
+  border-radius: 999px !important;
+  border: 1.5px solid var(--gold) !important;
+  background: var(--bg-card) !important;
+  color: white !important;
+  font-size: 15px !important;
+  outline: none !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* CAST BUTTON - BELOW SEARCH, NOT ON TOP */
+.cast-btn, #castBtn, .cast-to-tv, button[class*="cast"], a[class*="cast"] {
+  position: static !important;
+  position: relative !important;
+  top: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  right: auto !important;
+  transform: none !important;
+  margin: 0 auto !important;
+  z-index: 2 !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* ===== MOBILE FIXES ===== */
+@media (max-width: 768px) {
+  header, .header { padding: 8px 12px; }
+  .header-logo img { width: 46px !important; height: 46px !important; }
+  header nav { gap: 12px; font-size: 11px; }
+  
+  .hero-logo img, #mainLogo { width: 210px !important; height: 210px !important; }
+  .hero h1 { font-size: 22px; }
+  .hero p { font-size: 13px; padding: 0 10px; }
+  
+  .search-section { width: 94% !important; margin: 20px auto 20px auto !important; gap: 12px !important; }
+  .search-section input { height: 44px !important; font-size: 14px !important; }
+}
+
+@media (max-width: 480px) {
+  .hero-logo img, #mainLogo { width: 185px !important; height: 185px !important; }
+  .btn-group { gap: 8px; }
+  .btn-group button { font-size: 12px; padding: 8px 12px; }
+}
+
+/* Hide any absolute overlapping elements from old code */
+[style*="position: absolute"] .cast-btn,
+[style*="position:absolute"] .cast-btn {
+  position: relative !important;
+  }
