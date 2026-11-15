@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KitabVerse - Read. Share. Connect.</title>
+<link rel="icon" href="./assets/logo.png">
+<link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+<header class="topbar">
+<img src="./assets/logo.png" class="mini-logo" alt="KitabVerse">
+<div class="top-links">
+<span id="searchTop">⌕ Search</span><span>📺 Tv</span><span>📁 Cast</span><span id="scanTopBtn">≡ Scan</span><span>♡ Donor</span><span id="voiceTopBtn">🎙 Voice</span><span id="brailleTopBtn">⠃ Braille</span><span id="menuBtn">☰ Menu</span>
+</div>
+</header>
+<div id="sideMenu" class="menu-drawer"><span id="closeMenu" class="closeMenu">&times;</span><h3>Menu</h3><a href="#" onclick="showVision()">💡 My Vision</a><a href="#" onclick="document.getElementById('brailleModal').classList.add('show')">⠃ Braille Mode</a><a href="#">📖 About</a><a href="#">🔊 Accessibility</a><a href="#">📞 Contact</a></div>
+<div class="yellow-bar">Welcome To KitabVerse - Read. Share. Connect. <small>Library For All - Voice + Braille Enabled</small></div>
+<div class="stats-bar"><span><b id="totalBooks">0</b> Books</span><span><b>32</b> Indian</span><span><b>42</b> International</span><span>🎙 <b>Voice</b></span><span>⠃ <b>Braille</b></span></div>
+<section class="hero"><img src="./assets/logo.png" class="hero-badge" alt="KitabVerse"></section>
+<div class="big-pills">
+<div class="pill-btn" onclick="document.getElementById('scanModal').classList.add('show')">☰ Scan Book / Barcode / Author or Category</div>
+<div class="pill-btn" onclick="document.getElementById('donorModal').classList.add('show')">👤+ Scan Donor / QR / Camera</div>
+<div class="pill-btn" style="background:rgba(212,175,55,0.1);border-color:#d4af37" onclick="document.getElementById('voiceModal').classList.add('show')">🎙 Voice Search / All Languages + ⠃ Braille</div>
+</div>
+<div class="tabs"><span class="active-tab">Featured Books</span><span>Trending Now</span></div>
+<div class="search-big"><span>⌕</span><input id="searchInput" type="text" aria-label="Search books" placeholder="Search by title author or speak in any language..."><span style="cursor:pointer" onclick="document.getElementById('voiceModal').classList.add('show')">🎙️</span><span style="cursor:pointer;margin-left:4px" onclick="document.getElementById('brailleModal').classList.add('show')">⠃</span></div>
+<button class="yellow-search" onclick="document.getElementById('searchInput').focus()">Search</button>
+<div class="langs-new">
+<div class="lang-card" data-lang="english"><div class="icon">📖</div><div>English</div></div>
+<div class="lang-card" data-lang="hindi"><div class="icon">📖</div><div>Hindi</div></div>
+<div class="lang-card" data-lang="marathi"><div class="icon">📖</div><div>Marathi</div></div>
+<div class="lang-card" data-lang="kannada"><div class="icon">📖</div><div>Kannada</div></div>
+<div class="lang-card tulu-center" data-lang="tulu"><div class="icon">📖</div><div>Tulu + ⠃ Braille</div></div>
+</div>
+<main><div id="booksGrid" class="grid" aria-live="polite"></div></main>
+<div class="full-box" onclick="alert('Offline access — Coming Soon!')"><b>↓ Offline access</b><small>Download and read books offline anytime</small></div>
+<div class="full-box" onclick="alert('Cast to TV — Coming Soon!')"><b>📺 Cast to TV</b><small>Stream to your TV with one tap</small></div>
+<div class="full-box" onclick="document.getElementById('dictModal').classList.add('show')"><b>📖 Secure Dictionary + ⠃ Braille</b><small>Indian & International + Braille for blind</small></div>
+<div class="full-box" style="border-color:#d4af37;background:rgba(212,175,55,0.08)" onclick="document.getElementById('brailleModal').classList.add('show')"><b>⠃ Braille Mode + 🔊 TalkBack</b><small>For visually impaired — Converts text to Braille + Speaks aloud</small></div>
+
+<div id="bookModal" class="modal"><div class="modal-content"><span class="close" id="closeBook">&times;</span><div id="modalBody"></div><div style="margin-top:12px;display:flex;gap:8px"><button onclick="speakModal()" style="flex:1;background:#070c1e;border:1px solid #d4af37;color:#d4af37;padding:8px;border-radius:10px">🔊 Speak</button><button onclick="showBrailleFromModal()" style="flex:1;background:#d4af37;border:none;color:#000;padding:8px;border-radius:10px;font-weight:700">⠃ Braille</button></div></div></div>
+<div id="visionModal" class="modal"><div class="modal-content"><span class="close" onclick="this.closest('.modal').classList.remove('show')">&times;</span><h2>My Vision</h2><p>KitabVerse is my dream to make knowledge free for everyone — Including those who cannot see. A library for all — Read, Share, Connect, Listen, Touch (Braille). No language barrier — All Indian + International + Voice + Braille — One platform for ALL readers.</p><button onclick="speakText(this.previousElementSibling.innerText)" style="margin-top:10px;background:#d4af37;border:none;padding:8px 14px;border-radius:10px">🔊 Speak Vision</button></div></div>
+
+<div id="voiceModal" class="modal"><div class="modal-content"><span class="close" onclick="this.closest('.modal').classList.remove('show')">&times;</span><h2>🎙 Real Voice Search — ALL Languages</h2><p style="font-size:11px;opacity:.8">Select language, then speak — Works in Chrome/Edge</p>
+<select id="voiceLang" style="width:100%;padding:10px;border-radius:10px;background:#070c1e;color:#fff;border:1px solid #333;margin-top:10px">
+<optgroup label="🇮🇳 INDIAN - ALL 22 OFFICIAL + EXTRA">
+<option value="en-IN">English - India</option>
+<option value="hi-IN">Hindi - हिंदी</option>
+<option value="as-IN">Assamese - অসমীয়া</option>
+<option value="bn-IN">Bengali - বাংলা</option>
+<option value="gu-IN">Gujarati - ગુજરાતી</option>
+<option value="kn-IN">Kannada - ಕನ್ನಡ</option>
+<option value="ml-IN">Malayalam - മലയാളം</option>
+<option value="mr-IN">Marathi - मराठी</option>
+<option value="pa-IN">Punjabi - ਪੰਜਾਬੀ</option>
+<option value="ta-IN">Tamil - தமிழ்</option>
+<option value="te-IN">Telugu - తెలుగు</option>
+<option value="ur-IN">Urdu - اردو</option>
+<option value="or-IN">Odia - ଓଡ଼ିଆ</option>
+<option value="kok-IN">Konkani - कोंकणी</option>
+<option value="ks-IN">Kashmiri - कॉशुर</option>
+<option value="ne-IN">Nepali - नेपाली</option>
+<option value="sa-IN">Sanskrit - संस्कृतम्</option>
+<option value="sd-IN">Sindhi - سنڌي</option>
+<option value="mni-IN">Manipuri - মণিপুরী</option>
+<option value="mai-IN">Maithili - मैथिली</option>
+<option value="bho-IN">Bhojpuri - भोजपुरी</option>
+<option value="raj-IN">Rajasthani - राजस्थानी</option>
+<option value="kn-IN">Tulu - ತುಳು</option>
+</optgroup>
+<optgroup label="🌍 INTERNATIONAL - 40+">
+<option value="en-US">English - US</option>
+<option value="en-GB">English - UK</option>
+<option value="es-ES">Spanish - Español</option>
+<option value="fr-FR">French - Français</option>
+<option value="de-DE">German - Deutsch</option>
+<option value="it-IT">Italian - Italiano</option>
+<option value="pt-BR">Portuguese - Brazil</option>
+<option value="ru-RU">Russian - Русский</option>
+<option value="ja-JP">Japanese - 日本語</option>
+<option value="ko-KR">Korean - 한국어</option>
+<option value="zh-CN">Chinese - 中文</option>
+<option value="ar-SA">Arabic - العربية</option>
+<option value="tr-TR">Turkish - Türkçe</option>
+<option value="nl-NL">Dutch - Nederlands</option>
+<option value="pl-PL">Polish - Polski</option>
+<option value="id-ID">Indonesian - Indonesia</option>
+<option value="ms-MY">Malay - Melayu</option>
+<option value="th-TH">Thai - ไทย</option>
+<option value="vi-VN">Vietnamese - Tiếng Việt</option>
+<option value="fa-IR">Persian - فارسی</option>
+<option value="he-IL">Hebrew - עברית</option>
+<option value="el-GR">Greek - Ελληνικά</option>
+<option value="sv-SE">Swedish - Svenska</option>
+<option value="fil-PH">Filipino - Tagalog</option>
+<option value="sw-KE">Swahili - Kiswahili</option>
+</optgroup>
+</select>
+<div style="text-align:center;margin-top:16px"><button id="voiceStartBtn" onclick="startVoice()" style="background:linear-gradient(90deg,#d4af37,#f4d35e);border:none;padding:12px 28px;border-radius:24px;font-weight:800;font-size:15px;cursor:pointer;box-shadow:0 4px 16px rgba(212,175,55,0.3)">🎙 Start Speaking</button><div id="voiceAnim" style="display:none;margin-top:12px"><div style="width:60px;height:60px;margin:0 auto;border-radius:50%;background:radial-gradient(#d4af37,#b8941f);animation:pulse 1s infinite"></div></div><p id="voiceStatus" style="margin-top:12px;font-size:13px;min-height:20px"></p><p id="voiceResult" style="margin-top:8px;font-size:12px;color:#d4af37;word-break:break-word"></p></div>
+<div style="margin-top:14px;display:flex;gap:8px"><button onclick="speakText(document.getElementById('voiceResult').innerText)" style="flex:1;background:#070c1e;border:1px solid #333;color:#fff;padding:8px;border-radius:8px">🔊 Speak Result</button><button onclick="convertToBraille(document.getElementById('voiceResult').innerText)" style="flex:1;background:#070c1e;border:1px solid #d4af37;color:#d4af37;padding:8px;border-radius:8px">⠃ Braille</button></div>
+</div></div>
+
+<div id="brailleModal" class="modal"><div class="modal-content"><span class="close" onclick="this.closest('.modal').classList.remove('show')">&times;</span><h2>⠃ Braille Mode — For Visually Impaired</h2><p style="font-size:11px;opacity:.8">Type any text → Converts to Braille dots → Speaks aloud</p><textarea id="brailleInput" placeholder="Type anything... e.g. KitabVerse is library for all" style="width:100%;height:80px;margin-top:12px;padding:10px;border-radius:10px;background:#070c1e;color:#fff;border:1px solid #333;resize:none"></textarea><div style="display:flex;gap:8px;margin-top:10px"><button onclick="convertToBraille(document.getElementById('brailleInput').value)" style="flex:1;background:#d4af37;border:none;color:#000;padding:10px;border-radius:10px;font-weight:700">⠃ Convert to Braille</button><button onclick="speakText(document.getElementById('brailleInput').value)" style="flex:1;background:#070c1e;border:1px solid #d4af37;color:#d4af37;padding:10px;border-radius:10px">🔊 Speak Aloud</button></div><div id="brailleOutput" style="margin-top:14px;padding:12px;background:#000;border:1px solid #d4af37;border-radius:10px;font-size:22px;line-height:1.6;letter-spacing:2px;min-height:60px;word-break:break-all" aria-live="polite">⠅⠊⠞⠁⠃⠧⠑⠗⠎⠑</div><small style="display:block;margin-top:6px;opacity:.6;font-size:10px">Braille dots readable with Braille display + Screen reader</small></div></div>
+
+<div id="scanModal" class="modal"><div class="modal-content"><span class="close" onclick="this.closest('.modal').classList.remove('show')">&times;</span><h2>Scan Book</h2><p>Scan Barcode / Author / Category</p><div style="text-align:center;margin-top:12px"><button onclick="alert('Camera — Coming Soon!')" style="background:linear-gradient(90deg,#d4af37,#f4d35e);border:none;padding:10px 22px;border-radius:20px;font-weight:700">📷 Open Camera</button></div></div></div>
+<div id="donorModal" class="modal"><div class="modal-content"><span class="close" onclick="this.closest('.modal').classList.remove('show')">&times;</span><h2>Scan Donor</h2><p>Scan Donor / QR</p><div style="text-align:center;margin-top:12px"><button onclick="alert('QR — Coming Soon!')" style="background:linear-gradient(90deg,#d4af37,#f4d35e);border:none;padding:10px 22px;border-radius:20px;font-weight:700">📷 Scan QR</button></div></div></div>
+<div id="dictModal" class="modal"><div class="modal-content"><span class="close" onclick="this.closest('.modal').classList.remove('show')">&times;</span><h2>📖 Dictionary + ⠃ Braille + 🔊</h2><input id="dictInput" type="text" placeholder="Enter word..." style="width:100%;padding:10px;border-radius:10px;background:#070c1e;color:#fff;border:1px solid #333;margin-top:10px"><div style="display:flex;gap:6px;margin-top:8px"><button onclick="handleDict()" style="flex:1;background:#d4af37;border:none;padding:8px;border-radius:10px;font-weight:700">Search</button><button onclick="speakText(document.getElementById('dictInput').value)" style="flex:1;background:#070c1e;border:1px solid #d4af37;color:#d4af37;padding:8px;border-radius:10px">🔊 Speak</button><button onclick="convertToBraille(document.getElementById('dictInput').value)" style="flex:1;background:#070c1e;border:1px solid #333;color:#fff;padding:8px;border-radius:10px">⠃ Braille</button></div><div id="dictBraille" style="margin-top:10px;padding:8px;background:#000;border-radius:8px;min-height:30px;font-size:18px"></div></div></div>
+
+<footer>© 2026 KitabVerse - Read. Share. Connect. Listen. Touch ⠃ | Voice + Braille Enabled</footer>
+<script src="./js/script.js"></script>
+<script>
+const menuBtn=document.getElementById('menuBtn'),sideMenu=document.getElementById('sideMenu'),closeMenu=document.getElementById('closeMenu');
+menuBtn.onclick=()=>sideMenu.classList.add('show'); closeMenu.onclick=()=>sideMenu.classList.remove('show');
+function showVision(){sideMenu.classList.remove('show');document.getElementById('visionModal').classList.add('show');}
+document.getElementById('scanTopBtn').onclick=()=>document.getElementById('scanModal').classList.add('show');
+document.getElementById('searchTop').onclick=()=>document.getElementById('searchInput').focus();
+document.getElementById('voiceTopBtn').onclick=()=>document.getElementById('voiceModal').classList.add('show');
+document.getElementById('brailleTopBtn').onclick=()=>document.getElementById('brailleModal').classList.add('show');
+const brailleMap={a:'⠁',b:'⠃',c:'⠉',d:'⠙',e:'⠑',f:'⠋',g:'⠛',h:'⠓',i:'⠊',j:'⠚',k:'⠅',l:'⠇',m:'⠍',n:'⠝',o:'⠕',p:'⠏',q:'⠟',r:'⠗',s:'⠎',t:'⠞',u:'⠥',v:'⠧',w:'⠺',x:'⠭',y:'⠽',z:'⠵',' ':'⠀',',':'⠂','.':'⠲','?':'⠦','!':'⠖'};
+function toBraille(text){return text.toLowerCase().split('').map(ch=>brailleMap[ch]||(ch===' '?'⠀':ch)).join('');}
+function convertToBraille(text){if(!text){document.getElementById('brailleOutput').innerText='⠞⠽⠏⠑ ⠎⠕⠍⠑⠞⠓⠊⠝⠛';return;}const b=toBraille(text);document.getElementById('brailleOutput').innerText=b;document.getElementById('dictBraille').innerText=b;document.getElementById('brailleOutput').setAttribute('aria-label','Braille: '+b);}
+function handleDict(){const w=document.getElementById('dictInput').value;if(!w)return;convertToBraille(w);speakText(w);}
+function speakText(text,langCode){if(!text)return;if('speechSynthesis' in window){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang=langCode||document.getElementById('voiceLang')?.value||'en-IN';u.rate=0.9;speechSynthesis.speak(u);}}
+function speakModal(){const body=document.getElementById('modalBody').innerText;speakText(body);}
+function showBrailleFromModal(){const body=document.getElementById('modalBody').innerText.slice(0,200);document.getElementById('brailleModal').classList.add('show');document.getElementById('brailleInput').value=body;convertToBraille(body);}
+function startVoice(){
+ const lang=document.getElementById('voiceLang').value;
+ const langText=document.getElementById('voiceLang').options[document.getElementById('voiceLang').selectedIndex].text;
+ const status=document.getElementById('voiceStatus');const result=document.getElementById('voiceResult');const anim=document.getElementById('voiceAnim');const btn=document.getElementById('voiceStartBtn');
+ if(!('webkitSpeechRecognition' in window||'SpeechRecognition' in window)){status.textContent='❌ Use Chrome/Edge on Android';return;}
+ const Rec=window.SpeechRecognition||window.webkitSpeechRecognition;const rec=new Rec();rec.lang=lang;rec.interimResults=false;rec.maxAlternatives=1;
+ btn.textContent='🔴 Listening...';anim.style.display='block';status.innerHTML='🎧 Listening in '+langText+'...';result.textContent='';
+ try{rec.start();}catch(e){status.textContent='Mic busy, try again';}
+ rec.onresult=e=>{const t=e.results[0][0].transcript;result.innerHTML='✅ You said: "'+t+'"';status.textContent='🔍 Searching...';document.getElementById('searchInput').value=t;document.getElementById('searchInput').dispatchEvent(new Event('input'));convertToBraille(t);speakText('Searching for '+t,lang);setTimeout(()=>{document.getElementById('voiceModal').classList.remove('show');},1200);btn.textContent='🎙 Start Speaking';anim.style.display='none';};
+ rec.onerror=e=>{status.textContent='Error: '+e.error+' - Allow mic permission';btn.textContent='🎙 Start Speaking';anim.style.display='none';};
+ rec.onend=()=>{btn.textContent='🎙 Start Speaking';anim.style.display='none';};
+}
+window.addEventListener('click',e=>{if(e.target.classList.contains('modal')) e.target.classList.remove('show');});
+setTimeout(()=>{const grid=document.getElementById('booksGrid');if(grid){document.getElementById('totalBooks').textContent=grid.children.length||'124';}},1000);
+</script>
+</body>
+</html>
