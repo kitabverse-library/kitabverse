@@ -1,0 +1,64 @@
+:root{--navy:#090F1E;--gold:#D7AD2E;--cream:#F3E7A0}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--navy);color:var(--cream);font-family:Inter,Arial,sans-serif}
+
+/* HEADER */
+.top-header{display:flex;justify-content:space-between;align-items:center;padding:14px 32px}
+.logo-left img{width:115px;height:115px;border-radius:50%;display:block;border:none;object-fit:cover}
+.top-nav{display:flex;gap:28px;align-items:center}
+.top-nav a{color:var(--cream);font-size:14px;font-weight:500;display:flex;align-items:center;gap:6px;cursor:pointer}
+.top-nav a .ico{font-size:20px}
+
+/* MARQUEE - ONE LINE - MOBILE + DESKTOP */
+.marquee{background:var(--gold);color:#000;font-weight:800;text-align:center;padding:11px 0;overflow:hidden;white-space:nowrap}
+.marquee-inner{display:inline-block;white-space:nowrap;font-size:17px}
+
+/* CENTER LOGO SPACE */
+.center-wrap{text-align:center;padding-top:85px;padding-bottom:36px}
+.center-logo{width:340px;height:340px;border-radius:50%;display:block;margin:0 auto;border:none;object-fit:cover}
+
+/* 3 PILLS */
+.pill-row{display:flex;justify-content:center;gap:18px;margin-bottom:30px;flex-wrap:wrap;padding:0 20px}
+.pill-row button{background:transparent;border:1px solid var(--cream);color:var(--cream);border-radius:24px;padding:10px 18px;font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer}
+.pill-row button span{font-size:16px}
+
+/* SEARCH */
+.search-row{display:flex;align-items:center;gap:18px;padding:0 32px;margin-bottom:30px;flex-wrap:wrap}
+.sec-title{font-size:17px;font-weight:700;color:var(--cream);white-space:nowrap}
+.search-box{flex:1;display:flex;align-items:center;border:1px solid var(--cream);border-radius:28px;padding:10px 16px;min-width:300px}
+.search-box input{flex:1;background:transparent;border:none;color:var(--cream);outline:none;font-size:13px;margin:0 10px}
+.search-box input::placeholder{color:var(--cream);opacity:.9}
+.s-ico,.m-ico{font-size:18px;color:var(--cream)}
+.search-btn{background:var(--gold);color:#000;border:none;border-radius:10px;padding:11px 32px;font-weight:800;cursor:pointer;font-size:14px}
+
+/* 5 TILES */
+.lang-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;padding:0 32px;margin-bottom:20px}
+.lang-card{border:1px solid var(--cream);border-radius:16px;padding:22px 10px;text-align:center}
+.lang-card .bk{font-size:30px;margin-bottom:8px}
+.lang-card p{font-size:15px;font-weight:600}
+
+/* BOTTOM 2 */
+.bottom-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:0 32px 24px 32px}
+.bottom-card{border:1px solid var(--cream);border-radius:16px;padding:16px;text-align:center}
+.bottom-card h4{font-size:17px;margin-bottom:4px}
+.bottom-card p{font-size:13px;opacity:.9}
+
+/* FOOTER 2026 */
+footer{text-align:center;padding:14px 10px;font-size:12px;color:var(--cream);border-top:none}
+
+/* MOBILE - MARQUEE STILL ONE LINE */
+@media(max-width:900px){
+ .top-header{padding:10px 14px}
+ .logo-left{margin-right:20px}
+ .logo-left img{width:72px;height:72px}
+ .top-nav{gap:14px;flex-wrap:wrap}
+ .top-nav a{font-size:12px}
+ .marquee-inner{font-size:12px}
+ .center-wrap{padding-top:65px}
+ .center-logo{width:285px;height:285px}
+ .search-row{padding:0 14px;gap:10px}
+ .sec-title{font-size:14px}
+ .lang-grid{grid-template-columns:repeat(2,1fr);gap:12px;padding:0 14px}
+ .lang-grid .lang-card:nth-child(5){grid-column:1 / span 2;width:50%;margin:0 auto}
+ .bottom-grid{grid-template-columns:1fr;padding:0 14px 20px 14px}
+  }
