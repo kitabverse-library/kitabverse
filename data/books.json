@@ -1,0 +1,17 @@
+[
+ {"title":"The Alchemist","author":"Paulo Coelho","lang":"english","emoji":"📖","desc":"A shepherd boy travels in search of treasure, learning to listen to his heart."},
+ {"title":"Atomic Habits","author":"James Clear","lang":"english","emoji":"📘","desc":"Tiny habits lead to remarkable results. Build good habits, break bad ones."},
+ {"title":"Wings of Fire","author":"A.P.J. Abdul Kalam","lang":"english","emoji":"🚀","desc":"Autobiography of Dr. Kalam, inspiring journey from Rameswaram to Rashtrapati Bhavan."},
+ {"title":"गोदान","author":"मुंशी प्रेमचंद","lang":"hindi","emoji":"📕","desc":"किसान होरी की कहानी, भारतीय ग्रामीण जीवन का सजीव चित्रण।"},
+ {"title":"रश्मिरथी","author":"रामधारी सिंह दिनकर","lang":"hindi","emoji":"📙","desc":"कर्ण के जीवन पर आधारित महाकाव्य, वीर रस से भरपूर।"},
+ {"title":"मधुशाला","author":"हरिवंश राय बच्चन","lang":"hindi","emoji":"🍷","desc":"जीवन दर्शन पर लिखी अमर कविता, हर दिल को छू लेने वाली।"},
+ {"title":"श्यामची आई","author":"साने गुरुजी","lang":"marathi","emoji":"👩‍👦","desc":"आईच्या प्रेमाची हृदयस्पर्शी कहाणी, प्रत्येकाने वाचावी अशी।"},
+ {"title":"मृत्युंजय","author":"शिवाजी सावंत","lang":"marathi","emoji":"⚔️","desc":"कर्णाच्या जीवनावरील महाकादंबरी, मराठी साहित्यातील मानाचा तुरा।"},
+ {"title":"ययाति","author":"वि.स. खांडेकर","lang":"marathi","emoji":"👑","desc":"मानवी इच्छा आकांक्षेची कथा, ज्ञानपीठ पुरस्कार विजेती।"},
+ {"title":"ಮಂಕು ತಿಮ್ಮನ ಕಗ್ಗ","author":"ಡಿ.ವಿ.ಜಿ","lang":"kannada","emoji":"📜","desc":"ಜೀವನದ ಸತ್ಯಗಳನ್ನು ಸರಳವಾಗಿ ಹೇಳುವ ಕಗ್ಗಗಳ ಸಂಕಲನ।"},
+ {"title":"ಕನಸು","author":"ಕುವೆಂಪು","lang":"kannada","emoji":"🌿","desc":"ಕನ್ನಡದ ಶ್ರೇಷ್ಠ ಕೃತಿ, ಪ್ರಕೃತಿ ಮತ್ತು ಮಾನವ ಸಂಬಂಧ।"},
+ {"title":"ಭಾರತ ಜನನಿಯ ತನುಜಾತೆ","author":"ಬೇಂದ್ರೆ","lang":"kannada","emoji":"🇮🇳","desc":"ನಾಡು ನುಡಿಯ ಬಗ್ಗೆ ಹೆಮ್ಮೆ ಮೂಡಿಸುವ ಕವನ ಸಂಕಲನ।"},
+ {"title":"Koti Chennaya","author":"Tulu Folklore","lang":"tulu","emoji":"🦁","desc":"Legendary twin heroes of Tulu Nadu, symbol of bravery and justice."},
+ {"title":"Tulu Paddana","author":"Amrutha Someshwara","lang":"tulu","emoji":"🎶","desc":"Collection of ancient Tulu folk epics and songs, soul of Tulunadu."},
+ {"title":"Paradana","author":"Tulu Heritage","lang":"tulu","emoji":"🛕","desc":"Spiritual verses of Tulu culture, sung during Bhoota Aradhane."}
+]
