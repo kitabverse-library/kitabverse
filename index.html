@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KitabVerse - Read. Share. Connect.</title>
+<link rel="icon" href="./assets/logo.png">
+<link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+<img src="./assets/logo.png" class="mini-logo" alt="K">
+<div class="top-links">
+<span>⌕ Search</span><span>📺 TV</span><span>📁 Cast</span><span>≡ Scan</span><span>♡ Donor</span><span>🎙 Voice</span><span>👤 Profile</span><span id="menuBtn">☰ Menu</span>
+</div>
+</header>
+
+<div id="sideMenu" class="menu-drawer">
+<span id="closeMenu" class="closeMenu">&times;</span>
+<h3>Menu</h3>
+<a href="#" onclick="showVision()">💡 My Vision</a>
+<a href="#">📖 About KitabVerse</a>
+<a href="#">📚 How It Works</a>
+<a href="#">🤝 Donate Books</a>
+<a href="#">📞 Contact</a>
+<a href="#">🔒 Privacy Policy</a>
+</div>
+
+<div class="yellow-bar">Welcome To KitabVerse - Read. Share. Connect. <small>Library For All</small></div>
+
+<section class="hero">
+<img src="./assets/logo.png" class="hero-badge" alt="KitabVerse">
+</section>
+
+<div class="controls">
+<div class="tabs"><span class="active-tab">Featured Books</span><span>Trending Now</span></div>
+<div class="search-wrap"><input id="searchInput" type="text" placeholder="Search by book title author category or speaker..."><button>Scan</button></div>
+</div>
+
+<div class="langs-5">
+<button class="lang" data-lang="english">📖<br>English</button>
+<button class="lang" data-lang="hindi">📖<br>Hindi</button>
+<button class="lang" data-lang="marathi">📖<br>Marathi</button>
+<button class="lang" data-lang="kannada">📖<br>Kannada</button>
+<button class="lang" data-lang="tulu">📖<br>Tulu</button>
+</div>
+
+<main><div id="booksGrid" class="grid"></div></main>
+
+<div class="extra2">
+<div class="box">⬇ Offline access<br><small>Download and read books offline anytime</small></div>
+<div class="box">📺 Cast to TV<br><small>Stream to your TV with one tap</small></div>
+</div>
+
+<div id="bookModal" class="modal"><div class="modal-content"><span class="close" id="closeBook">&times;</span><div id="modalBody"></div></div></div>
+
+<div id="visionModal" class="modal"><div class="modal-content"><span class="close" onclick="document.getElementById('visionModal').classList.remove('show')">&times;</span><h2>My Vision</h2><p>KitabVerse is my dream to make knowledge free for everyone. A library for all — Read, Share, Connect. No language barrier — English, Hindi, Marathi, Kannada, Tulu — One platform for all readers. Inspired by love for books and community.</p><p class="founder">- Munazza Khan, Founder</p></div></div>
+
+<footer>
+© KitabVerse - Read. Share. Connect. | Powered By GitHub<br>
+<small>© Logo Designed By Munazza Khan | All Rights Reserved</small>
+</footer>
+
+<script src="./js/script.js"></script>
+<script>
+const menuBtn=document.getElementById('menuBtn'),sideMenu=document.getElementById('sideMenu'),closeMenu=document.getElementById('closeMenu');
+menuBtn.onclick=()=>sideMenu.classList.add('show'); closeMenu.onclick=()=>sideMenu.classList.remove('show');
+function showVision(){sideMenu.classList.remove('show');document.getElementById('visionModal').classList.add('show');}
+</script>
+</body>
+</html>
