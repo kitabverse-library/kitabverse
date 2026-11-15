@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KitabVerse - Read. Share. Connect.</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="header">
+<div class="logo-left"><img src="assets/logo.png" alt="KitabVerse"></div>
+<nav class="nav-right">
+<a><span>⌕</span>Search</a>
+<a><span>📺</span>Tv</a>
+<a><span>📡</span>Cast</a>
+<a><span>▭</span>Scan</a>
+<a><span>♡</span>Donor</a>
+<a><span>🎙️</span>Voice</a>
+<a><span>👤</span>Profile</a>
+<a><span>☰</span>Menu</a>
+</nav>
+</header>
+
+<div class="marquee">Welcome To KitabVerse - Read. Share. Connect - A Community Library For Everyone</div>
+
+<div class="center-logo-wrap">
+<img src="assets/logo.png" class="center-logo" alt="KitabVerse">
+</div>
+
+<div class="huge-gap"></div>
+
+<div class="scan-pills">
+<button>Scan with Camera</button>
+<button>Scan with Gallery</button>
+<button>Scan with QR Code</button>
+<button>Audio Scan</button>
+</div>
+
+<div class="titles">
+<h3 style="color:#D4AF37">Available Languages</h3>
+</div>
+
+<div class="search-bar">
+<div class="search-input-wrap">
+<input id="searchInput" placeholder="Search by book title...">
+<button class="mic-inside" onclick="startVoiceSearch()">🎙️</button>
+</div>
+<button class="search-btn" onclick="searchBooks()">Search</button>
+</div>
+
+<div class="lang-cards">
+<div class="card" onclick="openLang('english')"><h4>English</h4><div id="english-books" class="books-list"></div></div>
+<div class="card" onclick="openLang('hindi')"><h4>Hindi</h4><div id="hindi-books" class="books-list"></div></div>
+<div class="card" onclick="openLang('marathi')"><h4>Marathi</h4><div id="marathi-books" class="books-list"></div></div>
+<div class="card" onclick="openLang('kannada')"><h4>Kannada</h4><div id="kannada-books" class="books-list"></div></div>
+<div class="card" onclick="openLang('tulu')"><h4>Tulu</h4><div id="tulu-books" class="books-list"></div></div>
+</div>
+
+<div class="bottom-boxes">
+<div class="box" onclick="enableOffline()"><span>📥</span><div><b>Offline Access</b><p>Download & read</p></div></div>
+<div class="box" onclick="castToTV()"><span>📡</span><div><b>Cast to TV</b><p>Stream to TV</p></div></div>
+</div>
+
+<footer>© 2025 KitabVerse - Read. Share. Connect.</footer>
+<script src="js/app.js"></script>
+</body>
+  </html>
