@@ -1,0 +1,15 @@
+/* Phase 1B — Professional — No figures/names */
+.logo-1A,.hero-logo-1A{box-shadow:none!important;border:none!important;object-fit:cover}
+.featured{padding:40px 16px;text-align:center}
+.featured h2{color:#D4AF37;font-size:20px;margin-bottom:24px;letter-spacing:.5px}
+.grid-6{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.b-card{background:#0E162C;border:1px solid rgba(212,175,55,.35);border-radius:10px;padding:14px;transition:.2s}
+.b-card:hover{border-color:#D4AF37;transform:translateY(-3px)}
+.b-card .cover{height:92px;border-radius:6px;margin-bottom:12px}
+.c1{background:linear-gradient(135deg,#8A9BD6,#B8C6E8)}.c2{background:linear-gradient(135deg,#F8D8C8,#F2B8A0)}.c3{background:linear-gradient(135deg,#C8E8C8,#8ABFA0)}.c4{background:linear-gradient(135deg,#F8D8A0,#E8B87A)}.c5{background:linear-gradient(135deg,#A8C8D0,#7AB0B8)}.c6{background:linear-gradient(135deg,#B8A0D0,#8A78A8)}
+.b-card h4{font-size:13px;color:#FFF;font-weight:600}.b-card span{font-size:11px;color:#D4AF37;margin-top:4px;display:block}
+.mission{max-width:700px;margin:50px auto 0;text-align:center;padding:0 16px}
+.mission h2{color:#D4AF37;font-size:19px;margin-bottom:12px}.mission p{color:#A0A8C0;font-size:12px;line-height:1.7}
+footer{border-top:1px solid rgba(212,175,55,.2);margin-top:50px;padding:18px;text-align:center}
+footer p{color:#D4AF37;font-size:11px;letter-spacing:.8px}.credit{margin-top:6px;font-size:10.5px!important;opacity:.9}
+@media(max-width:700px){.grid-6{grid-template-columns:1fr 1fr;gap:12px}}
