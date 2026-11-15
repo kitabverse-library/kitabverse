@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KitabVerse - Read. Share. Connect.</title>
+<link rel="icon" type="image/png" href="assets/logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo-wrap">
+      <img src="assets/logo.png" alt="KitabVerse Logo" id="mainLogo">
+      <span>KitabVerse</span>
+    </div>
+    <div class="tagline">Read. Share. Connect.</div>
+  </nav>
+</header>
+
+<section class="hero">
+  <img src="assets/logo.png" alt="KitabVerse" class="hero-logo">
+  <h1>Discover Books in Your Language</h1>
+  <p>5 Languages • 15 Curated Books • One Verse</p>
+</section>
+
+<section class="languages">
+  <button class="lang-btn active" data-lang="all">All</button>
+  <button class="lang-btn" data-lang="english">English</button>
+  <button class="lang-btn" data-lang="hindi">हिंदी</button>
+  <button class="lang-btn" data-lang="marathi">मराठी</button>
+  <button class="lang-btn" data-lang="kannada">ಕನ್ನಡ</button>
+  <button class="lang-btn" data-lang="tulu">Tulu</button>
+</section>
+
+<main>
+  <div id="booksGrid" class="grid"></div>
+</main>
+
+<div id="bookModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 KitabVerse — Read. Share. Connect.</p>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>
