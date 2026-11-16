@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>KitabVerse 2026</title>
+<link rel="stylesheet" href="css/style.css?v=120final">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="topbar">
+  <div style="display:flex;align-items:center;gap:8px;cursor:pointer" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <img src="assets/logo.png?v=120final" class="mini-logo" alt="logo">
+    <b style="color:#d4af37">KitabVerse</b>
+  </div>
+  <div class="top-links">
+    <span onclick="speakVision()">🔊 My Vision</span>
+    <span onclick="openModal('aboutModal')">About</span>
+    <span onclick="toggleMenu()">☰</span>
+  </div>
+</div>
+
+<div class="yellow-bar">
+  <span class="line1">Welcome To KitabVerse - Read. Share. Connect.</span>
+  <span class="line2">Library For All With Advanced Features</span>
+</div>
+
+<div class="stats-bar">
+  <span onclick="filterBooks('all')"><b>16</b> Books</span>
+  <span onclick="filterBooks('english')"><b>3</b> English</span>
+  <span onclick="filterBooks('hindi')"><b>3</b> Hindi</span>
+  <span onclick="filterBooks('marathi')"><b>3</b> Marathi</span>
+  <span onclick="filterBooks('kannada')"><b>3</b> Kannada</span>
+  <span onclick="filterBooks('tulu')"><b>3</b> Tulu</span>
+  <span onclick="filterBooks('braille')"><b>1</b> Braille</span>
+  <span onclick="startVoiceSearch()" style="color:#f4d35e">🎤 Voice</span>
+</div>
+
+<div class="hero">
+  <img src="assets/logo.png?v=120final" class="hero-badge" alt="KitabVerse" onclick="speakVision()">
+  <div class="wow-title">KitabVerse 2026</div>
+  <div class="wow-sub">Voice + Touch + Braille Enabled</div>
+  <button onclick="speakVision()" class="btn-gold" style="margin-top:8px">🔊 Hear My Vision</button>
+</div>
+
+<div class="tabs">
+  <span class="active" onclick="filterBooks('all',this)">📚 All 16</span>
+  <span onclick="filterBooks('english',this)">English</span>
+  <span onclick="filterBooks('hindi',this)">Hindi</span>
+  <span onclick="filterBooks('marathi',this)">Marathi</span>
+  <span onclick="filterBooks('kannada',this)">Kannada</span>
+  <span onclick="filterBooks('tulu',this)">Tulu</span>
+  <span onclick="filterBooks('braille',this)">Braille</span>
+</div>
+
+<div class="search-big">
+  <span onclick="doSearch()">🔍</span>
+  <input type="text" id="searchInput" placeholder="Type or Speak..." oninput="searchBooks(this.value)">
+  <span onclick="startVoiceSearch()">🎤</span>
+  <span onclick="clearSearch()">✖️</span>
+</div>
+<div style="display:flex;gap:8px;margin:10px 20px">
+<button class="yellow-search" onclick="doSearch()" style="flex:1">🔍 Search</button>
+<button onclick="startVoiceSearch()" class="btn-outline" style="flex:1">🎤 Speak</button>
+</div>
+
+<div class="grid" id="bookGrid"></div>
+
+<div class="vision-card">
+  <h2>💡 My Vision</h2>
+  <p id="visionText">To create an inclusive digital library for all — where knowledge has no language barrier. With 16 books across English, Hindi, Marathi, Kannada, Tulu and Braille, KitabVerse ensures everyone can Read, Share and Connect. For those who can't see, can hear and can speak — this library will speak to you.</p>
+  <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+    <button onclick="speakVision()" class="btn-gold">🔊 Listen to My Vision</button>
+    <button onclick="openModal('visionModal')" class="btn-outline">Read Full →</button>
+    <button onclick="stopSpeak()" class="btn-outline">🔇 Stop</button>
+  </div>
+</div>
+
+<footer>
+  <div>© 2026 KitabVerse - Read. Share. Connect | Powered & Designed On GitHub</div>
+  <div>© 2026 Logo Designed By Munazza Khan | All Rights Reserved | Voice + Touch + Braille Enabled</div>
+</footer>
+
+<div class="modal" id="visionModal" onclick="if(event.target==this)closeModal('visionModal')"><div class="modal-content"><span class="close" onclick="closeModal('visionModal')">&times;</span><h2>💡 My Vision</h2><div style="margin-top:12px;line-height:1.8;font-size:13px"><p><b>Welcome To KitabVerse - Read. Share. Connect.</b><br><b>Library For All With Advanced Features</b></p><p style="margin-top:10px">My Vision is to build a library where even those who can't see can hear and speak to books. 16 Books: English 3, Hindi 3, Marathi 3, Kannada 3, Tulu 3, Braille 1. Voice + Touch + Braille Enabled.</p><button onclick="speakVision()" class="btn-gold" style="width:100%;margin-top:10px">🔊 Speak My Vision</button><button onclick="stopSpeak()" class="btn-outline" style="width:100%;margin-top:8px">🔇 Stop</button></div></div></div>
+<div class="modal" id="bookModal" onclick="if(event.target==this)closeModal('bookModal')"><div class="modal-content"><span class="close" onclick="closeModal('bookModal')">&times;</span><h2 id="bookModalTitle"></h2><p id="bookModalDesc" style="margin-top:12px"></p><div style="display:flex;gap:8px;margin-top:14px"><button onclick="speakBook()" class="btn-gold" style="flex:1">🔊 Listen</button><button onclick="stopSpeak()" class="btn-outline" style="flex:1">🔇 Stop</button></div><button onclick="alert('Reader soon')" class="btn-gold" style="width:100%;margin-top:8px">📖 Read Now</button></div></div>
+<div class="modal" id="aboutModal" onclick="if(event.target==this)closeModal('aboutModal')"><div class="modal-content"><span class="close" onclick="closeModal('aboutModal')">&times;</span><h2>About</h2><p style="margin-top:12px">Voice + Touch + Braille Enabled library for all. © 2026 KitabVerse</p></div></div>
+
+<div class="menu-drawer" id="menuDrawer"><span class="closeMenu" onclick="toggleMenu()">&times;</span><h3>🔊 Voice</h3><a onclick="speakVision();toggleMenu()">🔊 Hear My Vision</a><a onclick="startVoiceSearch();toggleMenu()">🎤 Voice Search</a><a onclick="stopSpeak();toggleMenu()">🔇 Stop Voice</a><h3>Library 16</h3><a onclick="filterBooks('all');toggleMenu()">📚 All 16</a><a onclick="filterBooks('english');toggleMenu()">English 3</a><a onclick="filterBooks('hindi');toggleMenu()">Hindi 3</a><a onclick="filterBooks('marathi');toggleMenu()">Marathi 3</a><a onclick="filterBooks('kannada');toggleMenu()">Kannada 3</a><a onclick="filterBooks('tulu');toggleMenu()">Tulu 3</a><a onclick="filterBooks('braille');toggleMenu()">Braille 1</a></div>
+
+<script src="js/app.js?v=120final"></script>
+</body>
+</html>
