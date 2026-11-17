@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard - KitabVerse</title>
+<style>
+body{font-family:system-ui;background:#f5f5f5;margin:0}
+header{background:#1a1a2e;color:#fff;padding:15px 20px;display:flex;justify-content:space-between;align-items:center}
+.container{padding:20px;max-width:1000px;margin:0 auto}
+.card{background:#fff;padding:20px;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,0.1);margin-bottom:20px}
+button{padding:10px 18px;background:#1a1a2e;color:#fff;border:none;border-radius:6px;cursor:pointer}
+button:hover{background:#16213e}
+#booksList{display:grid;gap:15px}
+.book-item{background:#f9f9f9;padding:15px;border-radius:8px;display:flex;justify-content:space-between}
+</style>
+</head>
+<body>
+<header>
+<h2>📚 KitabVerse Admin</h2>
+<div>
+<span id="userEmail" style="margin-right:15px;font-size:14px"></span>
+<button onclick="logout()">Logout</button>
+</div>
+</header>
+<div class="container">
+<div class="card">
+<h3>Dashboard Protected 🔒</h3>
+<p>Logged in as: <strong id="emailDisplay">Loading...</strong></p>
+<p style="color:green">✅ Secure Authentication Active - Firebase Auth</p>
+</div>
+<div class="card">
+<h3>Manage Books</h3>
+<div id="booksList">Loading books...</div>
+</div>
+</div>
+
+<script type="module">
+import { requireAuth, logout } from './js/adminAuth.js';
+import { auth } from './js/firebase.js';
+
+const user = await requireAuth();
+if (user) {
+  document.getElementById('emailDisplay').textContent = user.email;
+  document.getElementById('userEmail').textContent = user.email;
+}
+
+window.logout = logout;
+
+// Load books example - connect to your Firestore
+// import { db } from './js/firebase.js' etc.
+</script>
+</body>
+</html>
