@@ -1,20 +1,14 @@
 {
-  "name": "KitabVerse - Read. Share. Connect.",
+  "name": "KitabVerse Library",
   "short_name": "KitabVerse",
-  "description": "Online book lending and reading community. Kitabverse Library is a non-profit initiative.",
-  "start_url": "/kitabverse/",
+  "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#000000",
+  "background_color": "#0a0a0a",
+  "theme_color": "#d4af37",
   "icons": [
     {
       "src": "assets/logo.png",
       "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "assets/logo-banner.png",
-      "sizes": "512x512",
       "type": "image/png"
     }
   ]
