@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KitabVerse - Read. Share. Connect. | Branch 30 Final</title>
+<title>KitabVerse - Read. Share. Connect. | Branch 30 FINAL CORRECTED</title>
 <link rel="icon" type="image/png" href="assets/logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tigalari&display=swap" rel="stylesheet">
 <style>
@@ -13,15 +13,11 @@
 .header-line1 { font-size:1.35em; font-weight:800; letter-spacing:0.5px; }
 .header-line2 { font-size:1.05em; margin-top:4px; color:#fef08a; font-weight:600; }
 .header-line3, .header-line4 { font-size:0.85em; margin-top:3px; opacity:0.9; }
-
 .main-footer { background:#0f172a; color:#cbd5e1; text-align:center; padding:18px 10px; border-top:5px solid #facc15; margin-top:30px; user-select:none; }
 .footer-line1 { font-weight:700; color:white; }
 .footer-line2, .footer-line3 { font-size:0.85em; margin-top:4px; }
-
 .content { max-width:900px; margin:0 auto; padding:20px 15px; }
 body { margin:0; font-family:system-ui, sans-serif; background:#f8fafc; }
-
-/* ===== TULU BOXES ===== */
 @font-face { font-family:'TuluTigalari'; src:url('https://cdn.jsdelivr.net/gh/googlefonts/noto-fonts/unhinted/NotoSansTigalari/NotoSansTigalari-Regular.ttf'); }
 .tulu-search-wrap, .tulu-kb-wrap { background:#fff; border:3px solid #1e3a8a; border-radius:14px; padding:18px; margin-bottom:25px; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
 #tuluSearchInput, #tuluStoryBoxExact { width:100%; padding:12px; font-size:18px; border:2px solid #facc15; border-radius:10px; box-sizing:border-box; font-family:'Noto Sans Tigalari',sans-serif; }
@@ -45,6 +41,7 @@ body { margin:0; font-family:system-ui, sans-serif; background:#f8fafc; }
 .front-btn { background:#1e3a8a; color:white; border:none; padding:10px 18px; border-radius:20px; font-weight:bold; }
 #feedbackForm input, #feedbackForm textarea { width:100%; padding:10px; margin:6px 0; border-radius:8px; border:1px solid #cbd5e1; box-sizing:border-box; }
 #feedbackForm button { background:#16a34a; color:white; border:none; padding:10px 18px; border-radius:8px; font-weight:bold; width:100%; }
+.flag-card-img { width:100%; max-width:320px; border-radius:12px; border:3px solid white; display:block; margin:10px auto; box-shadow:0 4px 12px rgba(0,0,0,0.3); }
 </style>
 </head>
 <body>
@@ -77,30 +74,24 @@ body { margin:0; font-family:system-ui, sans-serif; background:#f8fafc; }
 <h2>ತುಳು ಅಕ್ಷರ ಕೀಬೋರ್ಡ್ — Tulu-Tigalari Keyboard</h2>
 <p style="margin:6px 0 0 0; font-size:13px; color:#475569;">Tap a key to type • Pronunciation below each key • Works like Image 3</p>
 </div>
-
 <textarea id="tuluStoryBoxExact" placeholder="✍️ Write story here... Toggle to TULU mode to type authentic Tulu Lipi... ಬರೆಯಿರಿ..."></textarea>
-
 <div style="display:flex; gap:8px; justify-content:center; margin:14px 0; flex-wrap:wrap;">
 <span id="storyModeLabel" style="font-size:12px; font-weight:800; background:#fef3c7; padding:6px 10px; border-radius:12px; align-self:center;">Mode: ENGLISH</span>
 <button onclick="toggleStoryLang()" id="storyToggleBtn" style="padding:8px 18px; background:#dc2626; color:white; border:none; border-radius:20px; font-weight:bold;">Toggle to TULU 𑎐</button>
 <button onclick="saveStory()" style="padding:8px 14px; background:#16a34a; color:white; border:none; border-radius:8px; font-weight:bold;">💾 Save</button>
 <button onclick="copyStory()" style="padding:8px 14px; background:#facc15; border:none; border-radius:8px; font-weight:bold;">📋 Copy</button>
 </div>
-
 <div class="kb-section-title">VOWELS — ಸ್ವರಗಳು</div>
 <div class="kb-grid" id="vowelGrid"></div>
 <div class="kb-section-title">CONSONANTS — ವ್ಯಂಜನಗಳು</div>
 <div class="kb-grid" id="consonantGrid"></div>
 <div class="kb-section-title">NUMBERS & SYMBOLS — ಅಂಕಗಳು</div>
 <div class="kb-grid" id="numberGrid"></div>
-
 <div class="kb-bottom">
 <button class="btn-shift" onclick="handleShift()">⇧ Shift</button>
 <button class="btn-space" onclick="insertInExact(' ')">Space</button>
 <button class="btn-delete" onclick="backspaceExact()">⌫ Delete</button>
 </div>
-
-<!-- 1,2,3 IMAGES -->
 <div style="margin-top:22px; background:#fffbeb; padding:14px; border-radius:12px; border:2px solid #1e3a8a;">
 <p class="ref-title" style="color:#1e3a8a;">1️⃣ Image 1 — Authentic Original Tulu Akshara Male</p>
 <img src="assets/tulu-1-authentic.png" alt="Image 1" class="ref-img">
@@ -108,21 +99,43 @@ body { margin:0; font-family:system-ui, sans-serif; background:#f8fafc; }
 <img src="assets/tulu-2-complete-with-numbers.png" alt="Image 2" class="ref-img">
 <p class="ref-title" style="color:#16a34a;">3️⃣ Image 3 — Tulu-Tigalari Keyboard Layout (Exact Functional)</p>
 <img src="assets/tulu-3-keyboard.png" alt="Image 3" class="ref-img">
+<p class="ref-title" style="color:#b45309;">4️⃣ Image 4 — Tulunadu Flag — REAL FLAG (Red with Sun + Moon)</p>
+<img src="assets/tulu-4-tulunadu-flag.png" alt="Tulunadu Flag" class="ref-img" style="max-width:400px; border:3px solid #dc2626;">
 </div>
 </div>
 
-<!-- BRANCH 30 FINAL - SEP 18 FLAG MADIME -->
-<div style="background:linear-gradient(135deg,#facc15 0%,#dc2626 50%,#1e3a8a 100%); padding:45px 20px; text-align:center; color:white; border-radius:14px; margin-bottom:28px; box-shadow:0 6px 20px rgba(0,0,0,0.2);">
-<h1 style="font-size:2.15em; margin:0; text-shadow:2px 2px 6px rgba(0,0,0,0.6); line-height:1.2;">🚩 Sep 18, 2026: Tulu 2nd Official + Flag + Madime</h1>
-<p style="font-size:1.25em; margin-top:12px; font-weight:800; color:#fef08a;">30/30 GRAND FINALE - TULU HERITAGE COMPLETE!</p>
+<!-- BRANCH 30 FINAL - CORRECTED FLAG -->
+<div style="background:linear-gradient(135deg,#b91c1c 0%,#dc2626 50%,#1e3a8a 100%); padding:45px 20px; text-align:center; color:white; border-radius:14px; margin-bottom:28px; box-shadow:0 6px 20px rgba(0,0,0,0.2);">
+<h1 style="font-size:2.15em; margin:0; text-shadow:2px 2px 6px rgba(0,0,0,0.6); line-height:1.2;">🚩 Sep 18, 2026: Tulu 2nd Official + Tulunadu Flag + Madime</h1>
+<p style="font-size:1.25em; margin-top:12px; font-weight:800; color:#fef08a;">30/30 GRAND FINALE - TULU HERITAGE CORRECTED!</p>
 <div style="margin-top:18px; background:rgba(0,0,0,0.35); padding:15px; border-radius:10px; max-width:750px; margin-left:auto; margin-right:auto; border:1px solid rgba(255,255,255,0.2);">
-<p style="margin:0; font-size:1.05em; line-height:1.6; font-style:italic;">"September 18, 2026 - History Created! Tulu becomes 2nd Official Language of Karnataka, Our Yellow-Red Flag flies high, Madime keeps our culture alive!"</p></div>
+<p style="margin:0; font-size:1.05em; line-height:1.6; font-style:italic;">"September 18, 2026 - History Created! Tulu becomes 2nd Official, Tulunadu Flag flies high, Madime keeps culture alive!"</p></div>
+
 <div style="margin-top:22px; display:grid; gap:14px; max-width:760px; margin-left:auto; margin-right:auto;">
-<div style="text-align:left; background:rgba(255,255,255,0.18); padding:18px; border-radius:10px; backdrop-filter:blur(4px);"><h3 style="margin:0 0 8px 0; color:#fef08a;">📜 Sep 18, 2026 - Tulu 2nd Official</h3><p style="margin:0; line-height:1.5;">✅ Historic Day - Sep 18, 2026 Karnataka declares Tulu 2nd Official<br>✅ 50 Year Struggle won<br>✅ Govt Jobs - Tulu certificates valid</p></div>
-<div style="text-align:left; background:rgba(255,255,255,0.18); padding:18px; border-radius:10px;"><h3 style="margin:0 0 8px 0; color:#fef08a;">🚩 Tulunadu Flag - Our Pride</h3><p style="margin:0;">🚩 Yellow-Red Flag - Peace & Courage<br>🚩 Symbol for separate Tulunadu</p></div>
-<div style="text-align:left; background:rgba(255,255,255,0.18); padding:18px; border-radius:10px;"><h3 style="margin:0 0 8px 0; color:#fef08a;">💍 Tulunadu Madime - Wedding Traditions</h3><p style="margin:0;">💍 Dhare Ceremony - Kanyadhana<br>💍 Bale & Moohurtha - Feast & auspicious time</p></div>
+<div style="text-align:left; background:rgba(255,255,255,0.18); padding:18px; border-radius:10px;">
+<h3 style="margin:0 0 8px 0; color:#fef08a;">📜 Sep 18, 2026 - Tulu 2nd Official</h3>
+<p style="margin:0; line-height:1.5;">✅ Historic Day - Sep 18, 2026 Karnataka declares Tulu 2nd Official<br>✅ 50 Year Struggle won<br>✅ Govt Jobs - Tulu certificates valid</p></div>
+
+<!-- CORRECTED TULUNADU FLAG CARD -->
+<div style="text-align:left; background:rgba(255,255,255,0.22); padding:18px; border-radius:10px; border:2px solid #fef08a;">
+<h3 style="margin:0 0 8px 0; color:#fef08a;">🚩 Tulunadu Flag - CORRECTED - Our REAL Pride Flag</h3>
+<img src="assets/tulu-4-tulunadu-flag.png" alt="Tulunadu Flag Corrected" class="flag-card-img">
+<p style="margin:8px 0 0 0; line-height:1.6;">
+🚩 <b>RED Flag with WHITE Sun (Full Moon) + WHITE Crescent Moon</b> — This is Tulunadu Flag<br>
+🚩 Yellow-Red is <b>Karnataka State Flag (Haladi-Kempu)</b> — NOT Tulunadu<br>
+🚩 Maroon colour from <b>Kepula flower</b> — sacred in rituals<br>
+🚩 Seen in <b>Bhoota Kola & Daiva Sthanas</b> — carries tradition<br>
+🚩 Hoisted on Nov 1 Rajyotsava in Dakshina Kannada demanding separate state — Symbol of 2500 years legacy<br>
+🚩 Sun = Surya, Moon = Chandra — Eternal existence of Tulunadu
+</p>
 </div>
-<div style="margin-top:22px; background:rgba(0,0,0,0.45); padding:12px; border-radius:8px; font-weight:900; letter-spacing:1px; border:1px solid #facc15;">🏆 30/30 BRANCHES COMPLETE - KITABVERSE LEGEND 🏆</div>
+
+<div style="text-align:left; background:rgba(255,255,255,0.18); padding:18px; border-radius:10px;">
+<h3 style="margin:0 0 8px 0; color:#fef08a;">💍 Tulunadu Madime - Wedding Traditions</h3>
+<p style="margin:0;">💍 Dhare Ceremony - Kanyadhana<br>💍 Bale & Moohurtha - Feast & auspicious time<br>💍 Saree & tradition</p></div>
+</div>
+
+<div style="margin-top:22px; background:rgba(0,0,0,0.45); padding:12px; border-radius:8px; font-weight:900; letter-spacing:1px; border:1px solid #facc15;">🏆 30/30 BRANCHES COMPLETE - CORRECTED FLAG VERIFIED 🏆</div>
 </div>
 
 <div class="welcome-box"><h2 style="margin:0 0 6px 0; color:#1e3a8a;">Feedback</h2><p style="margin:0 0 10px 0;">We Value Your Feedback</p><button class="front-btn" onclick="document.getElementById('feedback').scrollIntoView({behavior:'smooth'})">Give Feedback</button></div>
@@ -140,16 +153,12 @@ body { margin:0; font-family:system-ui, sans-serif; background:#f8fafc; }
 <script>
 // LOCK HEADER FOOTER
 Object.freeze(document.getElementById('lockedHeader')); Object.freeze(document.getElementById('lockedFooter'));
-
-// TULU TYPING LOGIC
 const tuluKeys = ["𑎀","𑎁","𑎂","𑎃","𑎄","𑎅","𑎆","𑎇","𑎈","𑎉","𑎊","𑎋","𑎌","𑎍","𑎎","𑎏","𑎐","𑎑","𑎒","𑎓","𑎔","𑎕","𑎖","𑎗","𑎘","𑎙","𑎚","𑎛","𑎜","𑎝","𑎞","𑎟","𑎠","𑎡","𑎢","𑎣","𑎤","𑎥","𑎦","𑎧","𑎨","𑎩","೦","೧","೨","೩","೪","೫","೬","೭","೮","೯"];
 let isSearchTulu=false, isStoryTulu=false;
 function buildMiniKeyboard(){ const kb=document.getElementById('tuluKeyboard'); kb.innerHTML=''; tuluKeys.forEach(ch=>{ const b=document.createElement('button'); b.className='kb-key'; b.innerHTML=`<span class="tulu-char" style="font-size:18px;">${ch}</span>`; b.style.padding='6px 2px'; b.onclick=()=>insertAt('tuluSearchInput',ch); kb.appendChild(b); }); }
 function insertAt(id,ch){ const ta=document.getElementById(id); const s=ta.selectionStart, e=ta.selectionEnd; ta.value=ta.value.substring(0,s)+ch+ta.value.substring(e); ta.selectionStart=ta.selectionEnd=s+ch.length; ta.focus(); }
 function toggleSearchLang(){ isSearchTulu=!isSearchTulu; const kb=document.getElementById('tuluKeyboard'); const inp=document.getElementById('tuluSearchInput'); const lbl=document.getElementById('searchModeLabel'); const btn=document.getElementById('searchToggleBtn'); if(isSearchTulu){ lbl.textContent="Mode: TULU 𑎐"; btn.textContent="Toggle to ENGLISH"; inp.classList.add('tulu-mode'); kb.style.display='grid'; if(kb.children.length===0) buildMiniKeyboard(); } else { lbl.textContent="Mode: ENGLISH"; btn.textContent="Toggle to TULU 𑎐"; inp.classList.remove('tulu-mode'); kb.style.display='none'; } }
 function toggleStoryLang(){ isStoryTulu=!isStoryTulu; const lbl=document.getElementById('storyModeLabel'); const btn=document.getElementById('storyToggleBtn'); const inp=document.getElementById('tuluStoryBoxExact'); if(isStoryTulu){ lbl.textContent="Mode: TULU 𑎐"; btn.textContent="Toggle to ENGLISH"; inp.classList.add('tulu-mode'); } else { lbl.textContent="Mode: ENGLISH"; btn.textContent="Toggle to TULU 𑎐"; inp.classList.remove('tulu-mode'); } }
-
-// EXACT KEYBOARD LIKE IMAGE 3 - 14 KEYS PER ROW
 const vowels = [{t:"𑎀",p:"a"},{t:"𑎁",p:"aa"},{t:"𑎂",p:"i"},{t:"𑎃",p:"ii"},{t:"𑎄",p:"u"},{t:"𑎅",p:"uu"},{t:"",p:""},{t:"𑎉",p:"e"},{t:"𑎊",p:"ē"},{t:"𑎋",p:"ai"},{t:"𑎌",p:"o"},{t:"𑎍",p:"ō"},{t:"𑎎",p:"au"},{t:"",p:""}];
 const consonants = [{t:"𑎎",p:"ka"},{t:"𑎏",p:"kha"},{t:"𑎐",p:"ga"},{t:"𑎑",p:"gha"},{t:"𑎒",p:"ṅa"},{t:"𑎓",p:"ca"},{t:"𑎔",p:"cha"},{t:"𑎕",p:"ja"},{t:"𑎖",p:"jha"},{t:"𑎗",p:"ña"},{t:"𑎘",p:"ṭa"},{t:"𑎙",p:"ṭha"},{t:"𑎚",p:"ḍa"},{t:"𑎛",p:"ḍha"},{t:"𑎜",p:"ṇa"},{t:"𑎝",p:"ta"},{t:"𑎞",p:"tha"},{t:"𑎟",p:"da"},{t:"𑎠",p:"dha"},{t:"𑎡",p:"na"},{t:"𑎢",p:"pa"},{t:"𑎣",p:"pha"},{t:"𑎤",p:"ba"},{t:"𑎥",p:"bha"},{t:"𑎦",p:"ma"},{t:"𑎧",p:"ya"},{t:"𑎨",p:"ra"},{t:"𑎩",p:"la"},{t:"𑎪",p:"va"},{t:"𑎫",p:"śa"},{t:"𑎬",p:"ṣa"},{t:"𑎭",p:"sa"},{t:"𑎮",p:"ha"},{t:"𑎯",p:"ḷa"}];
 const numbers = [{t:"೦",p:"0"},{t:"೧",p:"1"},{t:"೨",p:"2"},{t:"೩",p:"3"},{t:"೪",p:"4"},{t:"೫",p:"5"},{t:"೬",p:"6"},{t:"೭",p:"7"},{t:"೮",p:"8"},{t:"೯",p:"9"},{t:"।",p:"."},{t:"॥",p:".."}];
@@ -160,8 +169,6 @@ function handleShift(){ alert('Shift - Secondary symbols soon!'); }
 function saveStory(){ localStorage.setItem('tuluStory', document.getElementById('tuluStoryBoxExact').value); alert('Story Saved! 💾'); }
 function copyStory(){ navigator.clipboard.writeText(document.getElementById('tuluStoryBoxExact').value); alert('Copied! 📋'); }
 createKeys('vowelGrid', vowels); createKeys('consonantGrid', consonants); createKeys('numberGrid', numbers);
-
-// Daily Quote
 const quotes=[{t:"Books are a uniquely portable magic.",a:"Stephen King"},{t:"Tulu Lipi is our heritage pride.",a:"KitabVerse"}];
 document.getElementById('dailyQuote').innerText=`"${quotes[Math.floor(Math.random()*quotes.length)].t}"`;
 </script>
