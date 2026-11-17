@@ -5,11 +5,11 @@ import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebas
 
 const firebaseConfig = {
   apiKey: "AIzaSyA3RtkFn390udz28cGyS0_zGdMmc-YVCu8",
-  authDomain: "kitabverse-1.firebaseapp.com",
-  projectId: "kitabverse-1",
-  storageBucket: "kitabverse-1.firebasestorage.app",
-  messagingSenderId: "1065120120445",
-  appId: "1:1065120120445:web:3c4c5e9f1b2c3d4e5f6a7b",
+  authDomain: "kitabverse.firebaseapp.com",
+  projectId: "kitabverse",
+  storageBucket: "kitabverse.firebasestorage.app",
+  messagingSenderId: "918701492498",
+  appId: "1:918701492498:web:f2bdae6a46b1a2b3edcbcb"
 };
 
 const app = initializeApp(firebaseConfig);
