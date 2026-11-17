@@ -7,52 +7,52 @@
 <link rel="icon" type="image/png" href="assets/logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tigalari&display=swap" rel="stylesheet">
 <style>
-/* ===== LOCKED HEADER & FOOTER ===== */
-.main-header { background: linear-gradient(135deg,#1e3a8a 0%,#1e40af 100%); color:white; text-align:center; padding:18px 10px; border-bottom:5px solid #facc15; position:sticky; top:0; z-index:1000; user-select:none; }
+/* ==== LOCKED HEADER & FOOTER - DO NOT EDIT ==== */
+.main-header { background: linear-gradient(135deg,#1e3a8a 0%,#1e40af 100%); color:white; text-align:center; padding:18px; }
 .header-logo { width:85px; height:85px; border-radius:50%; border:3px solid #facc15; margin-bottom:8px; background:white; }
 .header-line1 { font-size:1.35em; font-weight:800; letter-spacing:0.5px; }
-.header-line2 { font-size:1.05em; margin-top:4px; color:#fef08a; font-weight:600; }
+.header-line2, .header-line3 { font-size:1.05em; margin-top:4px; color:#fef08a; font-weight:600; }
 .header-line3, .header-line4 { font-size:0.85em; margin-top:3px; opacity:0.9; }
-.main-footer { background:#0f172a; color:#cbd5e1; text-align:center; padding:18px 10px; border-top:5px solid #facc15; margin-top:30px; user-select:none; }
-.footer-line1 { font-weight:700; color:white; }
+.main-footer { background:#0f172a; color:#cbd5e1; text-align:center; padding:18px 10px; border-top:5px solid #facc15; margin-top:20px; }
+.footer-line1, .footer-line3 { color:white; }
 .footer-line2, .footer-line3 { font-size:0.85em; margin-top:4px; }
 .content { max-width:900px; margin:0 auto; padding:20px 15px; }
 body { margin:0; font-family:system-ui, sans-serif; background:#f8fafc; }
 @font-face { font-family:'TuluTigalari'; src:url('https://cdn.jsdelivr.net/gh/googlefonts/noto-fonts/unhinted/NotoSansTigalari/NotoSansTigalari-Regular.ttf'); }
-.tulu-search-wrap, .tulu-kb-wrap { background:#fff; border:3px solid #1e3a8a; border-radius:14px; padding:18px; margin-bottom:25px; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
-#tuluSearchInput, #tuluStoryBoxExact { width:100%; padding:12px; font-size:18px; border:2px solid #facc15; border-radius:10px; box-sizing:border-box; font-family:'Noto Sans Tigalari',sans-serif; }
+.tulu-search-wrap, .tulu-kb-wrap { background:#fff; border:3px solid #1e3a8a; border-radius:14px; padding:18px; margin-top:15px; }
+#tuluSearchInput, #tuluStoryBoxExact { width:100%; padding:12px; font-size:18px; border:2px solid #facc15; border-radius:10px; }
 #tuluStoryBoxExact { height:170px; resize:vertical; }
 .tulu-mode { border-color:#dc2626 !important; background:#fffbeb !important; }
-.kb-header { background:#f1f5f9; border-radius:12px; padding:12px; text-align:center; margin-bottom:12px; border:1px solid #e2e8f0; }
-.kb-header h2 { margin:0; color:#1e3a8a; font-size:1.35em; }
-.kb-section-title { background:#dbeafe; color:#1e3a8a; font-weight:bold; padding:6px 14px; border-radius:20px; display:inline-block; margin:14px 0 8px 0; font-size:13px; border:1px solid #bfdbfe; }
+.kb-header { background:#1f2937; border-radius:12px; padding:12px; text-align:center; margin-bottom:12px; border:1px solid #374151; }
+.kb-header h2 { margin:0; color:#fde68a; font-size:1.35em; }
+.kb-section-title { background:#fde68a; color:#1e3a8a; font-weight:bold; padding:6px 14px; border-radius:20px; display:inline-block; margin:12px 0 8px 0; }
 .kb-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:7px; }
-.kb-key { background:#f8fafc; border:1px solid #cbd5e1; border-radius:10px; padding:7px 1px; cursor:pointer; text-align:center; transition:0.1s; }
+.kb-key { background:#f8fafc; border:1px solid #cbd5e1; border-radius:10px; padding:7px 1px; cursor:pointer; text-align:center; }
 .kb-key:active { background:#facc15; transform:scale(0.95); }
-.kb-key .tulu-char { font-family:'Noto Sans Tigalari',sans-serif; font-size:24px; font-weight:bold; color:#000; display:block; line-height:1.1; }
+.kb-key .tulu-char { font-family:'Noto Sans Tigalari', sans-serif; font-size:24px; font-weight:bold; color:#000; display:block; }
 .kb-key .eng-pron { font-size:10px; color:#334155; font-weight:700; display:block; margin-top:2px; }
 .kb-bottom { display:flex; gap:8px; margin-top:14px; }
 .kb-bottom button { flex:1; padding:14px; border:none; border-radius:10px; font-weight:bold; cursor:pointer; font-size:14px; }
-.btn-shift, .btn-delete { background:#cbd5e1; color:#1e293b; }
+.btn-shift, .btn-delete { background:#0f172a; color:white; }
 .btn-space { background:#e2e8f0; flex:3 !important; }
 .ref-title { font-weight:800; margin:20px 0 8px 0; font-size:14px; }
-.ref-img { width:100%; max-width:700px; border-radius:12px; display:block; margin:8px auto; border:3px solid #e2e8f0; box-shadow:0 3px 10px rgba(0,0,0,0.15); }
-.welcome-box, .quote-box, .feedback-section { background:white; border-radius:12px; padding:18px; margin-bottom:20px; border:1px solid #e2e8f0; }
+.ref-img { width:100%; max-width:700px; border-radius:12px; display:block; margin:8px auto; border:3px solid #e2e8f0; }
+.welcome-box, .quote-box, .feedback-section { background:white; border-radius:12px; padding:18px; margin-bottom:20px; }
 .front-btn { background:#1e3a8a; color:white; border:none; padding:10px 18px; border-radius:20px; font-weight:bold; }
-#feedbackForm input, #feedbackForm textarea { width:100%; padding:10px; margin:6px 0; border-radius:8px; border:1px solid #cbd5e1; box-sizing:border-box; }
-#feedbackForm button { background:#16a34a; color:white; border:none; padding:10px 18px; border-radius:8px; font-weight:bold; width:100%; }
-.flag-card-img { width:100%; max-width:320px; border-radius:12px; border:3px solid white; display:block; margin:10px auto; box-shadow:0 4px 12px rgba(0,0,0,0.3); }
+#feedbackForm input, #feedbackForm textarea { width:100%; padding:10px; margin:6px 0; border-radius:8px; border:1px solid #ccc; }
+#feedbackForm button { background:#16a34a; color:white; border:none; padding:10px 18px; border-radius:8px; font-weight:bold; }
+.flag-card-img { width:100%; max-width:320px; border-radius:12px; border:3px solid white; display:block; margin:10px auto; }
 </style>
 </head>
 <body>
 
-<!-- ===== LOCKED HEADER - DO NOT EDIT ===== -->
+<!-- ==== LOCKED HEADER - DO NOT EDIT ==== -->
 <header class="main-header" id="lockedHeader">
 <img src="assets/logo.png" alt="KitabVerse Logo" class="header-logo">
 <div class="header-line1">Welcome To KitabVerse - Read. Share. Connect.</div>
 <div class="header-line2">Library For All With Advanced Features</div>
 <div class="header-line3">Email : kitabverse.library@gmail.com</div>
-<div class="header-line4">Satish Puthran - 08_satish_iaf | KitabVerse Official - kitabverse.official</div>
+<div class="header-line4">Satish Puthran - 08_satiah_1af | KitabVerse Official - kitabverse.official</div>
 </header>
 
 <main class="content">
@@ -60,117 +60,125 @@ body { margin:0; font-family:system-ui, sans-serif; background:#f8fafc; }
 <!-- SEARCH WITH TULU TOGGLE -->
 <div class="tulu-search-wrap">
 <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
-<h3 style="margin:0; color:#1e3a8a;">🔍 Search in Tulu Lipi — English ↔ Tulu</h3>
-<div><span id="searchModeLabel" style="font-size:12px; font-weight:800; background:#fef3c7; padding:4px 8px; border-radius:12px;">Mode: ENGLISH</span>
-<button onclick="toggleSearchLang()" id="searchToggleBtn" style="padding:7px 14px; background:#1e3a8a; color:white; border:none; border-radius:20px; font-weight:bold; margin-left:6px;">Toggle to TULU 𑎐</button></div>
+<h3 style="margin:0; color:#1e3a8a;">🔍 Search in Tulu Lipi - English - Tulu</h3>
+<div style="display:flex; gap:8px; justify-content:center; margin:14px 0; flex-wrap:wrap;">
+<span id="searchModeLabel" style="font-size:12px; font-weight:800; background:#fef3c7; padding:6px 10px; border-radius:10px;">English</span>
+<button onclick="toggleSearchLang()" id="searchToggleBtn" style="padding:7px 14px; background:#1e3a8a; color:white; border:none; border-radius:8px; font-weight:bold;">Switch to Tulu</button>
 </div>
-<div style="display:flex; gap:8px; margin-top:12px;"><input type="text" id="tuluSearchInput" placeholder="Search books... English or Tulu"><button onclick="document.getElementById('tuluSearchInput').value=''" style="padding:10px 14px; border-radius:8px; border:1px solid #ccc; background:white;">Clear</button></div>
-<div id="tuluKeyboard" style="display:none; margin-top:14px; grid-template-columns:repeat(7,1fr); gap:6px; background:#f8fafc; padding:10px; border-radius:10px; border:2px dashed #dc2626;"></div>
+</div>
+<div style="display:flex; gap:8px; margin-top:12px;"><input type="text" id="tuluSearchInput" placeholder="Search books... 🎤 Voice enabled"><button onclick="toggleSearchLang()" style="padding:8px 14px; background:#16a34a; color:white; border:none; border-radius:8px;">⌨️</button></div>
+<div id="tuluKeyboard" style="display:none; margin-top:14px; grid-template-columns:repeat(7,1fr); gap:6px; background:#f8fafc; padding:12px; border-radius:10px;"></div>
 </div>
 
 <!-- EXACT KEYBOARD + STORY WRITER -->
 <div class="tulu-kb-wrap">
-<div class="kb-header">
-<h2>ತುಳು ಅಕ್ಷರ ಕೀಬೋರ್ಡ್ — Tulu-Tigalari Keyboard</h2>
-<p style="margin:6px 0 0 0; font-size:13px; color:#475569;">Tap a key to type • Pronunciation below each key • Works like Image 3</p>
-</div>
-<textarea id="tuluStoryBoxExact" placeholder="✍️ Write story here... Toggle to TULU mode to type authentic Tulu Lipi... ಬರೆಯಿರಿ..."></textarea>
+<div class="kb-header"><h2>⌨️ ಅಕ್ಷರ ಮಾಲೆ - Tulu-Tigalari Keyboard</h2><p style="margin:6px 0 0 0; font-size:13px; color:#475569;">Tap a key to type • Pronunciation below each key • Works like real keyboard</p></div>
+<textarea id="tuluStoryBoxExact" placeholder="✍️ Write story here... Toggle to TULU mode to type authentic Tulu Lipi..."></textarea>
 <div style="display:flex; gap:8px; justify-content:center; margin:14px 0; flex-wrap:wrap;">
-<span id="storyModeLabel" style="font-size:12px; font-weight:800; background:#fef3c7; padding:6px 10px; border-radius:12px; align-self:center;">Mode: ENGLISH</span>
-<button onclick="toggleStoryLang()" id="storyToggleBtn" style="padding:8px 18px; background:#dc2626; color:white; border:none; border-radius:20px; font-weight:bold;">Toggle to TULU 𑎐</button>
-<button onclick="saveStory()" style="padding:8px 14px; background:#16a34a; color:white; border:none; border-radius:8px; font-weight:bold;">💾 Save</button>
+<span id="storyModeLabel" style="font-size:12px; font-weight:800; background:#fef3c7; padding:6px 10px; border-radius:10px;">ENGLISH</span>
+<button onclick="toggleStoryLang()" id="storyToggleBtn" style="padding:8px 14px; background:#dc2626; color:white; border:none; border-radius:8px; font-weight:bold;">Switch to TULU</button>
+<button onclick="saveStory()" style="padding:8px 14px; background:#16a34a; color:white; border:none; border-radius:8px;">💾 Save</button>
 <button onclick="copyStory()" style="padding:8px 14px; background:#facc15; border:none; border-radius:8px; font-weight:bold;">📋 Copy</button>
+<button onclick="backspaceExact()" style="padding:8px 14px; background:#0f172a; color:white; border:none; border-radius:8px;">⌫ Delete</button>
 </div>
-<div class="kb-section-title">VOWELS — ಸ್ವರಗಳು</div>
+<div class="kb-section-title">VOWELS - ಸ್ವರಗಳು</div>
 <div class="kb-grid" id="vowelGrid"></div>
-<div class="kb-section-title">CONSONANTS — ವ್ಯಂಜನಗಳು</div>
+<div class="kb-section-title">CONSONANTS - ವ್ಯಂಜನಗಳು</div>
 <div class="kb-grid" id="consonantGrid"></div>
-<div class="kb-section-title">NUMBERS & SYMBOLS — ಅಂಕಗಳು</div>
+<div class="kb-section-title">NUMBERS & SYMBOLS - ಅಂಕಿಗಳು</div>
 <div class="kb-grid" id="numberGrid"></div>
 <div class="kb-bottom">
 <button class="btn-shift" onclick="handleShift()">⇧ Shift</button>
 <button class="btn-space" onclick="insertInExact(' ')">Space</button>
 <button class="btn-delete" onclick="backspaceExact()">⌫ Delete</button>
 </div>
-<div style="margin-top:22px; background:#fffbeb; padding:14px; border-radius:12px; border:2px solid #1e3a8a;">
-<p class="ref-title" style="color:#1e3a8a;">1️⃣ Image 1 — Authentic Original Tulu Akshara Male</p>
-<img src="assets/tulu-1-authentic.png" alt="Image 1" class="ref-img">
-<p class="ref-title" style="color:#dc2626;">2️⃣ Image 2 — Complete Chart with Numbers 0-9 (Soonyo to Ombattu)</p>
-<img src="assets/tulu-2-complete-with-numbers.png" alt="Image 2" class="ref-img">
-<p class="ref-title" style="color:#16a34a;">3️⃣ Image 3 — Tulu-Tigalari Keyboard Layout (Exact Functional)</p>
-<img src="assets/tulu-3-keyboard.png" alt="Image 3" class="ref-img">
-<p class="ref-title" style="color:#b45309;">4️⃣ Image 4 — Tulunadu Flag — REAL FLAG (Red with Sun + Moon)</p>
-<img src="assets/tulu-4-tulunadu-flag.png" alt="Tulunadu Flag" class="ref-img" style="max-width:400px; border:3px solid #dc2626;">
 </div>
+
+<div style="margin-top:22px; background:#fffbeb; padding:14px; border-radius:12px; border:2px solid #1e3a8a;">
+<p class="ref-title" style="color:#1e3a8a;">📖 Image 1 - Authentic Original Tulu Akshara Male</p>
+<img src="assets/tulu-1-authentic.png" alt="Image 1" class="ref-img">
+<p class="ref-title" style="color:#dc2626;">📖 Image 2 - Complete Chart with Numbers 0-9 (Soonyo to Ombattu)</p>
+<img src="assets/tulu-2-complete-with-numbers.png" alt="Image 2" class="ref-img">
+<p class="ref-title" style="color:#16a34a;">📖 Image 3 - Tulu-Tigalari Keyboard Layout (Exact Functional)</p>
+<img src="assets/tulu-3-keyboard.png" alt="Image 3" class="ref-img">
+<p class="ref-title" style="color:#45309;">📖 Image 4 - Tulunadu Flag - REAL FLAG (Red with Sun + Moon)</p>
+<img src="assets/tulu-4-tulunadu-flag.png" alt="Tulunadu Flag" class="ref-img" style="max-width:400px; border:3px solid #1e3a8a;">
 </div>
 
 <!-- BRANCH 30 FINAL - CORRECTED FLAG -->
-<div style="background:linear-gradient(135deg,#b91c1c 0%,#dc2626 50%,#1e3a8a 100%); padding:45px 20px; text-align:center; color:white; border-radius:14px; margin-bottom:28px; box-shadow:0 6px 20px rgba(0,0,0,0.2);">
-<h1 style="font-size:2.15em; margin:0; text-shadow:2px 2px 6px rgba(0,0,0,0.6); line-height:1.2;">🚩 Sep 18, 2026: Tulu 2nd Official + Tulunadu Flag + Madime</h1>
-<p style="font-size:1.25em; margin-top:12px; font-weight:800; color:#fef08a;">30/30 GRAND FINALE - TULU HERITAGE CORRECTED!</p>
-<div style="margin-top:18px; background:rgba(0,0,0,0.35); padding:15px; border-radius:10px; max-width:750px; margin-left:auto; margin-right:auto; border:1px solid rgba(255,255,255,0.2);">
-<p style="margin:0; font-size:1.05em; line-height:1.6; font-style:italic;">"September 18, 2026 - History Created! Tulu becomes 2nd Official, Tulunadu Flag flies high, Madime keeps culture alive!"</p></div>
+<div style="background:linear-gradient(135deg,#9f1c1c 0%,#dc2626 50%,#1e3a8a 100%); padding:45px 20px; text-align:center; border-radius:12px; margin-top:20px;">
+<h1 style="font-size:2.15em; margin:0; text-shadow:2px 2px 6px rgba(0,0,0,0.6); line-height:1.2;">🎉 Sep 18, 2026: Tulu Heritage Corrected!</h1>
+<p style="font-size:1.25em; margin-top:12px; font-weight:800; color:#fef08a;">30/30 GRAND FINALE - TULU HERITAGE CORRECTED</p>
+<div style="margin-top:18px; background:rgba(0,0,0,0.35); padding:15px; border-radius:10px; max-width:750px; margin-left:auto; margin-right:auto;">
+<p style="margin:0; font-size:1.05em; line-height:1.6; font-style:italic;">"September 18, 2026 - History Created! Tulu Officially Recognized!"</p>
+</div>
 
 <div style="margin-top:22px; display:grid; gap:14px; max-width:760px; margin-left:auto; margin-right:auto;">
 <div style="text-align:left; background:rgba(255,255,255,0.18); padding:18px; border-radius:10px;">
-<h3 style="margin:0 0 8px 0; color:#fef08a;">📜 Sep 18, 2026 - Tulu 2nd Official</h3>
-<p style="margin:0; line-height:1.5;">✅ Historic Day - Sep 18, 2026 Karnataka declares Tulu 2nd Official<br>✅ 50 Year Struggle won<br>✅ Govt Jobs - Tulu certificates valid</p></div>
+<h3 style="margin:0 0 8px 0; color:#fef08a;">🎉 Sep 18, 2026 - Tulu 2nd Official</h3>
+<p style="margin:0; line-height:1.5;">✅ Historic Day - Sep 18, 2026 Karnataka declares Tulu 2nd Official - 50 Year Dream!</p>
+</div>
 
 <!-- CORRECTED TULUNADU FLAG CARD -->
 <div style="text-align:left; background:rgba(255,255,255,0.22); padding:18px; border-radius:10px; border:2px solid #fef08a;">
 <h3 style="margin:0 0 8px 0; color:#fef08a;">🚩 Tulunadu Flag - CORRECTED - Our REAL Pride Flag</h3>
 <img src="assets/tulu-4-tulunadu-flag.png" alt="Tulunadu Flag Corrected" class="flag-card-img">
 <p style="margin:8px 0 0 0; line-height:1.6;">
-🚩 <b>RED Flag with WHITE Sun (Full Moon) + WHITE Crescent Moon</b> — This is Tulunadu Flag<br>
-🚩 Yellow-Red is <b>Karnataka State Flag (Haladi-Kempu)</b> — NOT Tulunadu<br>
-🚩 Maroon colour from <b>Kepula flower</b> — sacred in rituals<br>
-🚩 Seen in <b>Bhoota Kola & Daiva Sthanas</b> — carries tradition<br>
-🚩 Hoisted on Nov 1 Rajyotsava in Dakshina Kannada demanding separate state — Symbol of 2500 years legacy<br>
-🚩 Sun = Surya, Moon = Chandra — Eternal existence of Tulunadu
+🔴 <b>Red Flag with WHITE Sun (Full Moon) + WHITE Crescent Moon</b> - This is Tulunadu Flag<br>
+❌ Yellow-Red is <b>Karnataka State Flag (Haladi-Kempu)</b> - NOT Tulunadu<br>
+🔴 Maroon colour from <b>Kepula flower</b> - sacred in rituals<br>
+📜 Seen in <b>Bhoota Kola & Daiva Sthanas</b> - carries tradition<br>
+🚩 Hoisted on Nov 1 Rajyotsava in Dakshina Kannada demanding separate state - Symbol of 2500 years legacy<br>
+☀️ Sun = Surya, Moon = Chandra - Eternal existence of Tulunadu
 </p>
 </div>
 
 <div style="text-align:left; background:rgba(255,255,255,0.18); padding:18px; border-radius:10px;">
-<h3 style="margin:0 0 8px 0; color:#fef08a;">💍 Tulunadu Madime - Wedding Traditions</h3>
-<p style="margin:0;">💍 Dhare Ceremony - Kanyadhana<br>💍 Bale & Moohurtha - Feast & auspicious time<br>💍 Saree & tradition</p></div>
+<h3 style="margin:0 0 8px 0; color:#fef08a;">🎭 Tulunadu Madime - Wedding Traditions</h3>
+<p style="margin:0;">💍 Dhare Ceremony - Kanyadhana<br>🍛 Bale & Moorthha - Feast & auspicious time<br>👘 Saree & traditional attire</p>
+</div>
 </div>
 
-<div style="margin-top:22px; background:rgba(0,0,0,0.45); padding:12px; border-radius:8px; font-weight:900; letter-spacing:1px; border:1px solid #facc15;">🏆 30/30 BRANCHES COMPLETE - CORRECTED FLAG VERIFIED 🏆</div>
+<div style="margin-top:22px; background:rgba(0,0,0,0.45); padding:12px; border-radius:8px; font-weight:900; letter-spacing:0.5px;">
+TULU HERITAGE - 2500 YEARS LEGACY - PRESERVE OUR LIPI!
+</div>
 </div>
 
-<div class="welcome-box"><h2 style="margin:0 0 6px 0; color:#1e3a8a;">Feedback</h2><p style="margin:0 0 10px 0;">We Value Your Feedback</p><button class="front-btn" onclick="document.getElementById('feedback').scrollIntoView({behavior:'smooth'})">Give Feedback</button></div>
-<div class="quote-box"><p id="dailyQuote" style="font-style:italic; font-weight:600;">Loading today's thought...</p><small id="quoteAuthor" style="color:#64748b;"></small></div>
-<div class="feedback-section" id="feedback"><h3 style="margin-top:0; color:#1e3a8a;">Feedback / Contact</h3><form id="feedbackForm"><input type="text" id="fbName" placeholder="Your Name" required><input type="email" id="fbEmail" placeholder="Your Email" required><textarea id="fbMessage" placeholder="Your Message" rows="4" required></textarea><button type="submit">Send Feedback</button></form></div>
+<div class="welcome-box"><h2 style="margin:0 0 6px 0; color:#1e3a8a;">Feedback</h2><p style="margin:0 0 10px 0;">We Value Your Feedback!</p></div>
+<div class="quote-box"><p id="dailyQuote" style="font-style:italic; font-weight:600;">"Loading today's thought..."</p></div>
+<div class="feedback-section" id="feedback"><h3 style="margin-top:0; color:#1e3a8a;">Feedback / Contact</h3><form id="feedbackForm"><input type="text" placeholder="Your Name" required><input type="email" placeholder="Email" required><textarea placeholder="Your Message..." rows="4" required></textarea><button type="submit">Send Feedback</button></form></div>
+
 </main>
 
-<!-- ===== LOCKED FOOTER - DO NOT EDIT ===== -->
+<!-- ==== LOCKED FOOTER - DO NOT EDIT ==== -->
 <footer class="main-footer" id="lockedFooter">
-<div class="footer-line1">Design Copyrighted © 2026 KitabVerse | Designed On & Powered By GitHub</div>
+<div class="footer-line1">Design Copyright © 2026 KitabVerse | Designed On & Powered By GitHub</div>
 <div class="footer-line2">© 2026 Logo Designed By Munazza Khan | Voice + Touch + Braille Enabled</div>
 <div class="footer-line3">All Rights Reserved</div>
 </footer>
 
 <script>
-// LOCK HEADER FOOTER
+// ==== LOCKED HEADER FOOTER - DO NOT EDIT - SAFE ====
 Object.freeze(document.getElementById('lockedHeader')); Object.freeze(document.getElementById('lockedFooter'));
-const tuluKeys = ["𑎀","𑎁","𑎂","𑎃","𑎄","𑎅","𑎆","𑎇","𑎈","𑎉","𑎊","𑎋","𑎌","𑎍","𑎎","𑎏","𑎐","𑎑","𑎒","𑎓","𑎔","𑎕","𑎖","𑎗","𑎘","𑎙","𑎚","𑎛","𑎜","𑎝","𑎞","𑎟","𑎠","𑎡","𑎢","𑎣","𑎤","𑎥","𑎦","𑎧","𑎨","𑎩","೦","೧","೨","೩","೪","೫","೬","೭","೮","೯"];
+const tuluKeys = ["ಅ","ಆ","ಇ","ಈ","ಉ","ಊ","ಋ","ಎ","ಏ","ಐ","ಒ","ಓ","ಔ","ಕ","ಖ","ಗ","ಘ","ಙ","ಚ","ಛ","ಜ","ಝ","ಞ","ಟ","ಠ","ಡ","ಢ","ಣ","ತ","ಥ","ದ","ಧ","ನ","ಪ","ಫ","ಬ","ಭ","ಮ","ಯ","ರ","ಲ","ವ","ಶ","ಷ","ಸ","ಹ","ಳ","೦","೧","೨","೩","೪","೫","೬","೭","೮","೯"];
 let isSearchTulu=false, isStoryTulu=false;
-function buildMiniKeyboard(){ const kb=document.getElementById('tuluKeyboard'); kb.innerHTML=''; tuluKeys.forEach(ch=>{ const b=document.createElement('button'); b.className='kb-key'; b.innerHTML=`<span class="tulu-char" style="font-size:18px;">${ch}</span>`; b.style.padding='6px 2px'; b.onclick=()=>insertAt('tuluSearchInput',ch); kb.appendChild(b); }); }
-function insertAt(id,ch){ const ta=document.getElementById(id); const s=ta.selectionStart, e=ta.selectionEnd; ta.value=ta.value.substring(0,s)+ch+ta.value.substring(e); ta.selectionStart=ta.selectionEnd=s+ch.length; ta.focus(); }
-function toggleSearchLang(){ isSearchTulu=!isSearchTulu; const kb=document.getElementById('tuluKeyboard'); const inp=document.getElementById('tuluSearchInput'); const lbl=document.getElementById('searchModeLabel'); const btn=document.getElementById('searchToggleBtn'); if(isSearchTulu){ lbl.textContent="Mode: TULU 𑎐"; btn.textContent="Toggle to ENGLISH"; inp.classList.add('tulu-mode'); kb.style.display='grid'; if(kb.children.length===0) buildMiniKeyboard(); } else { lbl.textContent="Mode: ENGLISH"; btn.textContent="Toggle to TULU 𑎐"; inp.classList.remove('tulu-mode'); kb.style.display='none'; } }
-function toggleStoryLang(){ isStoryTulu=!isStoryTulu; const lbl=document.getElementById('storyModeLabel'); const btn=document.getElementById('storyToggleBtn'); const inp=document.getElementById('tuluStoryBoxExact'); if(isStoryTulu){ lbl.textContent="Mode: TULU 𑎐"; btn.textContent="Toggle to ENGLISH"; inp.classList.add('tulu-mode'); } else { lbl.textContent="Mode: ENGLISH"; btn.textContent="Toggle to TULU 𑎐"; inp.classList.remove('tulu-mode'); } }
-const vowels = [{t:"𑎀",p:"a"},{t:"𑎁",p:"aa"},{t:"𑎂",p:"i"},{t:"𑎃",p:"ii"},{t:"𑎄",p:"u"},{t:"𑎅",p:"uu"},{t:"",p:""},{t:"𑎉",p:"e"},{t:"𑎊",p:"ē"},{t:"𑎋",p:"ai"},{t:"𑎌",p:"o"},{t:"𑎍",p:"ō"},{t:"𑎎",p:"au"},{t:"",p:""}];
-const consonants = [{t:"𑎎",p:"ka"},{t:"𑎏",p:"kha"},{t:"𑎐",p:"ga"},{t:"𑎑",p:"gha"},{t:"𑎒",p:"ṅa"},{t:"𑎓",p:"ca"},{t:"𑎔",p:"cha"},{t:"𑎕",p:"ja"},{t:"𑎖",p:"jha"},{t:"𑎗",p:"ña"},{t:"𑎘",p:"ṭa"},{t:"𑎙",p:"ṭha"},{t:"𑎚",p:"ḍa"},{t:"𑎛",p:"ḍha"},{t:"𑎜",p:"ṇa"},{t:"𑎝",p:"ta"},{t:"𑎞",p:"tha"},{t:"𑎟",p:"da"},{t:"𑎠",p:"dha"},{t:"𑎡",p:"na"},{t:"𑎢",p:"pa"},{t:"𑎣",p:"pha"},{t:"𑎤",p:"ba"},{t:"𑎥",p:"bha"},{t:"𑎦",p:"ma"},{t:"𑎧",p:"ya"},{t:"𑎨",p:"ra"},{t:"𑎩",p:"la"},{t:"𑎪",p:"va"},{t:"𑎫",p:"śa"},{t:"𑎬",p:"ṣa"},{t:"𑎭",p:"sa"},{t:"𑎮",p:"ha"},{t:"𑎯",p:"ḷa"}];
-const numbers = [{t:"೦",p:"0"},{t:"೧",p:"1"},{t:"೨",p:"2"},{t:"೩",p:"3"},{t:"೪",p:"4"},{t:"೫",p:"5"},{t:"೬",p:"6"},{t:"೭",p:"7"},{t:"೮",p:"8"},{t:"೯",p:"9"},{t:"।",p:"."},{t:"॥",p:".."}];
-function createKeys(containerId, data){ const cont=document.getElementById(containerId); cont.innerHTML=''; data.forEach(item=>{ const div=document.createElement('div'); div.className='kb-key'; if(!item.t){ div.style.visibility='hidden'; cont.appendChild(div); return; } div.innerHTML=`<span class="tulu-char">${item.t}</span><span class="eng-pron">${item.p}</span>`; div.onclick=()=>insertInExact(item.t); cont.appendChild(div); }); }
-function insertInExact(ch){ const ta=document.getElementById('tuluStoryBoxExact'); const s=ta.selectionStart, e=ta.selectionEnd; ta.value=ta.value.substring(0,s)+ch+ta.value.substring(e); ta.selectionStart=ta.selectionEnd=s+ch.length; ta.focus(); }
-function backspaceExact(){ const ta=document.getElementById('tuluStoryBoxExact'); ta.value=ta.value.slice(0,-1); ta.focus(); }
+function buildMiniKeyboard(){ const kb=document.getElementById('tuluKeyboard'); if(!kb) return; kb.innerHTML=''; tuluKeys.forEach(ch=>{ const b=document.createElement('button'); b.textContent=ch; b.className='kb-key'; b.style.padding='8px'; b.onclick=()=>insertAt('tuluSearchInput', ch); kb.appendChild(b); }); }
+function insertAt(id,ch){ const ta=document.getElementById(id); if(!ta) return; const s=ta.selectionStart, e=ta.selectionEnd; ta.value=ta.value.substring(0,s)+ch+ta.value.substring(e); ta.selectionStart=ta.selectionEnd=s+1; ta.focus(); }
+function toggleSearchLang(){ isSearchTulu=!isSearchTulu; const inp=document.getElementById('tuluSearchInput'); const lbl=document.getElementById('searchModeLabel'); const btn=document.getElementById('searchToggleBtn'); if(!inp) return; if(isSearchTulu){ inp.placeholder='Tulu Lipi - ಹುಡುಕಿ...'; if(lbl) lbl.textContent='Tulu'; if(btn) btn.textContent='Switch to English'; buildMiniKeyboard(); const kb=document.getElementById('tuluKeyboard'); if(kb) kb.style.display='grid'; } else { inp.placeholder='Search books... 🎤 Voice enabled'; if(lbl) lbl.textContent='English'; if(btn) btn.textContent='Switch to Tulu'; const kb=document.getElementById('tuluKeyboard'); if(kb) kb.style.display='none'; } }
+function toggleStoryLang(){ isStoryTulu=!isStoryTulu; const lbl=document.getElementById('storyModeLabel'); if(lbl) lbl.textContent=isStoryTulu?'TULU':'ENGLISH'; }
+const vowels = [{t:"ಅ",p:"a"},{t:"ಆ",p:"aa"},{t:"ಇ",p:"i"},{t:"ಈ",p:"ii"},{t:"ಉ",p:"u"},{t:"ಊ",p:"uu"}];
+const consonants = [{t:"ಕ",p:"ka"},{t:"ಖ",p:"kha"},{t:"ಗ",p:"ga"},{t:"ಘ",p:"gha"},{t:"ಚ",p:"cha"}];
+const numbers = [{t:"೦",p:"0"},{t:"೧",p:"1"},{t:"೨",p:"2"},{t:"೩",p:"3"},{t:"೪",p:"4"},{t:"೫",p:"5"},{t:"೬",p:"6"}];
+function createKeys(containerId, data){ const cont=document.getElementById(containerId); if(!cont) return; cont.innerHTML=''; data.forEach(k=>{ const b=document.createElement('button'); b.className='kb-key'; b.innerHTML=`<span class='tulu-char'>${k.t}</span><span class='eng-pron'>${k.p}</span>`; b.onclick=()=>insertInExact(k.t); cont.appendChild(b); }); }
+function insertInExact(ch){ const ta=document.getElementById('tuluStoryBoxExact'); if(!ta) return; const s=ta.selectionStart, e=ta.selectionEnd; ta.value=ta.value.substring(0,s)+ch+ta.value.substring(e); ta.selectionStart=ta.selectionEnd=s+1; ta.focus(); }
+function backspaceExact(){ const ta=document.getElementById('tuluStoryBoxExact'); if(ta) { ta.value=ta.value.slice(0,-1); ta.focus(); } }
 function handleShift(){ alert('Shift - Secondary symbols soon!'); }
-function saveStory(){ localStorage.setItem('tuluStory', document.getElementById('tuluStoryBoxExact').value); alert('Story Saved! 💾'); }
-function copyStory(){ navigator.clipboard.writeText(document.getElementById('tuluStoryBoxExact').value); alert('Copied! 📋'); }
+function saveStory(){ const v=document.getElementById('tuluStoryBoxExact'); if(v){ localStorage.setItem('tuluStory', v.value); alert('Story Saved!'); } }
+function copyStory(){ const v=document.getElementById('tuluStoryBoxExact'); if(v){ navigator.clipboard.writeText(v.value); alert('Copied!'); } }
 createKeys('vowelGrid', vowels); createKeys('consonantGrid', consonants); createKeys('numberGrid', numbers);
-const quotes=[{t:"Books are a uniquely portable magic.",a:"Stephen King"},{t:"Tulu Lipi is our heritage pride.",a:"KitabVerse"}];
-document.getElementById('dailyQuote').innerText=`"${quotes[Math.floor(Math.random()*quotes.length)].t}"`;
+const quotes=[{t:"Books are a uniquely portable magic.",a:"Stephen King"},{t:"Tulu Lipi is our heritage pride.",a:"KitabVerse"}, {t:"Read. Share. Connect.",a:"KitabVerse"}];
+const dq=document.getElementById('dailyQuote'); if(dq) dq.innerText=`"${quotes[Math.floor(Math.random()*quotes.length)].t}" - ${quotes[Math.floor(Math.random()*quotes.length)].a}`;
 </script>
+<script src="js/voiceTyping.js"></script>
 </body>
 </html>
