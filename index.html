@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KitabVerse Library For All - V4.1 Fixed</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#f7f7fb;color:#111;line-height:1.5;transition:all .2s}
+header{position:sticky;top:0;background:#fff;border-bottom:1px solid #e5e7eb;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;z-index:50}
+.brand{font-weight:800;font-size:18px;letter-spacing:-.3px}
+.brand span{color:#7c3aed}
+.hdr-icons{display:flex;gap:10px}
+.icon-btn{width:36px;height:36px;border-radius:10px;border:1px solid #e5e7eb;background:#fff;display:grid;place-items:center;cursor:pointer;font-size:16px}
+.search-wrap{padding:14px 16px;background:#fff;border-bottom:1px solid #eee;position:sticky;top:57px;z-index:40}
+.search-box{position:relative;display:flex;align-items:center;background:#f3f4f6;border-radius:14px;padding:0 10px;border:1px solid #e5e7eb}
+.search-box input{flex:1;background:transparent;border:0;padding:14px 8px;outline:none;font-size:15px}
+.s-icon{width:32px;height:32px;border-radius:8px;border:0;background:#fff;display:grid;place-items:center;cursor:pointer}
+.results{padding:12px 16px;display:grid;gap:10px}
+.card{background:#fff;border:1px solid #e9e9ef;border-radius:16px;padding:14px 16px;display:block}
+.card b{display:block;font-size:15px;margin-bottom:4px}
+.card .meta{font-size:13px;color:#6b7280}
+.sheet{position:fixed;inset:0;background:rgba(0,0,0,.35);display:none;z-index:100}
+.sheet.open{display:block}
+.sheet-inner{position:absolute;bottom:0;left:0;right:0;background:#fff;border-radius:20px 20px 0 0;max-height:85vh;overflow:auto;padding:16px}
+.sheet-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.sheet-head h3{font-size:16px}
+.close-btn{border:1px solid #e5e7eb;background:#fff;border-radius:10px;width:32px;height:32px}
+.opt-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opt{border:1px solid #e5e7eb;border-radius:14px;padding:14px;background:#f9fafb;text-align:left;cursor:pointer}
+.opt:active{transform:scale(.98)}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#111;color:#fff;padding:10px 14px;border-radius:12px;font-size:13px;display:none;z-index:200}
+.toast.show{display:block}
+.braille-on{letter-spacing:1.5px!important;line-height:2!important}
+.high-contrast{background:#000!important;color:#fff!important}
+.high-contrast .card,.high-contrast header,.high-contrast .search-wrap,.high-contrast .sheet-inner{background:#000!important;color:#fff!important;border-color:#444!important}
+</style>
+</head>
+<body>
+<header>
+<div class="brand">Kitab<span>Verse</span> Library For All</div>
+<div class="hdr-icons">
+<button class="icon-btn" onclick="openSheet('accessSheet')" title="Accessibility">♿</button>
+<button class="icon-btn" onclick="speakPage()" title="Read Aloud">🔊</button>
+<button class="icon-btn" onclick="openSheet('langSheet')" title="All Languages Translator">🌐</button>
+</div>
+</header>
+
+<div class="search-wrap">
+<div class="search-box">
+<input id="q" placeholder="Search books, e.g. Speaking Shadows, Dreams Take Flight, English..." oninput="doSearch(this.value)">
+<button class="s-icon" onclick="startMic()">🎤</button>
+<button class="s-icon" onclick="openSheet('drawSheet')">👆</button>
+<button class="s-icon" onclick="openSheet('moreSheet')">⋮</button>
+</div>
+</div>
+
+<div id="results" class="results"></div>
+<div id="toast" class="toast"></div>
+
+<!-- All Languages Translator -->
+<div id="langSheet" class="sheet" onclick="if(event.target==this)closeSheet('langSheet')">
+<div class="sheet-inner">
+<div class="sheet-head"><h3>All Languages Translator</h3><button class="close-btn" onclick="closeSheet('langSheet')">✕</button></div>
+<input id="langFilter" placeholder="Type Kannada, Tamil, Hindi..." style="width:100%;padding:12px;border-radius:12px;border:1px solid #e5e7eb;margin-bottom:12px" oninput="filterLangs(this.value)">
+<div id="langList" style="display:grid;gap:8px"></div>
+<div id="google_translate_element" style="margin-top:12px"></div>
+</div>
+</div>
+
+<!-- More Options -->
+<div id="moreSheet" class="sheet" onclick="if(event.target==this)closeSheet('moreSheet')">
+<div class="sheet-inner">
+<div class="sheet-head"><h3>More Options</h3><button class="close-btn" onclick="closeSheet('moreSheet')">✕</button></div>
+<div class="opt-grid">
+<button class="opt" onclick="toggleBraille()">♿ Braille Mode</button>
+<button class="opt" onclick="toggleContrast()">◐ High Contrast</button>
+<button class="opt" onclick="speakPage()">🔊 Read Page Aloud</button>
+<button class="opt" onclick="changeFont(1)">A+ Larger</button>
+<button class="opt" onclick="changeFont(-1)">A- Smaller</button>
+<button class="opt" onclick="toastMsg('📚 Library Coming V5')">📚 Library</button>
+<button class="opt" onclick="toastMsg('📊 ISO Hub Coming V5')">📊 ISO</button>
+<button class="opt" onclick="toastMsg('🏛️ Hub Coming V5')">🏛️ Hub</button>
+</div>
+</div>
+</div>
+
+<div id="accessSheet" class="sheet" onclick="if(event.target==this)closeSheet('accessSheet')">
+<div class="sheet-inner">
+<div class="sheet-head"><h3>Accessibility</h3><button class="close-btn" onclick="closeSheet('accessSheet')">✕</button></div>
+<p style="font-size:14px;color:#555">Braille spacing, High Contrast, Font size, Voice reader available in More Options ⋮</p>
+</div>
+</div>
+
+<div id="drawSheet" class="sheet" onclick="if(event.target==this)closeSheet('drawSheet')">
+<div class="sheet-inner">
+<div class="sheet-head"><h3>Draw Search</h3><button class="close-btn" onclick="closeSheet('drawSheet')">✕</button></div>
+<p style="font-size:14px;color:#555">Draw Search Coming V2.1 — For Kannada / Tulu / Hindi handwriting</p>
+</div>
+</div>
+
+<script>
+// BOOKS DATA - V4.1 CORRECTED
+const books=[
+{title:"Speaking Shadows - Echoes from the Silent Corners", author:"Your Collection", lang:"English", cat:"Your Book - English", emoji:"🌑"},
+{title:"Dreams Take Flight", author:"You - Debut Novella", lang:"English", cat:"Your Book - English", emoji:"✈️"},
+{title:"Dreams Take Flight - Hindi Edition", author:"You - Hindi", lang:"Hindi", cat:"Your Book - Hindi", emoji:"✈️"},
+{title:"The Silent Library", author:"Anon", lang:"English", cat:"Public Domain", emoji:"📖"},
+{title:"Kannada Sahitya Sangraha", author:"Various", lang:"Kannada", cat:"Regional", emoji:"📚"},
+{title:"Tulu Tales", author:"Folk", lang:"Tulu", cat:"Regional", emoji:"📜"},
+{title:"Hindi Kavita", author:"Premchand", lang:"Hindi", cat:"Hindi Collection", emoji:"📝"},
+{title:"Tamil Classics", author:"Thiruvalluvar", lang:"Tamil", cat:"Tamil Collection", emoji:"📖"},
+{title:"English Poetry Hub", author:"Various", lang:"English", cat:"Poetry", emoji:"✒️"},
+{title:"Accessibility Guide", author:"KitabVerse", lang:"English", cat:"Guide", emoji:"♿"}
+];
+
+const langs=[
+{code:"en",name:"English",native:"English"},
+{code:"hi",name:"Hindi",native:"हिन्दी"},
+{code:"kn",name:"Kannada",native:"ಕನ್ನಡ"},
+{code:"ta",name:"Tamil",native:"தமிழ்"},
+{code:"te",name:"Telugu",native:"తెలుగు"},
+{code:"ml",name:"Malayalam",native:"മലയാളം"},
+{code:"mr",name:"Marathi",native:"मराठी"},
+{code:"gu",name:"Gujarati",native:"ગુજરાતી"},
+{code:"bn",name:"Bengali",native:"বাংলা"},
+{code:"pa",name:"Punjabi",native:"ਪੰਜਾਬੀ"},
+{code:"ur",name:"Urdu",native:"اردو"},
+{code:"tcy",name:"Tulu",native:"ತುಳು"}
+];
+
+function render(list){
+const r=document.getElementById('results');
+if(!list.length){r.innerHTML='<div style="padding:20px;text-align:center;color:#888">No books found — Try Speaking Shadows or Dreams Take Flight</div>';return}
+r.innerHTML=list.map(b=>`
+<div class="card">
+<b>${b.emoji} ${b.title}</b>
+<div class="meta">${b.author} • ${b.lang} • 📖 ${b.cat}</div>
+</div>`).join('');
+}
+
+function doSearch(q){
+q=(q||'').toLowerCase().trim();
+if(!q){render(books);return}
+const f=books.filter(b=> 
+b.title.toLowerCase().includes(q) || 
+b.author.toLowerCase().includes(q) || 
+b.lang.toLowerCase().includes(q) ||
+b.cat.toLowerCase().includes(q)
+);
+render(f);
+}
+
+function openSheet(id){document.getElementById(id).classList.add('open'); if(id=='langSheet') renderLangs(langs)}
+function closeSheet(id){document.getElementById(id).classList.remove('open')}
+function toastMsg(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500)}
+
+function renderLangs(arr){
+document.getElementById('langList').innerHTML=arr.map(l=>`<button onclick="setLang('${l.code}','${l.name}')" style="text-align:left;padding:10px;border:1px solid #eee;border-radius:10px;background:#f9fafb">${l.native} — ${l.name}</button>`).join('');
+}
+function filterLangs(q){
+q=q.toLowerCase();
+renderLangs(langs.filter(l=>l.name.toLowerCase().includes(q)||l.native.includes(q)));
+}
+function setLang(code,name){
+toastMsg('🌐 Translator: '+name+' active');
+if(window.google&&google.translate){ /* translate */ }
+}
+
+function toggleBraille(){document.body.classList.toggle('braille-on');toastMsg(document.body.classList.contains('braille-on')?'♿ Braille Mode ON':'♿ Braille Mode OFF')}
+function toggleContrast(){document.body.classList.toggle('high-contrast');toastMsg('◐ High Contrast toggled')}
+let fs=15;
+function changeFont(d){fs+=d; if(fs<12)fs=12; if(fs>22)fs=22; document.body.style.fontSize=fs+'px';toastMsg('Font size '+fs+'px')}
+
+function speakPage(){
+const txt='Welcome to KitabVerse Library For All. Search books like Speaking Shadows Echoes from the Silent Corners, Dreams Take Flight English and Hindi edition.';
+const u=new SpeechSynthesisUtterance(txt); speechSynthesis.speak(u); toastMsg('🔊 Reading aloud');
+}
+
+function startMic(){
+if(!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)){toastMsg('🎤 Mic not supported in this browser');return}
+const Rec=window.SpeechRecognition||window.webkitSpeechRecognition;
+const rec=new Rec(); rec.lang='en-IN'; rec.start(); toastMsg('🎤 Listening... Say Speaking Shadows');
+rec.onresult=e=>{const t=e.results[0][0].transcript; document.getElementById('q').value=t; doSearch(t); toastMsg('Heard: '+t)}
+}
+
+// init
+render(books);
+</script>
+<script type="text/javascript">
+function googleTranslateElementInit(){new google.translate.TranslateElement({pageLanguage:'en'},'google_translate_element')}
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+  </html>
