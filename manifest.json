@@ -1,0 +1,31 @@
+{
+  "name": "KitabVerse - Read. Share. Connect.",
+  "short_name": "KitabVerse",
+  "description": "KitabVerse - Your Universe of Books. Read. Share. Connect. IFLA compliant library for all.",
+  "start_url": "/kitabverse/",
+  "scope": "/kitabverse/",
+  "display": "standalone",
+  "orientation": "any",
+  "theme_color": "#0A0F1F",
+  "background_color": "#0A0F1F",
+  "icons": [
+    {
+      "src": "assets/logo-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/logo-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/logo-1024.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
