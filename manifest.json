@@ -1,0 +1,67 @@
+{
+  "name": "KitabVerse - Library For All With Advanced Features",
+  "short_name": "KitabVerse",
+  "description": "KitabVerse - Your Universe of Books. Advanced Library For All with Search, Catalog, Borrow System, Wishlist, Add Books, Offline Access, Anthem, Accessibility. IFLA & ISO 2789 Compliant.",
+  "start_url": "/kitabverse/",
+  "scope": "/kitabverse/",
+  "display": "standalone",
+  "display_override": ["standalone", "browser"],
+  "orientation": "any",
+  "theme_color": "#0A0F1F",
+  "background_color": "#0A0F1F",
+  "categories": ["books", "education", "library", "lifestyle"],
+  "lang": "en",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "assets/logo-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/logo-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/logo-1024.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Search Books",
+      "short_name": "Search",
+      "description": "Search Library Catalog",
+      "url": "/kitabverse/#catalog",
+      "icons": [{ "src": "assets/logo-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "My Borrowed Books",
+      "short_name": "My Books",
+      "description": "View My Borrowed Books & Wishlist",
+      "url": "/kitabverse/#mybooks",
+      "icons": [{ "src": "assets/logo-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Add New Book",
+      "short_name": "Add Book",
+      "description": "Add Book to Community Library",
+      "url": "/kitabverse/#catalog",
+      "icons": [{ "src": "assets/logo-192.png", "sizes": "192x192" }]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "assets/logo-1024.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "KitabVerse Library For All"
+    }
+  ]
+}
