@@ -755,5 +755,49 @@ div[style*="Do Not Copy"]{ bottom:175px !important; opacity:0.35 !important; }
 </script>
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <!-- ===== END TRANSLATION - BHASHINI API CAN BE ADDED LATER IN SAME PLACE - NO EXTRA COST NOW ===== -->
+<!-- ===== KITABVERSE FINAL FIX - MOBILE NIGHT MODE ===== -->
+<style>
+  /* 1. LANGUAGE BAR - STOP overlapping, make it normal row below top bar */
+  #google_translate_element, .kv-lang-bar, div[id*="google_translate"]{
+    position: fixed !important;
+    top: 75px !important;
+    left: 8px !important;
+    display: block !important;
+    width: auto !important;
+    margin: auto !important;
+    background: #fff !important;
+    border-radius: 25px !important;
+    padding: 6px 10px !important;
+    z-index: 10 !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+  }
+  #google_translate_element select{
+    color: #000 !important;
+    background: #fff !important;
+  }
+
+  /* 2. READ BUTTON - Bring it back, don't let Language cover it */
+  button[onclick*="read"], #readBtn, .read-btn{
+    position: relative !important;
+    z-index: 20 !important;
+  }
+
+  /* 3. SCAN BARCODE BUTTON - Make text WHITE on GREEN, can't miss it */
+  button[onclick*="Scan"], button[onclick*="scan"]{
+    background: #00C853 !important;
+    color: #FFFFFF !important;
+    border: 2px solid #FFFFFF !important;
+    font-weight: 900 !important;
+    font-size: 17px !important;
+    text-shadow: 0 1px 2px #000 !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5) !important;
+    opacity: 1 !important;
+  }
+  /* Force white text inside scanner button */
+  button[onclick*="Scan"] *, button[onclick*="scan"] *{
+    color: #FFFFFF !important;
+  }
+</style>
+<!-- ===== END FINAL FIX ===== -->
 </body>
 </html>
