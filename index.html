@@ -660,5 +660,63 @@ if(origScan){
 <style>
 div[style*="Do Not Copy"]{ bottom:175px !important; opacity:0.35 !important; }
 </style>
+<!-- ===== KITABVERSE ACCESSIBILITY MODE - STEP 2 - ISO + IFLA ===== -->
+<style>
+  .kv-access-bar{
+    position:fixed; top:10px; right:10px; z-index:99999;
+    display:flex; gap:6px; background:#111; padding:6px; border-radius:999px;
+    box-shadow:0 4px 16px rgba(0,0,0,0.25);
+  }
+  .kv-access-bar button{
+    border:0; cursor:pointer; padding:8px 11px; border-radius:999px;
+    font-size:14px; font-weight:700; background:#fff; color:#111;
+  }
+  .kv-access-bar button.active{ background:#FFD700; color:#000; }
+  /* Big Text Mode */
+  body.kv-big-text{ font-size:19px !important; }
+  body.kv-big-text h1{ font-size:32px !important; }
+  body.kv-big-text h2{ font-size:26px !important; }
+  body.kv-big-text h3{ font-size:22px !important; }
+  body.kv-big-text p, body.kv-big-text li, body.kv-big-text button{ font-size:18px !important; line-height:1.7 !important; }
+  /* Night Mode */
+  body.kv-night{ background:#0f0f0f !important; color:#f5f5f5 !important; }
+  body.kv-night div, body.kv-night section{ background:#1a1a1a !important; color:#f5f5f5 !important; border-color:#333 !important; }
+  body.kv-night button{ background:#222 !important; color:#fff !important; border:1px solid #444 !important; }
+</style>
+
+<div class="kv-access-bar" role="toolbar" aria-label="Accessibility">
+  <button id="kvBtnBig" onclick="kvToggleBig()" title="Big Text for Elders">A+ Big</button>
+  <button id="kvBtnNight" onclick="kvToggleNight()" title="Night Mode">🌙 Night</button>
+  <button id="kvBtnRead" onclick="kvReadAloud()" title="Read Aloud">🔊 Read</button>
+</div>
+
+<script>
+  function kvToggleBig(){
+    document.body.classList.toggle('kv-big-text');
+    document.getElementById('kvBtnBig').classList.toggle('active');
+    localStorage.setItem('kv_big', document.body.classList.contains('kv-big-text') ? '1' : '0');
+  }
+  function kvToggleNight(){
+    document.body.classList.toggle('kv-night');
+    document.getElementById('kvBtnNight').classList.toggle('active');
+    localStorage.setItem('kv_night', document.body.classList.contains('kv-night') ? '1' : '0');
+  }
+  function kvReadAloud(){
+    try{ speechSynthesis.cancel(); }catch(e){}
+    var text = document.body.innerText || '';
+    text = text.replace(/\s+/g,' ').slice(0, 4000);
+    if(!text){ alert('Nothing to read'); return; }
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = 'en-IN'; u.rate = 0.95;
+    speechSynthesis.speak(u);
+    alert('Reading aloud started. Tap 🔊 again to stop. To stop, refresh page.');
+  }
+  // Remember choice after refresh - ISO Quality
+  (function(){
+    if(localStorage.getItem('kv_big')==='1'){ document.body.classList.add('kv-big-text'); document.getElementById('kvBtnBig').classList.add('active'); }
+    if(localStorage.getItem('kv_night')==='1'){ document.body.classList.add('kv-night'); document.getElementById('kvBtnNight').classList.add('active'); }
+  })();
+</script>
+<!-- ===== END ACCESSIBILITY MODE ===== -->
 </body>
 </html>
