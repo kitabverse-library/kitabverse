@@ -634,5 +634,28 @@ document.addEventListener('keyup', function(e){
 window.addEventListener('contextmenu', e=>e.preventDefault());
 </script>
 <!-- ===== END CAST + ANTI-SCREENSHOT ===== -->
+<style>
+/* FIX: Watermark should not block Scanner */
+#watermark, .watermark, [id*="watermark"]{
+  pointer-events:none !important;
+  z-index:1 !important;
+}
+#scannerModal, #barcodeScanner, [id*="scanner"]{
+  z-index:9999 !important;
+}
+video{
+  z-index:9998 !important;
+}
+</style>
+<script>
+// Hide watermark when scanner opens
+let origScan = window.startScanner;
+if(origScan){
+  window.startScanner = function(){
+    document.querySelectorAll('[id*="watermark"], .watermark').forEach(w=>w.style.display='none');
+    origScan();
+  };
+}
+</script>
 </body>
 </html>
