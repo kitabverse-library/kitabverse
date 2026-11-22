@@ -721,11 +721,14 @@ div[style*="Do Not Copy"]{ bottom:175px !important; opacity:0.35 !important; }
 <!-- ===== KITABVERSE FREE TRANSLATION - STEP 3 - BHASHINI READY + GOOGLE FREE ===== -->
 <style>
   .kv-lang-bar{
-    position:fixed; top:10px; left:10px; z-index:99999;
-    background:#fff; border:2px solid #111; border-radius:999px;
-    padding:5px 8px; display:flex; align-items:center; gap:6px;
-    box-shadow:0 4px 16px rgba(0,0,0,0.2); font-size:13px; font-weight:700;
-  }
+  position:static !important;
+  background:transparent !important;
+  border:none !important;
+  padding:0 !important;
+  margin:0 !important;
+  box-shadow:none !important;
+  display:contents !important;
+}
   .kv-lang-bar select{
     border:0; outline:0; font-size:13px; font-weight:700; background:transparent; cursor:pointer; max-width:150px;
   }
@@ -759,7 +762,11 @@ div[style*="Do Not Copy"]{ bottom:175px !important; opacity:0.35 !important; }
 <style>
 /* KITABVERSE KV SEARCH - REBRAND GOOGLE AS KV */
 #google_translate_element{
-  display: block !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 6px !important;
+  height: 32px !important;
   visibility: visible !important;
   position: fixed !important;
   top: 75px !important;
@@ -769,7 +776,6 @@ div[style*="Do Not Copy"]{ bottom:175px !important; opacity:0.35 !important; }
   padding: 6px 10px 6px 6px !important;
   border-radius: 25px !important;
   box-shadow: 0 4px 12px rgba(0,0,0,0.3) !important;
-  height: auto !important;
   width: auto !important;
 }
 /* HIDE THE 'G' LOGO */
@@ -779,6 +785,7 @@ div[style*="Do Not Copy"]{ bottom:175px !important; opacity:0.35 !important; }
 /* ADD KV BADGE */
 #google_translate_element::before{
   content: "KV" !important;
+  flex-shrink: 0 !important;
   background: #FFC107 !important;
   color: #0B2C4A !important;
   font-weight: 900 !important;
@@ -786,7 +793,7 @@ div[style*="Do Not Copy"]{ bottom:175px !important; opacity:0.35 !important; }
   padding: 4px 7px !important;
   border-radius: 50% !important;
   margin-right: 6px !important;
-  display: inline-block !important;
+  display: inline-flex !important;
   vertical-align: middle !important;
 }
 #google_translate_element select{
@@ -804,6 +811,9 @@ div[style*="Do Not Copy"]{ bottom:175px !important; opacity:0.35 !important; }
 .goog-te-gadget{
   color: transparent !important;
   font-size: 0 !important;
+}
+#google_translate_element select{
+  max-width: 135px !important;
 }
 body{ top: 0 !important; }
   
@@ -831,5 +841,44 @@ body{ top: 0 !important; }
   }
 </style>
 <!-- ===== END FINAL FIX ===== -->
+<style>
+/* FORCE SCANNER VISIBLE ON MOBILE */
+#scanBtn{
+  display: block !important;
+  visibility: visible !important;
+  position: fixed !important;
+  bottom: 85px !important;
+  right: 12px !important;
+  z-index: 10000 !important;
+}
+@media (max-width: 768px){
+  #scanBtn{
+    display: block !important;
+    bottom: 85px !important;
+    right: 12px !important;
+    padding: 12px 14px !important;
+    font-size: 13px !important;
+  }
+}
+</style>
+<script>
+// If scan button is hidden inside form, make a floating copy for mobile
+window.addEventListener('load', function(){
+  setTimeout(function(){
+    var old = document.getElementById('scanBtn');
+    if(old){
+      // Pull it out of form to body so it always floats
+      document.body.appendChild(old);
+    }
+    if(!document.getElementById('scanBtn')){
+      var b = document.createElement('button');
+      b.id = 'scanBtn';
+      b.innerText = '📷 Scan';
+      b.onclick = startScan;
+      document.body.appendChild(b);
+    }
+  }, 1000);
+});
+</script>
 </body>
 </html>
