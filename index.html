@@ -481,5 +481,114 @@ document.getElementById('adminPass').addEventListener('keydown',e=>{if(e.key==='
 countVisitorOnce();
 updateStats();
 </script>
+<!-- ===== ANTI-HACKING + ANTI-COPY PROTECTION ===== -->
+<script>
+// 1. Disable Right Click for Visitors (Admin still can)
+document.addEventListener('contextmenu', function(e){
+  if(!document.body.classList.contains('admin-unlocked')){
+    e.preventDefault();
+    alert('Right-click disabled for protection © KitabVerse');
+  }
+});
+
+// 2. Disable F12, Ctrl+U, Ctrl+Shift+I, Ctrl+S, Ctrl+P
+document.addEventListener('keydown', function(e){
+  if(document.body.classList.contains('admin-unlocked')) return;
+  if(e.key === 'F12' || 
+    (e.ctrlKey && e.key.toLowerCase() === 'u') ||
+    (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') ||
+    (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'j') ||
+    (e.ctrlKey && e.key.toLowerCase() === 's') ||
+    (e.ctrlKey && e.key.toLowerCase() === 'p') ||
+    (e.ctrlKey && e.key.toLowerCase() === 'c')
+  ){
+    e.preventDefault();
+    alert('This shortcut is disabled © KitabVerse');
+    return false;
+  }
+});
+
+// 3. Disable Text Selection for Visitors
+document.addEventListener('selectstart', function(e){
+  if(!document.body.classList.contains('admin-unlocked')){
+    // Allow selection only in search box
+    if(e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    e.preventDefault();
+  }
+});
+
+// 4. Disable Drag Images
+document.addEventListener('dragstart', function(e){
+  if(e.target.tagName === 'IMG') e.preventDefault();
+});
+
+// 5. Watermark - Shows on Screenshot
+let wm = document.createElement('div');
+wm.innerText = '© KitabVerse • Satish Puthran • Do Not Copy';
+wm.style.cssText = 'position:fixed;bottom:8px;right:10px;z-index:9999;font-size:11px;color:rgba(0,0,0,0.35);pointer-events:none;font-weight:600;';
+document.body.appendChild(wm);
+
+// 6. DevTools Detection - Warning
+setInterval(function(){
+  if(window.outerWidth - window.innerWidth > 160 || window.outerHeight - window.innerHeight > 160){
+    console.clear();
+    console.log('%cSTOP! © KitabVerse - Protected', 'font-size:30px;color:red;font-weight:bold;');
+  }
+}, 2000);
+</script>
+<!-- ===== END ANTI-HACKING ===== -->
+<!-- ===== BARCODE SCANNER ===== -->
+<script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+<div id="scanModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:99999;align-items:center;justify-content:center;flex-direction:column;padding:16px;">
+<div style="background:#fff;border-radius:16px;padding:16px;width:100%;max-width:420px;text-align:center;">
+<h3>📷 Scan Book Barcode</h3>
+<div id="reader" style="width:100%;"></div>
+<p id="scanStatus">Waiting...</p>
+<button onclick="stopScan()" style="padding:10px 18px;border:0;border-radius:10px;background:#111;color:#fff;font-weight:700;">Close</button>
+</div></div>
+<script>
+let html5Qr=null, scanning=false;
+window.addEventListener('load', function(){
+  let btn=document.createElement('button');
+  btn.id='scanBtn'; btn.type='button'; btn.innerText='📷 Scan Barcode (Camera)';
+  btn.style.cssText='width:100%;padding:12px;margin:8px 0;border:0;border-radius:12px;background:#0a7a42;color:#fff;font-weight:800;font-size:15px;';
+  btn.onclick=startScan;
+  let forms=document.querySelectorAll('form');
+  if(forms.length>0) forms[0].prepend(btn); else document.body.appendChild(btn);
+});
+function startScan(){
+  document.getElementById('scanModal').style.display='flex';
+  document.getElementById('scanStatus').innerText='Starting camera... Allow permission';
+  html5Qr=new Html5Qrcode("reader");
+  html5Qr.start({facingMode:"environment"},{fps:10,qrbox:{width:250,height:140}},onScanSuccess)
+  .then(()=>{scanning=true;document.getElementById('scanStatus').innerText='Camera ON - Scan now';})
+  .catch(()=>{document.getElementById('scanStatus').innerText='Camera blocked. Allow permission & use HTTPS.';});
+}
+function stopScan(){
+  document.getElementById('scanModal').style.display='none';
+  if(html5Qr&&scanning){html5Qr.stop().then(()=>{scanning=false;html5Qr.clear();}).catch(()=>{});}
+}
+async function onScanSuccess(decodedText){
+  if(!scanning) return; scanning=false;
+  document.getElementById('scanStatus').innerText='Found: '+decodedText;
+  try{await html5Qr.stop();}catch(e){}
+  document.getElementById('scanModal').style.display='none';
+  try{
+    let res=await fetch('https://openlibrary.org/isbn/'+decodedText+'.json');
+    let data=await res.json();
+    let title=data.title||''; let author='';
+    if(data.authors&&data.authors[0]&&data.authors[0].key){
+      let ar=await fetch('https://openlibrary.org'+data.authors[0].key+'.json');
+      let ad=await ar.json(); author=ad.name||'';
+    }
+    let ti=document.getElementById('title')||document.querySelector('input[placeholder*="Title" i]');
+    let au=document.getElementById('author')||document.querySelector('input[placeholder*="Author" i]');
+    if(ti&&title) ti.value=title;
+    if(au&&author) au.value=author;
+    alert('✅ Scanned!\nISBN: '+decodedText+'\nTitle: '+title+'\nAuthor: '+author);
+  }catch(e){ alert('✅ Scanned ISBN: '+decodedText+'\nType Title/Author manually.'); }
+}
+</script>
+<!-- ===== END BARCODE ===== -->
 </body>
 </html>
