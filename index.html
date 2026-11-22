@@ -590,5 +590,49 @@ async function onScanSuccess(decodedText){
 }
 </script>
 <!-- ===== END BARCODE ===== -->
+<!-- ===== TV CAST + ANTI-SCREENSHOT ===== -->
+<div id="castBar" style="display:flex;gap:8px;margin:10px 0;">
+<button onclick="castToTV()" style="flex:1;padding:12px;border:0;border-radius:12px;background:#111;color:#fff;font-weight:800;">📺 Cast to TV</button>
+<button onclick="toggleFullscreen()" style="flex:1;padding:12px;border:0;border-radius:12px;background:#0a7a42;color:#fff;font-weight:800;">⛶ Fullscreen</button>
+</div>
+<script>
+// --- TV CAST ---
+function castToTV(){
+  if(navigator.presentation){
+    alert('📺 To Cast:\n1. Tap ⋮ menu in Chrome\n2. Tap Cast...\n3. Select your TV\n\nYour book will play on TV.');
+  } else {
+    alert('📺 To Cast to TV:\nAndroid: Swipe down > Screen Cast / Smart View > Select TV\n iPhone: Swipe down > Screen Mirroring > Select TV\nThen open KitabVerse.');
+  }
+}
+function toggleFullscreen(){
+  if(!document.fullscreenElement) document.documentElement.requestFullscreen();
+  else document.exitFullscreen();
+}
+// --- ANTI-SCREENSHOT ---
+document.addEventListener('visibilitychange', function(){
+  if(document.hidden){
+    document.body.style.filter='blur(20px)';
+    document.body.style.opacity='0';
+  } else {
+    setTimeout(()=>{document.body.style.filter='';document.body.style.opacity='1';},500);
+  }
+});
+window.addEventListener('blur', function(){
+  document.body.style.filter='blur(20px)';
+});
+window.addEventListener('focus', function(){
+  document.body.style.filter='';
+});
+document.addEventListener('keyup', function(e){
+  if(e.key==='PrintScreen'){
+    document.body.style.filter='blur(20px)';
+    navigator.clipboard.writeText('© KitabVerse - Protected Content').catch(()=>{});
+    alert('⚠️ Screenshot blocked © KitabVerse');
+    setTimeout(()=>{document.body.style.filter='';},1000);
+  }
+});
+window.addEventListener('contextmenu', e=>e.preventDefault());
+</script>
+<!-- ===== END CAST + ANTI-SCREENSHOT ===== -->
 </body>
 </html>
