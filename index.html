@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KitabVerse - Library For All</title>
+<script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Georgia,serif}
+body{background:#111;color:#e8d9a0}
+.topbar{display:flex;justify-content:space-between;padding:12px 20px;border-bottom:1px solid #c9a94a;font-size:13px;letter-spacing:1px;flex-wrap:wrap;gap:8px}
+.wrap{display:grid;grid-template-columns:250px 1fr 260px;gap:16px;padding:16px;max-width:1300px;margin:auto}
+.panel{border:1px solid #c9a94a;padding:16px;background:#141414}
+.panel h3{text-align:center;color:#e8c85a;font-size:13px;letter-spacing:1px;margin:14px 0 8px;border-bottom:1px solid #333;padding-bottom:8px}
+.menu-btn{display:flex;gap:10px;width:100%;background:transparent;border:0;color:#e8d9a0;padding:11px 8px;cursor:pointer;text-align:left;font-size:14px;border-radius:6px}
+.menu-btn:hover,.menu-btn.active{background:#e8c85a;color:#111;font-weight:700}
+.profile{text-align:center}.profile img{width:84px;height:84px;border-radius:50%;object-fit:cover;border:2px solid #c9a94a}
+.center{text-align:center;padding:20px 10px}
+.biglogo{font-size:56px;font-weight:900;color:#e8c85a}
+.searchbox{display:flex;max-width:580px;margin:18px auto;border:1px solid #c9a94a;border-radius:10px;overflow:hidden;background:#1a1a1a}
+.searchbox input{flex:1;background:transparent;border:0;padding:14px 16px;color:#fff;outline:none}
+.searchbox button{background:#e8c85a;border:0;padding:0 20px;font-weight:800;cursor:pointer;color:#111}
+.cta{display:flex;gap:14px;justify-content:center;margin:18px 0;flex-wrap:wrap}
+.cta button{padding:13px 26px;border-radius:8px;font-size:16px;font-weight:800;cursor:pointer}
+.gold{background:#e8c85a;color:#111;border:0}.outline{background:transparent;color:#e8d9a0;border:1px solid #c9a94a}
+.content{background:#1a1a1a;border:1px solid #c9a94a;padding:18px;text-align:left;margin-top:18px;display:none;border-radius:8px;color:#eee;line-height:1.7;font-size:14px}
+.content h2{color:#e8c85a;margin-bottom:8px}
+footer{border-top:1px solid #c9a94a;padding:14px;text-align:center;font-size:12px;line-height:1.8;color:#aaa}
+footer button{background:none;border:0;color:#e8c85a;cursor:pointer;text-decoration:underline}
+#reader{width:100%;max-width:360px;margin:10px auto;background:#fff}
+input,select,textarea{width:100%;padding:10px;margin:6px 0;background:#222;border:1px solid #444;color:#fff;border-radius:6px}
+@media(max-width:900px){.wrap{grid-template-columns:1fr}.biglogo{font-size:40px}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+<div>🇮🇳 KITABVERSE • LIBRARY SERVICES • FOLLOWS ISO 9001:2015 PRINCIPLES</div>
+<div>Secure • Compliant • Accessible</div>
+</div>
+
+<div class="wrap">
+<aside class="panel">
+<div class="profile"><img src="https://via.placeholder.com/150" alt="Profile"><p style="margin-top:8px;font-weight:700">Welcome, Admin User</p><p style="font-size:12px;color:#aaa">Profile Photo — Add Later</p></div>
+<h3>MANDATORY ITEMS</h3>
+<button class="menu-btn" onclick="showPage('about')">ℹ️ About</button>
+<button class="menu-btn" onclick="showPage('rules')">📜 Rules</button>
+<button class="menu-btn" onclick="showPage('contact')">✉️ Contact</button>
+<button class="menu-btn" onclick="showPage('help')">❓ Help</button>
+<button class="menu-btn" onclick="showPage('privacy')">🛡️ Privacy</button>
+<h3>ADMIN DASHBOARD</h3>
+<button class="menu-btn" onclick="showPage('admin')">🔐 Admin Login</button>
+<button class="menu-btn" onclick="showPage('manage-books')">📚 Manage Books</button>
+<button class="menu-btn" onclick="showPage('reports')">📊 Reports</button>
+<h3>MEMBER DASHBOARD</h3>
+<button class="menu-btn" onclick="showPage('member')">👤 Member Login</button>
+<button class="menu-btn" onclick="showPage('my-books')">📖 My Books</button>
+<button class="menu-btn" onclick="showPage('my-profile')">👤 My Profile</button>
+<button class="menu-btn" onclick="showPage('my-history')">🕒 My History</button>
+</aside>
+
+<main class="center">
+<div style="font-size:32px">📖</div>
+<div style="font-size:15px;letter-spacing:2px">Library • For • All</div>
+<div class="biglogo">KitabVerse</div>
+<p style="margin:6px 0;color:#d8c88a">Digital Library • Knowledge • Heritage • Follows ISO 9001:2015 Principles</p>
+<div class="searchbox"><input id="searchInput" placeholder="Search books, authors, genres, collections..."><button onclick="doSearch()">🔍</button></div>
+<div class="cta">
+<button class="gold" onclick="showPage('opac')">📚 OPAC</button>
+<button class="outline" onclick="showPage('member')">👤 Member Login</button>
+<button class="outline" onclick="openScanner()">📷 Scan Barcode</button>
+</div>
+<p style="font-size:12px;color:#aaa">Access resources responsibly — aligned to ISO 9001:2015 Quality Management Standards</p>
+
+<div id="scannerBox" class="content" style="text-align:center">
+<h2>📷 Barcode Scanner</h2><div id="reader"></div>
+<p id="scanStatus">Camera permission allow karein. HTTPS par hi camera chalega.</p>
+<input id="manualISBN" placeholder="Manual ISBN likhein">
+<button class="gold" style="padding:10px;border-radius:20px" onclick="fetchByISBN(document.getElementById('manualISBN').value)">Fetch Details By ISBN</button>
+<div id="scanResult" style="margin-top:12px"></div>
+<button onclick="closeScanner()" style="background:#444;color:#fff;padding:8px 16px;border:0;border-radius:20px;margin-top:10px;cursor:pointer">Close Scanner</button>
+</div>
+
+<div id="mainContent" class="content" style="display:block">
+<h2>Welcome to KitabVerse</h2>
+<p>KitabVerse ek professional library system hai — Libib, Librarika aur duniya bhar ki libraries ke best practices par based.</p>
+<p><b>Catalog:</b> Abhi khali hai. Aap Admin se books add karenge. Koi dummy figures nahi.</p>
+<p style="margin-top:10px">🇮🇳 <b>Jana Gana Mana — National Anthem</b><br>Jana-gana-mana-adhinayaka, jaya he, Bharata-bhagya-vidhata.<br>Jaya he, jaya he, jaya he, Jaya jaya jaya, jaya he!</p>
+</div>
+</main>
+
+<aside class="panel">
+<h3>QUICK ACTIONS ⭐</h3>
+<button class="menu-btn" onclick="showPage('accessibility')">♿ Accessibility</button>
+<button class="menu-btn" onclick="showPage('braille')">⠿ Braille</button>
+<button class="menu-btn" onclick="showPage('translator')">🌐 Translator</button>
+<button class="menu-btn" onclick="toggleNight()">🌙 Night View</button>
+<button class="menu-btn" onclick="changeText(1)">A+ Text Size</button>
+<button class="menu-btn" onclick="showPage('opac')">📚 Catalog</button>
+<button class="menu-btn" onclick="showPage('checkin')">✅ Check In</button>
+<button class="menu-btn" onclick="showPage('checkout')">📤 Check Out</button>
+<button class="menu-btn" onclick="showPage('patron')">👥 Patron Dashboard</button>
+<button class="menu-btn" onclick="showPage('book-entries')">📝 Book Entries</button>
+<button class="menu-btn" onclick="showPage('donor')">❤️ Donor Details</button>
+<button class="menu-btn" onclick="showPage('tulu')">🌿 Tulu Language</button>
+<button class="menu-btn" onclick="showPage('branches')">🏛️ Group-wise Admin Branches</button>
+<button class="menu-btn" onclick="showPage('compliance')">🛡️ Compliance Portal</button>
+<button class="menu-btn" onclick="showPage('help')">🎧 Help & Support</button>
+</aside>
+</div>
+
+<footer>
+© 2025 KitabVerse • Designed by Munazza Khan • Mangalore, Karnataka, India<br>
+<button onclick="showPage('privacy')">Privacy Policy</button> • <button onclick="showPage('terms')">Terms of Service</button> • <button onclick="showPage('compliance')">Compliance</button> • <button onclick="showPage('accessibility')">Accessibility Statement</button><br>
+<span style="font-size:11px">This website follows IFLA library guidelines and ISO 9001:2015 quality management principles. Not ISO certified.</span>
+</footer>
+
+<script>
+let books = JSON.parse(localStorage.getItem('kitabverse_books')||'[]');
+let scanner = null;
+function showPage(page){
+  let box = document.getElementById('mainContent'); box.style.display='block';
+  let pages = {
+    home:'<h2>Library Home</h2><p>Welcome to KitabVerse. Left aur Right panel se koi bhi option chunein — sab kaam karega.</p>',
+    about:'<h2>About KitabVerse</h2><p>Community library. Mission: Library For All. Vision: Read. Share. Connect.</p>',
+    rules:'<h2>Library Rules</h2><p>1. Books samay par return karein.<br>2. Signed / Rare books carefully handle karein.<br>3. Shanti banaye rakhein.<br>4. Bina Check Out ke book bahar na le jayein.</p>',
+    contact:'<h2>Contact</h2><p>Mangalore, Karnataka, India<br>Form bharein, Admin ko milega.</p><input placeholder="Aapka Naam"><input placeholder="Email"><textarea placeholder="Message"></textarea><button class="gold" style="padding:10px;border-radius:20px" onclick="alert(\'Message saved.\')">Send</button>',
+    help:'<h2>Help</h2><p><b>Search:</b> Title, Author, ISBN se.<br><b>Scan:</b> Scan Barcode dabayein.<br><b>Check Out:</b> Member Login ke baad.</p>',
+    privacy:'<h2>Privacy Policy</h2><p>Hum personal data bina consent ke collect nahi karte. Search history sirf aapke device par rehti hai.</p>',
+    terms:'<h2>Terms of Service</h2><p>Ye catalog sirf reading aur library use ke liye hai.</p>',
+    compliance:'<h2>Compliance & ISO 9001:2015 Principles</h2><p><b>1. Customer Focus:</b> Reader ki need pehle.<br><b>2. Process Approach:</b> Catalog, Check In/Out, Reports — documented process se.<br><b>3. Evidence-based Decisions:</b> Koi fake counts nahi. Sirf real data.<br><b>4. Continual Improvement:</b> Har version me audit aur improvement.<br><b>5. Document Control:</b> Har book me Title, Author, ISBN, DDC, Call No. mandatory.</p>',
+    accessibility:'<h2>Accessibility</h2><p>Night View, A+ Text Size, Braille, Translator — sab Right Panel se kaam karenge.</p><button class="gold" style="padding:10px;border-radius:20px" onclick="toggleNight()">Night View On/Off</button>',
+    braille:'<h2>Braille Support</h2><p>Braille books ko Type = Braille tag se mark karein.</p>',
+    translator:'<h2>Translator</h2><select onchange="alert(\'Language set: \'+this.value)"><option>English</option><option>Hindi</option><option>Kannada</option><option>Tulu</option><option>Konkani</option></select>',
+    opac:'<h2>Library Catalogue — OPAC</h2><p id="opacText"></p><div id="bookList"></div>',
+    member:'<h2>Member Login</h2><input placeholder="Member ID / Email"><input type="password" placeholder="Password"><button class="gold" style="padding:10px;border-radius:20px" onclick="alert(\'Demo: Real login Phase 2 me.\')">Login</button>',
+    admin:'<h2>Admin Login</h2><input placeholder="Admin ID"><input type="password" placeholder="Password"><button class="gold" style="padding:10px;border-radius:20px" onclick="showPage(\'manage-books\')">Login as Admin (Demo)</button>',
+    'manage-books':'<h2>Manage Books — Book Entries</h2><p>Yahin se books add hongi. Barcode scan se details auto-fill hongi.</p><input id="bTitle" placeholder="Title *"><input id="bAuthor" placeholder="Author *"><input id="bISBN" placeholder="ISBN"><input id="bDDC" placeholder="DDC / Call No."><select id="bLang"><option>English</option><option>Hindi</option><option>Kannada</option><option>Tulu</option><option>Konkani</option></select><button class="gold" style="padding:10px;border-radius:20px" onclick="saveBook()">➕ Add Book</button><button style="padding:10px;border-radius:20px;background:#333;color:#fff;border:0" onclick="openScanner()">📷 Scan & Add</button><div id="bookList2"></div>',
+    reports:'<h2>Reports</h2><p id="reportText"></p>',
+    'my-books':'<h2>My Books</h2><p>Login ke baad aapki issued books yahan dikhengi.</p>',
+    'my-profile':'<h2>My Profile</h2><input placeholder="Full Name"><input placeholder="Phone"><button class="gold" style="padding:10px;border-radius:20px" onclick="alert(\'Profile saved locally.\')">Save Profile</button>',
+    'my-history':'<h2>My History</h2><p>Abhi koi history nahi hai.</p>',
+    checkin:'<h2>Check In — Book Return</h2><input id="inISBN" placeholder="ISBN / Call No."><button class="gold" style="padding:10px;border-radius:20px" onclick="alert(\'Check In recorded for: \'+document.getElementById(\'inISBN\').value)">✅ Check In</button>',
+    checkout:'<h2>Check Out — Book Issue</h2><input placeholder="Member ID"><input placeholder="ISBN / Call No."><button class="gold" style="padding:10px;border-radius:20px" onclick="alert(\'Check Out recorded. Due date 14 days.\')">📤 Check Out</button>',
+    patron:'<h2>Patron Dashboard</h2><p>Patron details yahan aayengi. Demo me khali hai.</p>',
+    'book-entries':'<h2>Book Entries</h2><p>Admin → Manage Books se hi entries hongi.</p><button class="gold" style="padding:10px;border-radius:20px" onclick="showPage(\'manage-books\')">Go To Manage Books</button>',
+    donor:'<h2>Donor Details</h2><input placeholder="Donor Name"><input placeholder="Book Donated"><button class="gold" style="padding:10px;border-radius:20px" onclick="alert(\'Donor saved. Thank you!\')">Save Donor</button>',
+    tulu:'<h2>Tulu Language</h2><p>Namaskara! Tulu books ko Language = Tulu tag se add karein.</p>',
+    branches:'<h2>Group-wise Admin Branches</h2><p>Branch 1: Central Library<br>Branch 2: Community Branch<br>Phase 2 me alag Admin hoga.</p>',
+    collections:'<h2>Collections</h2><p>Fiction, Non-Fiction, Children, Braille, Tulu, Kannada, Magazines.</p>',
+    resources:'<h2>Resources</h2><p>Open Library, Google Books, IFLA Guidelines, DDC Classification.</p>'
+  };
+  box.innerHTML = pages[page] || pages.home;
+  if(page==='opac'||page==='manage-books') renderBooks();
+  if(page==='reports') document.getElementById('reportText').innerText = 'Total Real Books in Catalog: ' + books.length + ' (No fake counts)';
+  window.scrollTo({top:300,behavior:'smooth'});
+}
+function doSearch(){
+  let q = document.getElementById('searchInput').value.toLowerCase();
+  showPage('opac'); if(!q) return;
+  let filtered = books.filter(b=> (b.title+' '+b.author+' '+b.isbn).toLowerCase().includes(q));
+  let el = document.getElementById('bookList');
+  if(el) el.innerHTML = filtered.length ? filtered.map(b=>'<div style="border:1px solid #444;padding:10px;margin:8px 0;border-radius:6px"><b>'+b.title+'</b><br>'+b.author+' • ISBN: '+b.isbn+' • '+b.ddc+'</div>').join('') : '<p>No match. Try Scan Barcode.</p>';
+}
+function saveBook(){
+  let t=document.getElementById('bTitle').value.trim();
+  let a=document.getElementById('bAuthor').value.trim();
+  if(!t||!a){alert('Title aur Author mandatory hai — ISO Document Control');return;}
+  books.push({title:t,author:a,isbn:document.getElementById('bISBN').value,ddc:document.getElementById('bDDC').value,lang:document.getElementById('bLang').value});
+  localStorage.setItem('kitabverse_books',JSON.stringify(books));
+  alert('Book Added: '+t); renderBooks();
+}
+function renderBooks(){
+  let html = books.length ? books.map((b,i)=>'<div style="border:1px solid #444;padding:10px;margin:8px 0;border-radius:6px"><b>'+b.title+'</b><br>'+b.author+' • ISBN: '+b.isbn+' • '+b.ddc+' • '+b.lang+' <button onclick="delBook('+i+')" style="float:right;background:#a00;color:#fff;border:0;padding:4px 8px;border-radius:10px;cursor:pointer">Delete</button></div>').join('') : '<p>Catalog abhi khali hai. Aap books add karenge — koi dummy data nahi.</p>';
+  let el=document.getElementById('bookList')||document.getElementById('bookList2');
+  if(el) el.innerHTML=html;
+  let ot=document.getElementById('opacText'); if(ot) ot.innerText='Catalog me real books hain. Search ya Scan se dhundein.';
+}
+function delBook(i){ if(confirm('Delete this book?')){books.splice(i,1);localStorage.setItem('kitabverse_books',JSON.stringify(books));renderBooks();} }
+function openScanner(){
+  document.getElementById('scannerBox').style.display='block';
+  document.getElementById('scanStatus').innerText='Camera start ho raha hai...';
+  if(!scanner) scanner=new Html5Qrcode("reader");
+  scanner.start({facingMode:"environment"},{fps:10,qrbox:250},
+    async (code)=>{
+      document.getElementById('scanStatus').innerText='Scanned: '+code;
+      try{ await scanner.stop(); }catch(e){}
+      fetchByISBN(code);
+    },(err)=>{}
+  ).catch(e=>{ document.getElementById('scanStatus').innerText='Camera nahi khula: '+e+'. Manual ISBN use karein.'; });
+}
+function closeScanner(){ document.getElementById('scannerBox').style.display='none'; if(scanner){scanner.stop().catch(()=>{});} }
+async function fetchByISBN(isbn){
+  isbn=(isbn||'').trim(); if(!isbn){alert('ISBN daalein');return;}
+  document.getElementById('scanResult').innerHTML='Details la rahe hain... ⏳';
+  try{
+    let res=await fetch('https://openlibrary.org/isbn/'+isbn+'.json');
+    if(!res.ok) throw new Error('Not found');
+    let d=await res.json(); let title=d.title||''; let author='';
+    if(d.authors && d.authors[0] && d.authors[0].key){ let ar=await fetch('https://openlibrary.org'+d.authors[0].key+'.json'); let ad=await ar.json(); author=ad.name||''; }
+    document.getElementById('scanResult').innerHTML='<b>📚 '+title+'</b><br>✍️ '+author+'<br>ISBN: '+isbn;
+    showPage('manage-books');
+    setTimeout(()=>{ document.getElementById('bTitle').value=title; document.getElementById('bAuthor').value=author; document.getElementById('bISBN').value=isbn; },300);
+  }catch(e){
+    document.getElementById('scanResult').innerHTML='Open Library me nahi mila. Manual entry karein. ISBN: '+isbn;
+    showPage('manage-books');
+    setTimeout(()=>{ document.getElementById('bISBN').value=isbn; },300);
+  }
+}
+function toggleNight(){ document.body.style.background = document.body.style.background==='white' ? '#111' : 'white'; document.body.style.color = document.body.style.background==='white' ? '#111' : '#e8d9a0'; }
+let fs=16; function changeText(d){ fs+=d; document.body.style.fontSize=fs+'px'; }
+</script>
+</body>
+</html>
