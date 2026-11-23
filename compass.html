@@ -119,5 +119,21 @@
     renderCustom();
   }
 </script>
+function findBook(){
+  let ddc = document.getElementById('ddcInput').value;
+  let call = document.getElementById('callInput').value;
+  
+  // If Not Found
+  if(!ddc || !call){
+    let add = confirm('DDC / Call No. Not Found For This Book. Add Custom Now?');
+    if(add){
+      // Scroll to Custom Section
+      document.getElementById('customDDC').focus();
+      alert('Add DDC + Call No. Below In Custom (+) — It Will Save Offline');
+    }
+    return;
+  }
+  alert('Found! Shelf A-12 | 12 Steps Ahead');
+}
 </body>
 </html>
