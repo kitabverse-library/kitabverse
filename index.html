@@ -5,55 +5,33 @@
 <title>KitabVerse - Library For All</title>
 <style>
 *{box-sizing:border-box} body{margin:0;font-family:Inter,Arial;background:#F8FAFC;color:#1A202C;font-size:16px;line-height:1.5}
-<header style="background:#0B1D3A;color:#fff;text-align:center;padding:28px 16px 20px">
+<header style="background:#0B1D3A;color:#fff;text-align:center;font-family:Poppins,Arial">
 
-  <!-- LOGO — SABSE UPAR — ASSETS FOLDER SE -->
-  <div>
-    <img src="assets/logo.png" style="width:60px;height:60px;border-radius:14px;border:2px solid #FFD700;object-fit:cover">
+  <!-- LOGO -->
+  <div style="padding-top:16px">
+    <img src="assets/logo.png" style="width:72px;height:72px;border-radius:50%;border:2px solid #FFD700;object-fit:cover">
   </div>
 
-  <!-- LINE 1 -->
-  <div style="font-size:34px;font-weight:900;letter-spacing:-1px;margin-top:10px;line-height:1">
-    Kitab<span style="color:#FFD700">Verse</span>
-  </div>
-
-  <!-- LINE 2 -->
-  <div style="font-size:16px;font-weight:700;color:#fff;margin-top:6px">
-    Library For All With Advanced Features
+  <!-- KitabVerse -->
+  <div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:900;margin-top:10px">
+    <span style="color:#fff">Kitab</span><span style="color:#FFD700">Verse</span>
   </div>
 
   <!-- LINE 3 -->
-  <div style="font-size:12px;color:#CBD5E1;margin-top:6px">
+  <div style="font-size:11px;color:#CBD5E1;margin-top:6px;padding:0 14px;line-height:1.6">
+    Library For All With Advanced Features<br>
     Designed Following IFLA Guidelines • Quality Process Inspired By ISO 9001:2015 Principles
   </div>
 
-</header>  
-.logo{font-size:34px;font-weight:900;letter-spacing:-1px} .logo span{color:#FFD700}
-.tagline{color:#CBD5E1;margin:6px 0 16px;font-size:14px}
-.search{max-width:520px;margin:0 auto;display:flex;background:#fff;border-radius:999px;overflow:hidden}
-.search input{flex:1;padding:13px 16px;border:none;outline:none} .search button{background:#FFD700;border:none;padding:0 20px;cursor:pointer;font-weight:700}
-.tools{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:14px 0 0}
-.tools button{padding:8px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.12);color:#fff;cursor:pointer;font-size:13px}
-.wrap{max-width:720px;margin:0 auto;padding:0 12px 20px}
-.card{background:#fff;border:1px solid #E2E8F0;border-radius:16px;padding:18px;margin:14px 0}
-.card h3{margin:0 0 10px;font-size:18px}
-.muted{color:#64748B;font-size:13px}
-.grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px} .grid>div{background:#F1F5F9;border-radius:12px;padding:12px;text-align:center}
-input,select{width:100%;padding:11px;margin:6px 0;border:1px solid #CBD5E1;border-radius:10px}
-.btn{background:#0B1D3A;color:#fff;padding:11px;border:none;border-radius:10px;width:100%;cursor:pointer;font-weight:700}
-.btn-gold{background:#FFD700;color:#111}
-details{border:1px solid #E2E8F0;border-radius:12px;padding:12px 14px;margin:10px 0;background:#fff} summary{cursor:pointer;font-weight:700}
-.caption{display:none;background:#FEF08A;padding:8px;border-radius:8px;text-align:center;font-weight:700;margin:0 12px}
-footer{background:#0B1D3A;color:#CBD5E1;text-align:center;padding:18px;font-size:13px;line-height:1.7} footer a{color:#FFD700;text-decoration:none}
-.badge{display:inline-block;background:#ECFDF5;color:#065F46;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:700}
-.night{background:#0F172A!important;color:#fff!important} .night .card,.night details{background:#1E293B!important;color:#fff!important;border-color:#334155} .night .grid>div{background:#334155!important;color:#fff}
-@media(max-width:600px){.grid{grid-template-columns:1fr}}
-</style>
-</head>
-<body>
-<div id="captionBox" class="caption">🦻 Hearing Aid Mode ON - Visual Captions Enabled</div>
+  <!-- 🇮🇳 FLAG + ANTHEM — LINE 3 KE NEECHE -->
+  <div style="background:#fff;margin-top:14px;padding:8px 10px;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap">
+    <img src="assets/india-flag.png" style="height:32px;width:auto;border-radius:4px">
+    <span style="color:#0B1D3A;font-size:12px;font-weight:800">Jana Gana Mana • National Anthem</span>
+    <audio id="anthem" src="assets/anthem.mp3" preload="none"></audio>
+    <button onclick="let a=document.getElementById('anthem'); if(a.paused){a.play();this.innerHTML='⏸️ Pause'}else{a.pause();this.innerHTML='▶️ Play Anthem'}" style="background:#0B1D3A;color:#FFD700;border:none;padding:6px 14px;border-radius:999px;font-weight:700;font-size:12px">▶️ Play Anthem</button>
+  </div>
 
-<header>
+</header>
 <div class="logo">Kitab<span>Verse</span></div>
 <p class="tagline">Library For All • Designed Following IFLA Guidelines • Quality Process Inspired By ISO 9001:2015 Principles</p>
 <div class="search"><input id="q" placeholder="Search books, authors..."><button onclick="doSearch()">Search</button></div>
