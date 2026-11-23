@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KitabVerse — Library For All</title>
+<meta name="description" content="KitabVerse — A Free Digital Library For Everyone. Read, Download & Share Books.">
+<meta name="theme-color" content="#0f172a">
+
+<!-- WhatsApp / Facebook / Telegram Preview -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kitabverse-library.github.io/kitabverse/">
+<meta property="og:site_name" content="KitabVerse">
+<meta property="og:title" content="KitabVerse — Library For All">
+<meta property="og:description" content="A Free Digital Library For Everyone. Read, Download & Share Books.">
+<meta property="og:image" content="https://kitabverse-library.github.io/kitabverse/assets/logo-1024.png">
+
+<!-- Twitter Preview -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="KitabVerse — Library For All">
+<meta name="twitter:description" content="A Free Digital Library For Everyone. Read, Download & Share Books.">
+<meta name="twitter:image" content="https://kitabverse-library.github.io/kitabverse/assets/logo-1024.png">
+
+<link rel="icon" href="assets/logo.png">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,Arial,sans-serif;background:#f8fafc;color:#0f172a;line-height:1.6}
+a{text-decoration:none;color:inherit}
+header{background:#0f172a;color:#fff;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:22px}
+.logo img{width:40px;height:40px;border-radius:10px;background:#fff;object-fit:cover}
+nav{display:flex;gap:18px;font-weight:600;font-size:15px}
+nav a{opacity:.9}
+nav a:hover{opacity:1;color:#facc15}
+.hero{background:linear-gradient(135deg,#0f172a,#1e3a8a);color:#fff;padding:50px 20px;text-align:center}
+.hero h1{font-size:36px;line-height:1.2}
+.hero h1 span{color:#facc15}
+.hero p{opacity:.85;margin:14px auto;max-width:600px}
+.search-box{margin:22px auto 0;max-width:520px;display:flex;background:#fff;border-radius:50px;overflow:hidden;padding:5px}
+.search-box input{flex:1;border:0;outline:0;padding:12px 16px;font-size:16px}
+.search-box button{border:0;background:#facc15;color:#0f172a;font-weight:800;padding:10px 22px;border-radius:50px;cursor:pointer}
+.wrap{max-width:1100px;margin:0 auto;padding:28px 18px 50px}
+.wrap h2{font-size:24px;margin-bottom:6px}
+.wrap p.sub{color:#64748b;margin-bottom:20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:18px}
+.card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.07);display:flex;flex-direction:column}
+.card img{width:100%;height:260px;object-fit:cover;background:#e2e8f0}
+.card-body{padding:14px;flex:1;display:flex;flex-direction:column}
+.card-body h3{font-size:17px;line-height:1.3}
+.card-body p{font-size:13px;color:#64748b;margin:6px 0 12px}
+.btn{margin-top:auto;background:#0f172a;color:#fff;text-align:center;padding:10px;border-radius:10px;font-weight:700;font-size:14px}
+.btn:hover{background:#1e3a8a}
+footer{background:#0f172a;color:#cbd5e1;text-align:center;padding:22px;font-size:14px}
+@media(max-width:640px){nav{display:none}.hero h1{font-size:28px}}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="#"><img src="assets/logo.png" alt="KitabVerse Logo"> KitabVerse</a>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#books">Books</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Library For All.<br><span>Read. Learn. Grow.</span></h1>
+  <p>A free digital library for everyone. Read, download & share books — anytime, anywhere.</p>
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search books... e.g. Quran, Gita, History" onkeyup="searchBooks()">
+    <button onclick="searchBooks()">Search</button>
+  </div>
+</section>
+
+<div class="wrap" id="books">
+  <h2>📚 Popular Books</h2>
+  <p class="sub">Free books for all readers. Click any book to read / download.</p>
+  <div class="grid" id="bookGrid">
+
+    <div class="card book-card">
+      <img src="assets/logo-1024.png" alt="Book">
+      <div class="card-body">
+        <h3>KitabVerse Collection</h3>
+        <p>Starter Collection • Free</p>
+        <a class="btn" href="#">Read Now</a>
+      </div>
+    </div>
+
+    <div class="card book-card">
+      <img src="assets/logo-1024.png" alt="Book">
+      <div class="card-body">
+        <h3>History & Knowledge</h3>
+        <p>History • Free</p>
+        <a class="btn" href="#">Read Now</a>
+      </div>
+    </div>
+
+    <div class="card book-card">
+      <img src="assets/logo-1024.png" alt="Book">
+      <div class="card-body">
+        <h3>Stories For Everyone</h3>
+        <p>Stories • Free</p>
+        <a class="btn" href="#">Read Now</a>
+      </div>
+    </div>
+
+    <div class="card book-card">
+      <img src="assets/logo-1024.png" alt="Book">
+      <div class="card-body">
+        <h3>Motivation & Life</h3>
+        <p>Self Help • Free</p>
+        <a class="btn" href="#">Read Now</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="wrap" id="about">
+  <h2>About KitabVerse</h2>
+  <p class="sub">KitabVerse is a mission to make knowledge free for all. No login, no fees — just pure reading.</p>
+</div>
+
+<footer id="contact">
+  <b style="color:#fff">KitabVerse — Library For All</b><br>
+  Made with ❤️ for Readers • © 2026 KitabVerse
+</footer>
+
+<script>
+function searchBooks(){
+  let q = document.getElementById('searchInput').value.toLowerCase();
+  let cards = document.querySelectorAll('.book-card');
+  cards.forEach(c=>{
+    let text = c.innerText.toLowerCase();
+    c.style.display = text.includes(q) ? 'flex' : 'none';
+  });
+}
+</script>
+
+</body>
+</html>
