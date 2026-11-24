@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KitabVerse — Read. Share. Connect.</title>
+<link rel="icon" href="assets/logo-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg-navy:#080E1C;--bg-panel:#10192E;--bg-card:#16223D;--gold:#E0B143;--gold-soft:rgba(224,177,67,.18);--text-main:#F5F7FB;--text-muted:#B0BAD0;--border:rgba(224,177,67,.28)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg-navy);color:var(--text-main);font-family:'Plus Jakarta Sans',sans-serif;line-height:1.5;transition:.3s}
+body.night{background:#000}
+.brand-title{font-family:'Alex Brush',cursive;color:var(--gold);font-size:52px;line-height:1.05}
+.brand-motto{font-family:'Cormorant Garamond',serif;font-size:24px;letter-spacing:.04em;font-weight:700}
+.brand-tagline{font-family:'Plus Jakarta Sans',sans-serif;color:var(--gold);font-size:13px;font-weight:600}
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 24px;background:#060B16;border-bottom:1px solid var(--border);flex-wrap:wrap}
+.brand-lockup{display:flex;align-items:center;gap:14px}
+.brand-lockup img{width:64px;height:64px;border-radius:50%;border:1.5px solid var(--gold);object-fit:cover}
+.top-btns{display:flex;gap:8px;flex-wrap:wrap}
+.top-btns button{padding:9px 13px;border-radius:20px;border:1px solid var(--border);background:var(--bg-card);color:var(--text-main);cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-weight:600}
+.top-btns button.primary{background:var(--gold);color:#080E1C;font-weight:700}
+.layout{display:grid;grid-template-columns:240px 1fr 270px;gap:18px;padding:20px 24px}
+aside,main{background:var(--bg-panel);border:1px solid var(--border);border-radius:12px;padding:16px}
+.panel-title{color:var(--gold);font-weight:700;margin-bottom:12px;border-bottom:1px solid var(--border);padding-bottom:6px}
+.panel-list{list-style:none;display:grid;gap:8px;font-size:14px;color:var(--text-muted)}
+.hero-banner{background:var(--gold-soft);border:1px solid var(--border);border-radius:10px;padding:18px;margin-bottom:16px;text-align:center}
+.hero-banner img.flag{width:220px;margin:10px;border-radius:10px;border:2px solid var(--gold)}
+.search-row{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+.search-row input{flex:1;min-width:200px;padding:10px 12px;border-radius:8px;border:1px solid var(--border);background:var(--bg-navy);color:var(--text-main);font-family:'Plus Jakarta Sans',sans-serif}
+.grid-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:12px}
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:12px;cursor:pointer}
+#compass{width:100px;height:100px;margin:10px auto;border:4px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:36px;background:var(--bg-card)}
+iframe{width:100%;height:260px;border-radius:12px;border:2px solid var(--gold);margin-top:10px}
+.travel{background:#FF3B30;color:#fff;padding:12px 20px;border:none;border-radius:30px;font-weight:700;cursor:pointer;margin-top:10px;font-family:'Plus Jakarta Sans',sans-serif}
+#counter{max-width:750px;margin:20px auto;background:var(--gold);color:#080E1C;padding:14px;border-radius:30px;font-weight:700;text-align:center}
+footer{background:#060B16;border-top:1px solid var(--border);padding:18px 24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px;color:var(--text-muted)}
+footer a{color:var(--gold);text-decoration:none;margin:0 6px}
+@media(max-width:960px){.layout{grid-template-columns:1fr}.brand-title{font-size:42px}}
+</style>
+</head>
+<body>
+
+<header>
+<div class="brand-lockup">
+<img src="assets/logo-512.png" alt="KitabVerse Logo">
+<div><div class="brand-title">KitabVerse</div><div class="brand-motto">Read. Share. Connect.</div><div class="brand-tagline">Library For All With Advanced Features.</div></div>
+</div>
+<div class="top-btns">
+<button onclick="changeFont(-2)">A-</button><button onclick="changeFont(2)">A+</button>
+<button onclick="toggleNight()">🌙 Night Mode</button>
+<button onclick="speakPage()">🔊 Website Bolegi</button>
+<button onclick="playAnthem()">🇮🇳 Anthem</button>
+<button class="primary" onclick="go('dashboard.html')">Donate / Sponsor</button>
+</div>
+</header>
+
+<div class="layout">
+<aside>
+<div class="panel-title">Library Menu</div>
+<ul class="panel-list"><li>🏠 Home & Announcements</li><li>📚 DDC & Call No. Index</li><li>📷 ISBN Scanner & Manual Entry</li><li>📅 Loan 7-90 Days</li><li>📖 Kindle & Digital Shelves</li><li>📺 TV Cast & Big Screen</li><li>♿ Accessibility - A+ 200px</li></ul>
+</aside>
+
+<main>
+<section class="hero-banner">
+<h2 style="font-family:'Cormorant Garamond',serif;font-size:28px">Multilingual Community & Physical Catalog</h2>
+<p class="brand-tagline">Library For All With Advanced Features.</p>
+<img class="flag" src="assets/india-flag.png" alt="India Flag">
+<p>🇮🇳 India | 🏳️ Tulu Nadu | Made In India With ❤️ For Readers</p>
+<audio id="anthem" src="assets/anthem.mp3"></audio>
+<div class="search-row"><input type="search" placeholder="Search title, author, DDC, Call No., ISBN..."><button class="primary" style="padding:10px 16px;border-radius:8px;border:none;background:var(--gold);font-weight:700;cursor:pointer" onclick="speakText('Search shuru ho gaya')">Search</button></div>
+</section>
+<h3>Featured Collections</h3>
+<div class="grid-cards">
+<div class="card" onclick="go('dashboard.html')"><strong>Speaking Shadows</strong><p class="panel-list">DDC: 821.92 · Call No: KIT-2025-01 · Available</p></div>
+<div class="card"><strong>Multilingual Classics</strong><p class="panel-list">English · Hindi · Marathi · Kannada · Tulu</p></div>
+<div class="card"><strong>Accessible & Large Print</strong><p class="panel-list">Voice Readout · Captions · High Contrast</p></div>
+</div>
+<h3 style="margin-top:16px">📍 Find Library Near You + 🧭 Compass</h3>
+<iframe src="https://www.google.com/maps?q=Dahisar+West+Mumbai&output=embed"></iframe>
+<div id="compass">🧭</div><p id="compassText" style="text-align:center;color:var(--text-muted)">Compass - North Dikhayega</p>
+<div style="text-align:center"><button class="travel" onclick="startTravel()">🎤 Bolke Pucho - Library Kahan Hai? | Travel Mode</button></div>
+</main>
+
+<aside>
+<div class="panel-title">Live Hub & Tools</div>
+<ul class="panel-list">
+<li><strong>Visitors Today:</strong> <span id="visitorCount">1,247</span></li>
+<li><strong>Daily Quote:</strong> "A room without books is like a body without a soul."</li>
+<li><strong>Compass & Hub Map:</strong> Dahisar West Hub · View Map</li>
+<li><strong>Payments:</strong> Google Pay · Razorpay</li>
+<li><strong>Founder:</strong> Satish Puthran - Speaking Shadows</li>
+</ul>
+</aside>
+</div>
+
+<div id="counter">👁️ Visitors Today: <span id="today">1,247</span> | Week: <span id="week">8,932</span> | Total: <span id="total">1,24,580</span> | 🟢 Online: <span id="online">42</span></div>
+
+<footer>
+<div><strong style="color:var(--gold)">KitabVerse</strong> — Read. Share. Connect. · Library For All With Advanced Features.</div>
+<div><a href="#">About</a><a href="#">Accessibility</a><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Help</a><br>IFLA & ISO 9001:2015 Aligned · Offline Ready</div>
+</footer>
+
+<script src="visitor-counter.js"></script>
+<script>
+let size=16;
+function changeFont(n){size+=n;if(size<12)size=12;if(size>100)size=100;document.body.style.fontSize=size+"px";speakText("Akshar ka size badal gaya");}
+function toggleNight(){document.body.classList.toggle("night");}
+function speakText(t){speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(t);u.lang='hi-IN';u.rate=0.9;speechSynthesis.speak(u);}
+function speakPage(){speakText(document.body.innerText.substring(0,1200));}
+function playAnthem(){document.getElementById("anthem").play();speakText("Bharat ka Rashtriya Gaan");}
+function go(p){window.location.href=p;}
+function startTravel(){speakText("Travel Mode On hai. Aapki library 500 meter aage hai. Seedha chaliye. Left mudne par library aapke right me hogi. Aap surakshit hain, KitabVerse aapke saath hai.");navigator.vibrate?.([200,100,200]);alert("🧭 Travel Mode ON\nVoice bol rahi hai:\nLibrary 500m aage, seedha chaliye.");}
+window.addEventListener("deviceorientation",e=>{if(e.alpha!=null){document.getElementById("compass").style.transform=`rotate(${-e.alpha}deg)`;document.getElementById("compassText").innerText="Disha: "+Math.round(e.alpha)+"°";}});
+</script>
+</body>
+</html>
