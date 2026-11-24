@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KitabVerse Dashboard — Read. Share. Connect.</title>
+<link rel="icon" href="assets/logo-512.png">
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#080E1C;--gold:#E0B143;--cream:#F8F5EE;--text:#121826;--muted:#6B7280;--border:rgba(224,177,67,.35)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow-x:hidden}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--cream);color:var(--text);display:grid;grid-template-columns:250px 1fr;min-height:100vh}
+body.night{background:#080E1C;color:#F5F7FB}
+body.night .topbar,body.night .white,body.night .mobile-header{background:#10192E;color:#F5F7FB}
+body.night .topbar input,body.night .top-actions button{background:#080E1C;color:#F5F7FB;border-color:#2A3854}
+body.night .book,body.night .stat,body.night .quick button{background:#16223D;color:#F5F7FB;border-color:#2A3854}
+aside{background:var(--navy);color:#fff;padding:14px;display:flex;flex-direction:column;gap:6px}
+.logo-row{display:flex;align-items:center;gap:10px;padding:6px 0 14px;border-bottom:1px solid var(--border)}
+.logo-row img{width:58px;height:58px;object-fit:contain}
+.brand-title{font-family:'Alex Brush',cursive;color:var(--gold);font-size:36px;line-height:1}
+.brand-motto{font-family:'Cormorant Garamond',serif;font-size:13px;color:#fff}
+.side a{display:flex;gap:10px;padding:10px 12px;border-radius:10px;color:#E5E7EB;text-decoration:none;font-size:14px}
+.side a.active,.side a:hover{background:var(--gold);color:#080E1C;font-weight:700}
+.mobile-header{display:none}
+main{padding:14px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.topbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:#fff;padding:10px 14px;border-radius:12px}
+.topbar input{flex:1;min-width:140px;padding:10px 12px;border-radius:20px;border:1px solid #E5E7EB;background:#F8F5EE}
+.topbar button{padding:10px 18px;border:none;border-radius:20px;background:var(--gold);font-weight:700;cursor:pointer}
+.top-actions{display:flex;gap:6px;flex-wrap:wrap}
+.top-actions button{padding:8px 11px;border-radius:20px;border:1px solid #E5E7EB;background:#fff;cursor:pointer;font-weight:700;font-size:13px}
+.hero{background:#0A1428;color:#fff;border-radius:14px;padding:22px;display:flex;justify-content:space-between;gap:16px;align-items:center}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:38px;line-height:1.1}
+.hero h1 span{color:var(--gold)}
+.hero .search{margin-top:14px;display:flex;gap:8px;max-width:480px}
+.hero .search input{flex:1;min-width:0;padding:11px;border-radius:20px;border:none}
+.hero .search button{padding:11px 18px;border-radius:20px;border:none;background:var(--gold);font-weight:700;white-space:nowrap}
+.hero .globe{font-size:78px;flex-shrink:0}
+.grid2{display:grid;grid-template-columns:1fr 300px;gap:14px}
+.white{background:#fff;border-radius:12px;padding:14px;min-width:0}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;display:flex;justify-content:space-between;gap:8px;align-items:center}
+.books{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:10px}
+.book{border:1px solid #EDE9DD;border-radius:10px;padding:8px;background:#FFFDF5;min-width:0}
+.book img{width:100%;height:110px;object-fit:cover;border-radius:8px;background:#E0B143;display:block}
+.book b{font-size:12px;display:block;margin-top:6px}.book span{font-size:11px;color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.stat{background:#FFFDF5;border:1px solid #EDE9DD;border-radius:10px;padding:12px;display:flex;gap:10px;align-items:center}
+.stat b{font-size:20px}
+.due{display:grid;gap:10px;margin-top:10px}
+.due-item{display:flex;gap:10px;align-items:center;border-bottom:1px solid #F1EDE2;padding-bottom:8px}
+.due-item img{width:38px;height:54px;border-radius:6px;background:#E0B143;flex-shrink:0}
+.quick{display:grid;gap:8px;margin-top:10px}
+.quick button{padding:10px;border:none;border-radius:10px;background:#FFF3D6;font-weight:600;cursor:pointer;text-align:left}
+#counter{background:var(--gold);color:#080E1C;padding:12px;border-radius:30px;font-weight:700;text-align:center;font-size:13px}
+footer{background:#080E1C;color:#B0BAD0;padding:12px 16px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:12px}
+footer a{color:var(--gold);text-decoration:none;margin:0 6px}
+/* REAL COMPASS */
+.compass-wrap{display:flex;gap:12px;align-items:center;margin-top:12px;flex-wrap:wrap}
+.compass{width:90px;height:90px;border-radius:50%;background:#0A1428;border:3px solid var(--gold);position:relative;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+#needle{width:4px;height:70px;background:linear-gradient(to top,#fff 50%,#E0B143 50%);border-radius:4px;position:relative;transition:transform .1s linear}
+#needle::after{content:"N";position:absolute;top:-22px;left:-6px;color:#E0B143;font-weight:800;font-size:16px}
+#deg{font-weight:800;font-size:18px}
+@media(max-width:900px){
+body{grid-template-columns:1fr}
+aside{position:fixed;top:0;left:-280px;width:260px;height:100vh;z-index:999;transition:.3s;overflow-y:auto}
+aside.open{left:0}
+.mobile-header{display:flex;align-items:center;gap:10px;background:#080E1C;color:#fff;padding:10px 14px;position:sticky;top:0;z-index:100}
+.mobile-header img{width:42px;height:42px;object-fit:contain}
+.mobile-header .brand-title{font-size:28px}
+.mobile-header .brand-motto{font-size:11px}
+.hamburger{margin-left:auto;font-size:24px;background:var(--gold);border:none;width:42px;height:42px;border-radius:10px;cursor:pointer}
+main{padding:10px}
+.topbar{flex-direction:column;align-items:stretch}.topbar input,.topbar>button{width:100%}
+.hero{flex-direction:column;align-items:flex-start;padding:18px}.hero h1{font-size:30px}.hero .search{width:100%;max-width:none}.hero .globe{display:none}
+.grid2{grid-template-columns:1fr}.books{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:1fr}
+#counter{font-size:12px;line-height:1.6;border-radius:14px}
+footer{justify-content:center;text-align:center}
+}
+</style>
+</head>
+<body>
+<div class="mobile-header">
+<img src="assets/logo-512.png" alt="KitabVerse">
+<div><div class="brand-title">KitabVerse</div><div class="brand-motto">Read. Share. Connect.</div></div>
+<button class="hamburger" onclick="toggleMenu()">☰</button>
+</div>
+<aside id="sidebar">
+<div class="logo-row"><img src="assets/logo-512.png" alt="KitabVerse"><div><div class="brand-title">KitabVerse</div><div class="brand-motto">Read. Share. Connect.</div></div></div>
+<nav class="side">
+<a href="index.html">🏠 Home</a><a class="active" href="#">🏠 Dashboard</a><a href="#">🔍 Discover Catalogue</a><a href="#">📚 My Library</a><a href="#">👥 Members</a><a href="#">🔄 Circulation</a><a href="#">📌 Holds & Reservations</a><a href="#">☁️ Digital Library</a><a href="#">📋 Reading Lists</a><a href="#">📅 Events</a><a href="#">📊 Analytics & Reports</a><a href="#">🧩 Integrations</a><a href="#">⚙️ Settings</a>
+</nav>
+</aside>
+<main>
+<div class="topbar">
+<input placeholder="🔍 Search the catalogue..."><button>Search</button>
+<div class="top-actions">
+<button onclick="changeFont(-1)">A-</button><button onclick="resetFont()">A</button><button onclick="changeFont(1)">A+</button>
+<button onclick="toggleNight()" id="nightBtn">🌙 Night Mode</button>
+<button onclick="speakPage()">🔊 Listen</button>
+<button onclick="playAnthem()">🇮🇳 Anthem</button>
+<button>🌐 English ▾</button><button>🔔 3</button><button>👤 KitabVerse ▾</button>
+</div>
+</div>
+<audio id="anthem" src="assets/anthem.mp3"></audio>
+<div class="hero">
+<div>
+<h1>A world of knowledge,<br><span>beautifully connected</span></h1>
+<div class="search"><input placeholder="Search books, authors, topics..."><button>Search</button></div>
+<p style="margin-top:10px;font-size:12px;color:#B0BAD0">All Formats ▾ &nbsp; All Subjects ▾ &nbsp; All Ages ▾</p>
+</div><div class="globe">🌍📚</div>
+</div>
+<div class="grid2">
+<div>
+<div class="white"><div class="section-title">⭐ Featured Books <span style="font-size:13px;font-family:'Plus Jakarta Sans'">View All →</span></div>
+<div class="books">
+<div class="book"><img><b>Atomic Habits</b><span>James Clear</span></div>
+<div class="book"><img><b>Sapiens</b><span>Yuval Noah Harari</span></div>
+<div class="book"><img><b>Dune</b><span>Frank Herbert</span></div>
+<div class="book"><img><b>The Alchemist</b><span>Paulo Coelho</span></div>
+<div class="book"><img><b>Speaking Shadows</b><span>Satish Puthran</span></div>
+</div>
+<div class="stats">
+<div class="stat">📖 <div><b>12</b><br><span style="font-size:11px">Items Borrowed This Month ↑ 0%</span></div></div>
+<div class="stat">👥 <div><b>842</b><br><span style="font-size:11px">Active Members</span></div></div>
+<div class="stat">📚 <div><b>8,420</b><br><span style="font-size:11px">Total Collection</span></div></div>
+</div>
+</div>
+<div class="white" style="margin-top:14px"><div class="section-title">📍 Find Library + 🧭 Real Compass <span style="font-size:13px;font-family:'Plus Jakarta Sans'">Dahisar West Hub</span></div>
+<iframe src="https://www.google.com/maps?q=Dahisar+West+Mumbai&output=embed" style="width:100%;height:220px;border-radius:10px;border:1px solid #EDE9DD;margin-top:10px"></iframe>
+<div class="compass-wrap">
+<div class="compass"><div id="needle"></div></div>
+<div><div id="deg">0° North</div><div style="font-size:12px;color:var(--muted)">Phone ghumao — Compass ghumega</div>
+<button onclick="enableCompass()" style="margin-top:8px;padding:8px 14px;border:none;border-radius:20px;background:var(--gold);font-weight:700">🧭 Compass On Karo</button>
+<button onclick="openDirections()" style="margin-top:8px;padding:8px 14px;border:none;border-radius:20px;background:#080E1C;color:#fff;font-weight:700">📍 Directions</button>
+</div></div>
+</div>
+<div class="white" style="margin-top:14px"><div class="section-title">👥 Community Reading Activity <span style="font-size:13px;font-family:'Plus Jakarta Sans'">View All →</span></div><p style="font-size:13px;margin-top:8px;color:var(--muted)">Ayesha Khan finished reading Atomic Habits • Rohan Mehta added a review for Dune • Sara Ahmed joined KitabVerse</p></div>
+</div>
+<div>
+<div class="white"><div class="section-title">📅 Due Soon</div>
+<div class="due">
+<div class="due-item"><img><div style="flex:1"><b style="font-size:13px">The Midnight Library</b><br><span style="font-size:12px;color:var(--muted)">Matt Haig</span></div><b style="color:#DC2626;font-size:12px">Due Apr 25</b></div>
+<div class="due-item"><img><div style="flex:1"><b style="font-size:13px">Educated</b><br><span style="font-size:12px;color:var(--muted)">Tara Westover</span></div><b style="color:#DC2626;font-size:12px">Due Apr 27</b></div>
+<div class="due-item"><img><div style="flex:1"><b style="font-size:13px">Dune</b><br><span style="font-size:12px;color:var(--muted)">Frank Herbert</span></div><b style="color:#DC2626;font-size:12px">Due Apr 30</b></div>
+</div><p style="text-align:center;font-size:12px;margin-top:8px">View All Loans →</p></div>
+<div class="white" style="margin-top:14px"><div class="section-title">⚡ Quick Actions</div><div class="quick"><button>🔍 Search Catalogue</button><button>🔄 Renew Items</button><button>📌 Place a Hold</button><button>💡 Suggest a Book</button></div></div>
+<div class="white" style="margin-top:14px"><div class="section-title">⭐ Personalized Recommendations</div><p style="font-size:13px;margin-top:8px"><b>1984</b> — George Orwell<br><span style="color:var(--muted)">A timeless classic you might enjoy.</span></p><button style="margin-top:8px;padding:8px 12px;border:none;border-radius:20px;background:var(--gold);font-weight:700">Add to My Library</button></div>
+<div class="white" style="margin-top:14px"><div class="section-title">🛡️ Play Store Compliance</div><p style="font-size:12px;margin-top:8px;line-height:1.7;color:var(--muted)">IFLA & ISO 9001:2015 Aligned • Target API 34+ • 64-bit • Privacy First<br>Data Safety: No data sold • No location stored</p><p style="font-size:12px;margin-top:8px"><a href="privacy.html" style="color:var(--gold);font-weight:700">Privacy Policy</a> • <a href="terms.html" style="color:var(--gold);font-weight:700">Terms</a></p></div>
+</div>
+</div>
+<div id="counter">👁️ Visitors Today: 000000 | Week: 000000 | Total: 000000 | 🟢 Online: 000000</div>
+<footer>
+<div><span style="color:var(--gold);font-family:'Alex Brush',cursive;font-size:20px">KitabVerse</span> — Read. Share. Connect.</div>
+<div><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="#">Accessibility</a><a href="#">Help</a></div>
+</footer>
+</main>
+<script>
+function toggleMenu(){document.getElementById("sidebar").classList.toggle("open");}
+// A-/A/A+ - FIXED with Zoom - 100% working
+let zoomLevel=100;
+function applyZoom(){document.body.style.zoom=zoomLevel+"%";}
+function changeFont(step){zoomLevel+=step*10;if(zoomLevel<80)zoomLevel=80;if(zoomLevel<200)zoomLevel=zoomLevel;if(zoomLevel>150)zoomLevel=150;applyZoom();}
+function resetFont(){zoomLevel=100;applyZoom();}
+function toggleNight(){let isNight=document.body.classList.toggle("night");document.getElementById("nightBtn").innerText=isNight?"☀️ Day Mode":"🌙 Night Mode";localStorage.setItem("kv_night",isNight?"1":"0");}
+if(localStorage.getItem("kv_night")=="1"){document.body.classList.add("night");document.getElementById("nightBtn").innerText="☀️ Day Mode";}
+function speakText(t){speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(t);u.lang='hi-IN';speechSynthesis.speak(u);}
+function speakPage(){speakText(document.body.innerText.substring(0,800));}
+function playAnthem(){document.getElementById("anthem").play();}
+// REAL MOVING COMPASS
+function enableCompass(){
+  if(typeof DeviceOrientationEvent!=="undefined" && typeof DeviceOrientationEvent.requestPermission==="function"){
+    DeviceOrientationEvent.requestPermission().then(r=>{if(r==="granted") startCompass();});
+  } else { startCompass(); }
+}
+function startCompass(){
+  window.addEventListener("deviceorientation", (e)=>{
+    let deg = e.alpha || 0;
+    document.getElementById("needle").style.transform="rotate("+deg+"deg)";
+    let dir="North"; if(deg>22.5&&deg<=67.5)dir="North-East"; else if(deg>67.5&&deg<=112.5)dir="East"; else if(deg>112.5&&deg<=157.5)dir="South-East"; else if(deg>157.5&&deg<=202.5)dir="South"; else if(deg>202.5&&deg<=247.5)dir="South-West"; else if(deg>247.5&&deg<=292.5)dir="West"; else if(deg>292.5&&deg<=337.5)dir="North-West";
+    document.getElementById("deg").innerText=Math.round(deg)+"° "+dir;
+  });
+}
+function openDirections(){window.open("https://www.google.com/maps/dir/?api=1&destination=Dahisar+West+Mumbai","_blank");}
+</script>
+</body>
+</html>
