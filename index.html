@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KitabVerse — Read. Share. Connect.</title>
+<link rel="icon" href="assets/logo-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080E1C;--panel:#10192E;--card:#16223D;--gold:#E0B143;--text:#F5F7FB;--muted:#B0BAD0;--border:rgba(224,177,67,.28)}
+body.light{--bg:#F8F5EE;--panel:#FFFFFF;--card:#F2EDE2;--text:#121826;--muted:#3F4A63;--border:rgba(0,0,0,.12)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;line-height:1.5;transition:.3s}
+.brand-title{font-family:'Alex Brush',cursive;color:var(--gold);font-size:52px;line-height:1}
+.brand-motto{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;letter-spacing:.04em}
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 24px;background:#060B16;border-bottom:1px solid var(--border);flex-wrap:wrap}
+body.light header{background:#fff}
+.brand-lockup{display:flex;align-items:center;gap:14px}
+.brand-lockup img{width:60px;height:60px;border-radius:50%;border:1px solid var(--gold);object-fit:cover}
+.top-btns{display:flex;gap:8px;flex-wrap:wrap}
+.top-btns button{padding:9px 13px;border-radius:20px;border:1px solid var(--border);background:var(--card);color:var(--text);cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-weight:600}
+.top-btns button.primary{background:var(--gold);color:#080E1C;font-weight:700}
+.layout{display:grid;grid-template-columns:240px 1fr 270px;gap:18px;padding:20px 24px}
+aside,main{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:16px}
+.panel-title{color:var(--gold);font-weight:700;margin-bottom:12px;border-bottom:1px solid var(--border);padding-bottom:6px}
+.panel-list{list-style:none;display:grid;gap:9px;font-size:14px;color:var(--muted)}
+.hero-banner{background:rgba(224,177,67,.08);border:1px solid var(--border);border-radius:10px;padding:18px;margin-bottom:16px;text-align:center}
+.hero-banner img.flag{width:200px;margin:12px auto;border-radius:8px;display:block}
+.search-row{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+.search-row input{flex:1;min-width:180px;padding:10px 12px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif}
+.grid-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:12px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;cursor:pointer}
+#counter{max-width:750px;margin:20px auto;background:var(--gold);color:#080E1C;padding:13px;border-radius:30px;font-weight:700;text-align:center}
+footer{background:#060B16;border-top:1px solid var(--border);padding:16px 24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:13px;color:var(--muted)}
+body.light footer{background:#fff}
+footer a{color:var(--gold);text-decoration:none;margin:0 6px}
+@media(max-width:960px){.layout{grid-template-columns:1fr}.brand-title{font-size:42px}}
+</style>
+</head>
+<body>
+
+<header>
+<div class="brand-lockup">
+<img src="assets/logo-512.png" alt="KitabVerse Logo">
+<div><div class="brand-title">KitabVerse</div><div class="brand-motto">Read. Share. Connect.</div></div>
+</div>
+<div class="top-btns">
+<button onclick="changeFont(-2)">A-</button><button onclick="changeFont(2)">A+</button>
+<button onclick="toggleNight()">🌙 Day / Night</button>
+<button onclick="speakPage()">🔊 Listen</button>
+<button onclick="playAnthem()">🇮🇳 Anthem</button>
+<button class="primary" onclick="go('dashboard.html')">Donate / Sponsor</button>
+</div>
+</header>
+
+<div class="layout">
+<aside>
+<div class="panel-title">Library Menu</div>
+<ul class="panel-list"><li>Home</li><li>DDC & Call No. Index</li><li>ISBN Scanner & Manual Entry</li><li>Loan 7–90 Days</li><li>Kindle & Digital Shelves</li><li>TV Cast & Big Screen</li></ul>
+</aside>
+
+<main>
+<section class="hero-banner">
+<h2 style="font-family:'Cormorant Garamond',serif;font-size:28px">Multilingual Community Catalog</h2>
+<img class="flag" src="assets/india-flag.png" alt="India Flag">
+<audio id="anthem" src="assets/anthem.mp3"></audio>
+<div class="search-row"><input type="search" placeholder="Search title, author, DDC, Call No., ISBN..."><button style="padding:10px 16px;border-radius:8px;border:none;background:var(--gold);font-weight:700;cursor:pointer" onclick="speakText('Search')">Search</button></div>
+</section>
+<h3>Featured Collections</h3>
+<div class="grid-cards">
+<div class="card" onclick="go('dashboard.html')"><strong>Speaking Shadows</strong><p class="panel-list">DDC: 821.92 · KIT-2025-01 · Available</p></div>
+<div class="card"><strong>Multilingual Classics</strong><p class="panel-list">English · Hindi · Marathi · Kannada · Tulu</p></div>
+<div class="card"><strong>Accessible & Large Print</strong><p class="panel-list">Voice · Captions · High Contrast</p></div>
+</div>
+</main>
+
+<aside>
+<div class="panel-title">Live Hub</div>
+<ul class="panel-list">
+<li><strong>Visitors Today:</strong> 1,247</li>
+<li><strong>Payments:</strong> Google Pay · Razorpay</li>
+<li><strong>Standards:</strong> IFLA · ISO 9001:2015</li>
+</ul>
+</aside>
+</div>
+
+<div id="counter">👁️ Visitors Today: 1,247 | Week: 8,932 | Total: 1,24,580 | 🟢 Online: 42</div>
+
+<footer>
+<div><strong style="color:var(--gold)">KitabVerse</strong> — Read. Share. Connect.</div>
+<div><a href="#">About</a><a href="#">Accessibility</a><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Help</a></div>
+</footer>
+
+<script>
+let size=16;
+function changeFont(n){size+=n;if(size<12)size=12;if(size>100)size=100;document.body.style.fontSize=size+"px";}
+function toggleNight(){document.body.classList.toggle("light");}
+function speakText(t){speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(t);u.lang='hi-IN';speechSynthesis.speak(u);}
+function speakPage(){speakText(document.body.innerText.substring(0,800));}
+function playAnthem(){document.getElementById("anthem").play();}
+function go(p){window.location.href=p;}
+</script>
+</body>
+</html>
