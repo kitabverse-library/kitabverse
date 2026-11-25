@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KitabVerse - READ. SHARE. CONNECT.</title>
+<link rel="icon" href="assets/logo-512.png">
+<link rel="apple-touch-icon" href="assets/logo-512.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+b,strong{font-weight:400 !important}
+body{font-family:Arial,sans-serif;background:#F8F6F0;color:#1A1A1A;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+.header{position:fixed;top:0;left:0;right:0;background:#0A1931;z-index:1000;padding:10px 12px 12px}
+.header-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.logo-box{display:flex;align-items:center;gap:10px;overflow:visible}
+.logo-circle{width:52px;height:52px;min-width:52px;min-height:52px;border:2px solid #C9A227;border-radius:50%;background:#fff;color:#C9A227;display:flex;align-items:center;justify-content:center;text-align:center;font-size:8px;font-weight:400;line-height:1.2;flex-shrink:0;overflow:hidden;padding:0}
+.logo-text{line-height:1}
+.logo-text b{font-family:'Cormorant Garamond',Georgia,serif;font-size:30px;color:#C9A227;letter-spacing:1px;font-weight:400}
+.logo-text small{display:block;font-size:11px;letter-spacing:3px;color:#fff;margin-top:2px;font-family:Arial,sans-serif;font-weight:400}
+.hamburger{background:#C9A227;border:none;width:48px;height:48px;border-radius:12px;font-size:26px;cursor:pointer}
+.search-top{margin-top:10px}
+.search-top input{width:100%;padding:12px 16px;border-radius:20px;border:none;outline:none;font-size:15px}
+.search-btn{width:100%;background:#C9A227;border:none;padding:11px;border-radius:20px;font-weight:400;font-size:16px;margin-top:8px;cursor:pointer}
+.header-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.top-btn{border:none;background:#fff;padding:8px 14px;border-radius:20px;cursor:pointer;font-size:14px;font-weight:400;white-space:nowrap}
+.top-btn.dark{background:#1A1A1A;color:#fff}
+.top-btn.gold{background:#C9A227;color:#fff}
+.sidebar{position:fixed;top:0;left:-280px;width:260px;height:100vh;background:#fff;box-shadow:2px 0 20px rgba(0,0,0,.2);padding:16px 14px;transition:.3s;z-index:1200;overflow-y:auto}
+.sidebar.open{left:0}
+.sidebar h4{font-size:11px;letter-spacing:2px;color:#999;margin:12px 8px 8px}
+.side-item{display:flex;gap:12px;padding:11px 10px;border-radius:12px;cursor:pointer;font-size:14px}
+.side-item.active,.side-item:hover{background:#FFF8DC}
+.close-side{float:right;border:none;background:#F1EFE9;padding:6px 10px;border-radius:10px;cursor:pointer}
+.main{margin-top:232px;padding:14px 14px 30px;max-width:1100px;margin-left:auto;margin-right:auto}
+@media(min-width:900px){.main{margin-top:150px;margin-left:260px}.sidebar{left:0;top:0}}
+.hero{background:url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1200') center/cover;color:#fff;border-radius:18px;padding:28px 18px;text-align:center}
+.hero h1{font-family:'Cormorant Garamond',Georgia,serif;font-size:32px;line-height:1.2;text-shadow:0 2px 10px rgba(0,0,0,.7);font-weight:400}
+.hero h1 em{color:#E8C84A;font-style:normal;font-weight:400}
+.hero-search{display:flex;margin-top:16px;background:#fff;border-radius:20px;overflow:hidden}
+.hero-search input{flex:1;border:none;outline:none;padding:12px 14px;font-size:14px}
+.hero-search button{background:#C9A227;border:none;padding:0 18px;font-size:18px;cursor:pointer}
+.anthem{background:#fff;border:1px solid #E5E0D5;border-radius:14px;padding:14px;margin-top:14px}
+.anthem-top{display:flex;align-items:center;gap:10px}
+.anthem-top b{font-size:15px;font-weight:400}
+.play-btn{width:44px;height:44px;border-radius:50%;background:#C9A227;border:none;font-size:18px;cursor:pointer;flex-shrink:0}
+.progress{height:8px;background:#E5E0D5;border-radius:20px;margin-top:12px;overflow:hidden}
+.progress-bar{height:100%;width:0%;background:#1A1A1A;border-radius:20px;transition:width .2s}
+.anthem small{color:#666;font-size:12px}
+.quote-card{background:#fff;border:1px solid #C9A227;border-radius:14px;padding:18px;margin-top:14px;text-align:center}
+.quote-card h2{font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;line-height:1.5;font-weight:400}
+.quote-card p{color:#666;margin:8px 0 12px}
+.q-btn{background:#C9A227;border:none;padding:10px 16px;border-radius:20px;font-weight:400;cursor:pointer;margin:2px}
+.admin-input{width:100%;padding:11px;border-radius:12px;border:1px solid #E5E0D5;margin-top:12px;outline:none}
+.card{background:#fff;border-radius:18px;padding:18px;box-shadow:0 4px 18px rgba(0,0,0,.06);margin-top:14px}
+.grid{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:700px){.grid{grid-template-columns:1fr 1fr 1fr}}
+.book img{width:100%;height:180px;object-fit:cover;border-radius:14px}
+.book h3{margin:10px 0 4px;font-weight:400}
+.book p{color:#666;font-size:13px}
+.access{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+@media(min-width:700px){.access{grid-template-columns:1fr 1fr 1fr 1fr}}
+.acc{background:#F8F6F0;border-radius:16px;padding:16px;text-align:center}
+.acc span{font-size:28px}
+.acc b{display:block;margin:8px 0 4px;font-weight:400}
+.acc p{font-size:12px;color:#666}
+.acc button{margin-top:10px;padding:8px 12px;border-radius:20px;border:1px solid #E5E0D5;background:#fff;cursor:pointer;font-weight:400}
+.map-card{background:#fff;border-radius:18px;padding:14px;margin-top:14px;text-align:center}
+.map-card h2{font-size:22px;margin-bottom:10px;font-weight:400}
+.compass-box{background:#0A1931;border-radius:16px;padding:18px 12px 16px;color:#fff}
+.compass-circle{width:150px;height:150px;margin:0 auto;border:2px solid #C9A227;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#000}
+.compass-circle span{font-size:42px}
+.compass-circle b{color:#C9A227;margin-top:6px;font-size:14px;font-weight:400}
+.start-btn{background:#000;color:#C9A227;border:1px solid #C9A227;padding:10px 20px;border-radius:20px;cursor:pointer;margin-top:14px;font-weight:400}
+.map-frame{border-radius:12px;overflow:hidden;margin-top:14px}
+.dir-btn{background:#C9A227;border:none;padding:11px 22px;border-radius:20px;font-weight:400;cursor:pointer;margin-top:12px}
+.counter{text-align:center;padding:20px}
+.counter h2{font-size:30px;letter-spacing:3px;font-weight:400}
+#adminCounterPanel{display:none;position:fixed;top:100px;right:12px;left:12px;max-width:420px;margin-left:auto;background:#fff;border-radius:18px;box-shadow:0 10px 40px rgba(0,0,0,.3);padding:18px;z-index:1300}
+.admin-btn{width:100%;padding:12px;border-radius:14px;border:none;cursor:pointer;font-weight:400;margin-top:10px;font-size:14px}
+.reset{background:#1A1A1A;color:#fff}
+.close{background:#F1EFE9}
+.footer{text-align:center;padding:20px;color:#fff;font-size:13px;background:#0A1931;margin-top:14px;border-radius:14px}
+body.night{background:#1A1A1A !important;color:#fff !important}
+body.night .card,body.night .sidebar,body.night .quote-card,body.night .map-card,body.night .anthem,body.night #adminCounterPanel{background:#222 !important;color:#fff !important}
+</style>
+</head>
+<body>
+
+<header class="header">
+<div class="header-top">
+<div class="logo-box">
+<div class="logo-circle"><img src="assets/logo-512.png" alt="KitabVerse" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+<div class="logo-text"><b>KITABVERSE</b><small>READ. SHARE. CONNECT.</small></div>
+</div>
+<button class="hamburger" onclick="toggleMenu()">☰</button>
+</div>
+<div class="search-top"><input id="searchInput" placeholder="🔍 Search books..." onkeyup="searchBooks()"><button class="search-btn" onclick="searchBooks()">Search</button></div>
+<div class="header-actions">
+<button class="top-btn" onclick="changeFont(-1)">A-</button>
+<button class="top-btn" onclick="changeFont(0)">A</button>
+<button class="top-btn" onclick="changeFont(1)">A+</button>
+<button class="top-btn" onclick="toggleNight()">🌙 Night</button>
+<button class="top-btn" onclick="speakPage()">🔊 Listen</button>
+<button class="top-btn gold" onclick="adminLogin()">🔐 Admin</button>
+<button class="top-btn dark" onclick="memberLogin()">👤 Member Login</button>
+</div>
+</header>
+
+<div class="sidebar" id="sidebar">
+<button class="close-side" onclick="toggleMenu()">✕</button>
+<h4>MENU</h4>
+<div class="side-item active">📊 Dashboard</div>
+<div class="side-item">📚 Catalogue</div>
+<div class="side-item">📖 My Library</div>
+<div class="side-item">👥 Members</div>
+<div class="side-item">🔄 Circulation</div>
+<div class="side-item">💻 Digital</div>
+<div class="side-item">📅 Events</div>
+<div class="side-item">📈 Reports</div>
+<div class="side-item">⚙️ Settings</div>
+<h4>ACCESSIBLE FOR EVERYONE</h4>
+<div class="side-item">⠿ Braille Books</div>
+<div class="side-item">🦻 Hearing Aid</div>
+<div class="side-item">🎙️ Voice + Listen</div>
+<div class="side-item">👆 Touchscreen</div>
+</div>
+
+<div class="main">
+<div class="hero">
+<h1>LIBRARY FOR ALL <em>WITH<br>ADVANCED FEATURES</em></h1>
+<div class="hero-search"><input placeholder="Search books, authors..."><button>🔍</button></div>
+</div>
+
+<div class="anthem">
+<div class="anthem-top">
+<button class="play-btn" id="anthemBtn" onclick="toggleAnthem()">▶️</button>
+<div><b>🇮🇳 National Anthem — Jana Gana Mana</b><br><small id="anthemStatus">Tap play to listen • 52 sec</small></div>
+</div>
+<div class="progress"><div class="progress-bar" id="anthemBar"></div></div>
+<audio id="anthemAudio" preload="metadata"><source src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Jana_Gana_Mana_instrumental.ogg" type="audio/ogg"></audio>
+</div>
+
+<div class="quote-card">
+<h2 id="quoteBox">“A READER LIVES A THOUSAND LIVES BEFORE HE DIES.”</h2>
+<p id="quoteAuthor">— George R.R. Martin</p>
+<button class="q-btn" onclick="nextQuote()">↻ Next Quote</button>
+<button class="q-btn" onclick="copyQuote()">📋 Copy</button>
+<input class="admin-input" id="adminQuoteInput" placeholder="Admin / Author Quote">
+<button class="q-btn" style="margin-top:10px" onclick="saveAdminQuote()">➕ Add My Quote</button>
+</div>
+
+<div class="card" id="books">
+<h2>⭐ Featured <span style="float:right;font-size:14px">View All →</span></h2>
+<div class="grid">
+<div class="book"><img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=600"><h3>Atomic Habits</h3><p>James Clear • Self Help • ⭐ 4.8</p><button style="margin-top:10px;width:100%;background:#C9A227;border:none;padding:10px;border-radius:20px;cursor:pointer" onclick="alert('Atomic Habits - Available ✅')">Borrow Book</button></div>
+<div class="book"><img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=600"><h3>Dune</h3><p>Frank Herbert • Sci-Fi • ⭐ 4.9</p><button style="margin-top:10px;width:100%;background:#C9A227;border:none;padding:10px;border-radius:20px;cursor:pointer" onclick="alert('Dune - Available ✅')">Borrow Book</button></div>
+<div class="book"><img src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=600"><h3>To Kill a Mockingbird</h3><p>Harper Lee • Classic • ⭐ 4.9</p><button style="margin-top:10px;width:100%;background:#C9A227;border:none;padding:10px;border-radius:20px;cursor:pointer" onclick="alert('To Kill a Mockingbird - Available ✅')">Borrow Book</button></div>
+</div>
+</div>
+
+<div class="card">
+<h2>♿ Accessible For Everyone</h2>
+<div class="access">
+<div class="acc"><span>⠿</span><b>Braille Books</b><p>Braille me books — Kal Firebase se active hoga</p><button onclick="alert('Braille Books')">Explore →</button></div>
+<div class="acc"><span>🦻</span><b>Hearing Aid</b><p>Hearing support ke saath reading</p><button onclick="alert('Hearing Aid')">Explore →</button></div>
+<div class="acc"><span>🎙️</span><b>Voice + Listen</b><p>Sun ke padho — Audio books</p><button onclick="speakPage()">Listen Now</button></div>
+<div class="acc"><span>👆</span><b>Touchscreen</b><p>Touch se easy navigation</p><button onclick="alert('Touchscreen')">Explore →</button></div>
+</div>
+</div>
+
+<div class="map-card">
+<h2>Google Map 🗺️ + Compass 🧭</h2>
+<div class="compass-box">
+<div class="compass-circle"><span>🧭</span><b id="compassText">South-East • 116°</b></div>
+<button class="start-btn" onclick="startCompass()">▶ Start Compass</button>
+<div class="map-frame"><iframe src="https://www.google.com/maps?q=Dahisar+West+Mumbai&output=embed" width="100%" height="220" style="border:0" loading="lazy"></iframe></div>
+<a href="https://www.google.com/maps/search/?api=1&query=Dahisar+West+Mumbai" target="_blank"><button class="dir-btn">📍 Get Directions</button></a>
+</div>
+</div>
+
+<div class="card counter"><small>VISITOR COUNT</small><h2 id="visitorCount">00000</h2><p style="color:#666;font-size:13px"></p></div>
+<div class="footer">©2026 KitabVerse : READ. SHARE. CONNECT.<br>©2026 Logo Designed By Munazza Khan<br>Made In India ❤️ For Readers<br>Designed On GitHub<br>Powered By Google Firebase<br>All Rights Reserved<br>Disclaimer | Copyright | Privacy | Terms | Contact Us</div>
+</div>
+
+<div id="adminCounterPanel">
+<h3>🔐 Admin Panel</h3>
+<p style="color:#666;font-size:13px">Visitor Count Control</p>
+<p style="margin:12px 0"><b>Current Visitor Count: <span id="adminCount">00000</span></b></p>
+<button class="admin-btn reset" onclick="resetCounter()">🔄 Reset to 00000</button>
+<button class="admin-btn close" onclick="hideAdminCounter()">❌ Close</button>
+</div>
+
+<script>
+let baseFont=100;
+function changeFont(d){
+  if(d===0) baseFont=100;
+  else if(d===1) baseFont=Math.min(200,baseFont+20);
+  else baseFont=Math.max(70,baseFont-20);
+  document.documentElement.style.fontSize=baseFont+"%";
+} 
+function toggleNight(){document.body.classList.toggle("night");}
+function speakPage(){let t=document.getElementById("quoteBox").innerText;let u=new SpeechSynthesisUtterance(t);speechSynthesis.speak(u);}
+function memberLogin(){alert("👤 Member Login ✅");}
+function adminLogin(){var p=document.getElementById("adminCounterPanel");if(p)p.style.display="block";}
+function hideAdminCounter(){var p=document.getElementById("adminCounterPanel");if(p)p.style.display="none";}
+function toggleMenu(){var s=document.getElementById("sidebar");if(s)s.classList.toggle("open");}
+function searchBooks(){let v=document.getElementById("searchInput").value.toLowerCase();document.querySelectorAll(".book").forEach(b=>{b.style.display=b.innerText.toLowerCase().includes(v)?"block":"none";});}
+let quotes=[{t:"“A READER LIVES A THOUSAND LIVES BEFORE HE DIES.”",a:"— George R.R. Martin"},{t:"“BOOKS ARE A UNIQUELY PORTABLE MAGIC.”",a:"— Stephen King"},{t:"“SO MANY BOOKS, SO LITTLE TIME.”",a:"— Frank Zappa"}];
+let qi=0;
+function nextQuote(){qi=(qi+1)%quotes.length;document.getElementById("quoteBox").innerText=quotes[qi].t;document.getElementById("quoteAuthor").innerText=quotes[qi].a;}
+function copyQuote(){navigator.clipboard.writeText(document.getElementById("quoteBox").innerText+" "+document.getElementById("quoteAuthor").innerText);alert("Quote Copied ✅");}
+function saveAdminQuote(){let v=document.getElementById("adminQuoteInput").value;if(!v)return alert("Please Write Your Own Quote");document.getElementById("quoteBox").innerText=v;document.getElementById("quoteAuthor").innerText="— Admin Quote";localStorage.setItem("kv_admin_quote",v);alert("Admin Quote Saved ✅");}
+let savedQ=localStorage.getItem("kv_admin_quote");if(savedQ){document.getElementById("quoteBox").innerText=savedQ;document.getElementById("quoteAuthor").innerText="— Admin Quote";}
+let audio=document.getElementById("anthemAudio");let bar=document.getElementById("anthemBar");let anthemTimer=null;
+function toggleAnthem(){
+  if(audio.paused){
+    audio.play();
+    document.getElementById("anthemBtn").innerText="⏸️";
+    document.getElementById("anthemStatus").innerText="Playing... 🎵";
+    clearInterval(anthemTimer);
+    anthemTimer=setInterval(()=>{
+      if(audio.duration && isFinite(audio.duration) && audio.duration>0){
+        bar.style.width=(audio.currentTime/audio.duration*100)+"%";
+      } else {
+        let w=parseFloat(bar.style.width||"0");
+        if(w<98) bar.style.width=(w+0.5)+"%";
+      }
+    },200);
+  } else {
+    audio.pause();clearInterval(anthemTimer);
+    document.getElementById("anthemBtn").innerText="▶️";
+    document.getElementById("anthemStatus").innerText="Paused";
+  }
+}
+audio.onended=()=>{clearInterval(anthemTimer);document.getElementById("anthemBtn").innerText="▶️";bar.style.width="0%";document.getElementById("anthemStatus").innerText="Tap play to listen • 52 sec";};
+function startCompass(){
+  if(typeof DeviceOrientationEvent!=="undefined" && typeof DeviceOrientationEvent.requestPermission==="function"){
+    DeviceOrientationEvent.requestPermission().then(r=>{if(r==="granted")listenCompass();}).catch(()=>alert("Compass permission chahiye"));
+  } else listenCompass();
+}
+function listenCompass(){
+  window.addEventListener("deviceorientation",(e)=>{
+    let h=e.alpha||116;let dirs=["North","North-East","East","South-East","South","South-West","West","North-West"];let idx=Math.round(h/45)%8;
+    document.getElementById("compassText").innerText=dirs[idx]+" • "+Math.round(h)+"°";
+  });
+  alert("Compass Started 🧭");
+}
+function pad(n){return String(n).padStart(5,"0");}
+function getCount(){return parseInt(localStorage.getItem("kv_visitor_count")||"0");}
+function saveCount(n){localStorage.setItem("kv_visitor_count",String(n));}
+function renderCounter(){let c=getCount();let el=document.getElementById("visitorCount");if(el)el.innerText=pad(c);let a=document.getElementById("adminCount");if(a)a.innerText=pad(c);}
+function countVisitor(){
+  if(sessionStorage.getItem("kv_counted_this_session")){renderCounter();return;}
+  let last=parseInt(localStorage.getItem("kv_last_visit")||"0");let now=Date.now();
+  if(now-last<30*60*1000){renderCounter();return;}
+  if(localStorage.getItem("kv_is_admin")==="1"){renderCounter();return;}
+  let c=getCount()+1;saveCount(c);localStorage.setItem("kv_last_visit",String(now));sessionStorage.setItem("kv_counted_this_session","1");renderCounter();
+}
+function resetCounter(){
+  if(!confirm("Want To Reset Visitor Count 00000?")) return;
+  let p=prompt("Put Your Admin Password (WhatsApp Number)");
+  if(p==="8828350328"){
+    saveCount(0);
+    localStorage.setItem("kv_last_visit",String(Date.now()));
+    sessionStorage.setItem("kv_counted_this_session","1");
+    renderCounter();
+    alert("Visitor Count Reset to 00000 ✅");
+  } else {alert("Wrong Password - Reset Not Done ❌");}
+}
+countVisitor();renderCounter();
+</script>
+</body>
+</html>
