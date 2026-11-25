@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KitabVerse - READ. SHARE. CONNECT.</title>
+<script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Georgia,serif;background:#f5f1e6;color:#222;line-height:1.6}
+body.night{background:#111;color:#eee}
+/* HEADER - PURANA DESIGN - NAVY + GOLD */
+header{background:#0a1931;color:#fff;padding:15px}
+.top{display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:28px;letter-spacing:2px;color:#d4a017;font-weight:bold}
+.logo small{display:block;font-size:11px;letter-spacing:3px;color:#fff}
+.menuBtn{background:#d4a017;border:none;font-size:24px;padding:8px 16px;border-radius:10px;cursor:pointer}
+.searchBox{background:#fff;border-radius:30px;padding:5px;display:flex;margin:15px 0}
+.searchBox input{flex:1;border:none;outline:none;padding:12px;font-size:16px;border-radius:30px}
+.searchBtn{background:#d4a017;border:none;padding:10px 20px;border-radius:20px;font-size:16px;cursor:pointer;width:100%;margin-top:5px}
+.pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.pills button,.pills a{background:#fff;border:none;padding:8px 16px;border-radius:20px;cursor:pointer;text-decoration:none;color:#222;font-size:14px}
+.pills a.admin{background:#d4a017}
+.pills a.member{background:#111;color:#fff}
+/* HERO */
+.hero{position:relative;border-radius:20px;overflow:hidden;margin:15px}
+.hero img{width:100%;height:320px;object-fit:cover;display:block}
+.heroText{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:#fff;background:rgba(0,0,0,0.35)}
+.heroText h2{font-size:32px;letter-spacing:2px}
+.heroText h2 span{color:#e8c33c}
+.heroSearch{background:#fff;border-radius:30px;display:flex;overflow:hidden;margin-top:15px;width:90%;max-width:500px}
+.heroSearch input{flex:1;border:none;padding:12px;outline:none}
+.heroSearch button{background:#d4a017;border:none;padding:0 18px;font-size:20px;cursor:pointer}
+/* CARDS */
+.card{background:#fff;border-radius:15px;padding:15px;margin:15px;box-shadow:0 2px 8px rgba(0,0,0,0.08)}
+body.night .card{background:#222}
+.quote{font-size:22px;text-align:center;font-style:italic}
+.scanBox{border:2px dashed #d4a017;text-align:center}
+.scanBox button{padding:12px 20px;border:none;border-radius:20px;cursor:pointer;margin:5px;font-size:15px}
+.btnScan{background:#0b6e4f;color:#fff}.btnStop{background:#b00020;color:#fff}
+#reader{width:100%;max-width:400px;margin:10px auto}
+.book{border:1px solid #ddd;border-radius:10px;padding:12px;margin:8px 0;background:#fffbe6;display:flex;gap:12px}body.night .book{background:#333}
+.cover{width:80px;height:110px;object-fit:cover;border-radius:6px;background:#ddd;flex-shrink:0}
+input,select{padding:10px;border:1px solid #ccc;border-radius:8px;width:100%;margin:5px 0}
+footer{background:#0a1931;color:#fff;text-align:center;padding:20px;font-size:14px;margin-top:20px}
+footer a{color:#d4a017;margin:0 6px}
+</style>
+</head><body>
+
+<header>
+<div class="top">
+<div><div class="logo">KITABVERSE<small>READ. SHARE. CONNECT.</small></div></div>
+<button class="menuBtn" onclick="toggleMenu()">☰</button>
+</div>
+<div id="menu" style="display:none;margin-top:10px">
+<a href="about.html" style="color:#fff;display:block;padding:5px">About Us</a>
+<a href="contact.html" style="color:#fff;display:block;padding:5px">Contact Us</a>
+<a href="privacy.html" style="color:#fff;display:block;padding:5px">Privacy Policy</a>
+<a href="terms.html" style="color:#fff;display:block;padding:5px">Terms</a>
+<a href="disclaimer.html" style="color:#fff;display:block;padding:5px">Disclaimer</a>
+<a href="member-login.html" style="color:#fff;display:block;padding:5px">Member Login</a>
+<a href="admin-login.html" style="color:#fff;display:block;padding:5px">Admin Login</a>
+</div>
+<div class="searchBox"><input id="searchTop" placeholder="🔍 Search books..." onkeyup="syncSearch(this.value)"></div>
+<button class="searchBtn" onclick="doSearch()">Search</button>
+<div class="pills">
+<button onclick="changeFont(-1)">A-</button><button onclick="changeFont(0)">A</button><button onclick="changeFont(1)">A+</button>
+<button onclick="toggleNight()">🌙 Night</button><button onclick="speakPage()">🔊 Listen</button>
+<a href="admin-login.html" class="admin">🔐 Admin</a><a href="member-login.html" class="member">👤 Member Login</a>
+</div>
+<p style="margin-top:10px;font-size:13px">Founder: Satish Puthran | Borivali, Mumbai | 👥 Visitors: <b id="visitors">0</b> | 📚 Total: <b id="bookCount">0</b></p>
+</header>
+
+<div class="hero">
+<img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=900" alt="Library">
+<div class="heroText"><h2>LIBRARY FOR ALL<br><span>WITH ADVANCED<br>FEATURES</span></h2>
+<div class="heroSearch"><input id="searchHero" placeholder="Search books, authors..."><button onclick="doSearch()">🔍</button></div>
+</div>
+</div>
+
+<div class="card">
+<h3>🇮🇳 National Anthem — Jana Gana Mana</h3>
+<p>Tap play to listen • 52 sec</p>
+<audio controls style="width:100%"><source src="https://upload.wikimedia.org/wikipedia/commons/9/9c/Jana_Gana_Mana_%28vocal%29.ogg" type="audio/ogg">Your browser does not support audio.</audio>
+</div>
+
+<div class="card"><p class="quote">“A READER LIVES A THOUSAND<br>LIVES BEFORE HE DIES.”</p><p style="text-align:center">— George R.R. Martin</p></div>
+
+<!-- SCANNER - ISI DESIGN ME -->
+<div class="card scanBox">
+<h2>📷 Book Scan Karo</h2>
+<p>Book haath me hai? Barcode camera ke saamne rakho.</p>
+<button class="btnScan" onclick="startScan()">📷 Start Camera Scanner</button>
+<button class="btnStop" onclick="stopScan()">⏹️ Stop</button>
+<div id="reader" style="display:none"></div>
+<p id="scanMsg"></p>
+<div id="scanResult"></div>
+<p>Ya ISBN likho:</p>
+<input id="manualISBN" placeholder="ISBN-10 / ISBN-13" style="max-width:300px">
+<button onclick="searchByISBN()" style="background:#d4a017">🔍 Search</button>
+</div>
+
+<div class="card">
+<h2>📚 Our Catalogue</h2>
+<p style="font-size:13px">Catalogue abhi Admin se update ho raha hai. Koi book pre-filled nahi hai.</p>
+<input id="search" placeholder="Search Title / Author / DDC / Call No. / ISBN..." onkeyup="renderBooks()">
+<select id="filterSubject" onchange="renderBooks()"><option value="">All Subjects</option><option>Biography</option><option>Literature - English</option><option>Social Science</option><option>Kannada Literature</option><option>Language - English</option><option>Journal / Magazine</option><option>Philosophy</option><option>Law</option><option>Arts</option><option>Indian History</option></select>
+<div id="catalogue"></div>
+</div>
+
+<div class="card" style="text-align:center">
+<h3>🤝 Join / Donate / Feedback</h3>
+<p><a href="contact.html">Contact Us</a> | kitabverse.library@gmail.com</p>
+</div>
+
+<footer>
+<p><b>KITABVERSE — READ. SHARE. CONNECT.</b></p>
+<p><a href="about.html">About</a> | <a href="contact.html">Contact</a> | <a href="privacy.html">Privacy</a> | <a href="terms.html">Terms</a> | <a href="disclaimer.html">Disclaimer</a></p>
+<p><a href="member-login.html">Member Login</a> | <a href="admin-login.html">Admin Login</a> | <a href="admin-dashboard.html">Admin Dashboard</a></p>
+<p>© 2026 KitabVerse | Founder: Satish Puthran, Mumbai | Version 1.0 - LOCKED</p>
+</footer>
+
+<script>
+let v=parseInt(localStorage.getItem('kv_visitors')||'0')+1; localStorage.setItem('kv_visitors',v); document.getElementById('visitors').innerText=v;
+function toggleMenu(){ let m=document.getElementById('menu'); m.style.display=m.style.display==='none'?'block':'none'; }
+let fs=100; function changeFont(d){ if(d===0) fs=100; else fs=Math.min(200,Math.max(70,fs+d*10)); document.body.style.fontSize=fs+'%'; }
+function toggleNight(){ document.body.classList.toggle('night'); }
+function speakPage(){ let u=new SpeechSynthesisUtterance(document.body.innerText.substring(0,5000)); u.lang='en-IN'; speechSynthesis.speak(u); }
+function syncSearch(val){ document.getElementById('search').value=val; document.getElementById('searchHero').value=val; renderBooks(); }
+function doSearch(){ document.getElementById('search').value=document.getElementById('searchTop').value||document.getElementById('searchHero').value; renderBooks(); document.getElementById('catalogue').scrollIntoView(); }
+
+// --- BLANK - AAP KHUD UPLOAD KAROGE - LIBRARIKA KA DATA NAHI ---
+let books=JSON.parse(localStorage.getItem('kv_books')||'[]');
+function coverHTML(b){ if(b.cover) return '<img class="cover" src="'+b.cover+'">'; return '<div class="cover" style="display:flex;align-items:center;justify-content:center;font-size:30px">📕</div>'; }
+function bookCard(b,i){ return '<div class="book">'+coverHTML(b)+'<div><b>'+(i+1)+'. '+b.t+'</b><br>Author: '+b.a+' | Publisher: '+(b.p||'-')+'<br>Subject: '+b.s+' | DDC: '+b.ddc+' | Call No.: '+b.call+'<br>ISBN: '+(b.isbn||'N/A')+'</div></div>'; }
+function renderBooks(){
+  let q=(document.getElementById('search').value||'').toLowerCase(); let f=document.getElementById('filterSubject').value; let html='';
+  books.forEach((b,i)=>{ if(f && b.s!==f) return; let txt=(b.t+' '+b.a+' '+b.s+' '+b.ddc+' '+b.call+' '+b.isbn).toLowerCase(); if(q && !txt.includes(q)) return; html+=bookCard(b,i); });
+  if(books.length===0) document.getElementById('catalogue').innerHTML='<p>📚 <b>Catalogue abhi update ho raha hai.</b><br>26 books ki entry jald hi yahan dikhegi.</p>';
+  else document.getElementById('catalogue').innerHTML=html||'<p>Koi book nahi mili.</p>';
+  document.getElementById('bookCount').innerText=books.length;
+}
+renderBooks();
+let html5Qr=null;
+function startScan(){
+  document.getElementById('reader').style.display='block';
+  document.getElementById('scanMsg').innerHTML='📷 Camera on hai - Barcode saamne rakho...';
+  html5Qr=new Html5Qrcode("reader");
+  html5Qr.start({facingMode:"environment"},{fps:10,qrbox:{width:250,height:150}},(decoded)=>{ document.getElementById('scanMsg').innerHTML='✅ Scanned: '+decoded; searchByISBN(decoded); stopScan(); }, ()=>{}).catch(e=>{ document.getElementById('scanMsg').innerHTML='❌ Camera nahi khula: '+e; });
+}
+function stopScan(){ if(html5Qr){ html5Qr.stop().then(()=>{document.getElementById('reader').style.display='none';}).catch(()=>{}); html5Qr=null; } }
+function searchByISBN(val){
+  let isbn=(val||document.getElementById('manualISBN').value||'').replace(/[^0-9X]/gi,'');
+  if(!isbn){ document.getElementById('scanResult').innerHTML='❌ ISBN likho ya scan karo'; return; }
+  let found=books.find(b=> (b.isbn||'').replace(/[^0-9X]/gi,'')===isbn);
+  if(found){ document.getElementById('scanResult').innerHTML='<h3>✅ Book Mil Gayi!</h3>'+bookCard(found, books.indexOf(found)); }
+  else { document.getElementById('scanResult').innerHTML='❌ Ye ISBN <b>'+isbn+'</b> Catalogue me nahi mila.<br><br><button onclick="addScannedBook(\''+isbn+'\')" style="padding:12px 20px;background:#0b6e4f;color:#fff;border:none;border-radius:20px;cursor:pointer">➕ Is Book Ko Admin Me Add Karo</button>'; }
+}
+function addScannedBook(isbn){ localStorage.setItem('kv_pending_isbn', isbn); window.location.href='admin-dashboard.html'; }
+</script>
+</body></html>
