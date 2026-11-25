@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KitabVerse - Community Library | Mumbai</title>
+<meta name="description" content="KitabVerse - A Book in Every Hand, Knowledge in Every Heart. Free Public Library, Borivali, Mumbai.">
+<script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+<style>
+body{font-family:Georgia,serif;max-width:1000px;margin:0 auto;padding:15px;line-height:1.7;color:#222;background:#fff}
+body.night{background:#111;color:#eee}body.night a{color:#ffd700}
+header{text-align:center;border-bottom:3px solid #d4b84a;padding-bottom:10px}
+h1{color:#3d2c00;margin:5px}body.night h1{color:#ffd700}
+.topbar{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:10px 0}
+.topbar button,.topbar a{padding:8px 14px;background:#6b4d00;color:#fff;border:none;border-radius:20px;text-decoration:none;font-size:14px;cursor:pointer}
+input,select{padding:10px;border:1px solid #ccc;border-radius:8px;width:100%;margin:5px 0}
+.book{border:1px solid #ddd;border-radius:10px;padding:12px;margin:8px 0;background:#fffbe6;display:flex;gap:12px}body.night .book{background:#222;border-color:#444}
+.book b{color:#3d2c00}body.night .book b{color:#ffd700}
+.cover{width:80px;height:110px;object-fit:cover;border-radius:6px;background:#ddd;flex-shrink:0}
+footer{margin-top:30px;border-top:2px solid #d4b84a;padding-top:15px;text-align:center;font-size:14px}
+footer a{color:#6b4d00;margin:0 6px}body.night footer a{color:#ffd700}
+.badge{display:inline-block;background:#3d2c00;color:#fff;padding:3px 10px;border-radius:20px;font-size:12px}
+.quote{background:#fffbe6;border-left:4px solid #d4b84a;padding:12px;margin:15px 0}body.night .quote{background:#222}
+.scanBox{border:2px dashed #6b4d00;padding:15px;border-radius:12px;text-align:center;background:#fffbe6}body.night .scanBox{background:#222}
+#reader{width:100%;max-width:400px;margin:10px auto}
+#scanResult{margin-top:10px}
+</style>
+</head><body>
+
+<header>
+<h1>📚 KitabVerse</h1>
+<p><b>"A Book in Every Hand, Knowledge in Every Heart"</b><br>Free Public Library | Borivali, Mumbai, Maharashtra, India<br><span class="badge">IFLA • ISO 9001:2015 • Version 1.0 - LOCKED</span></p>
+<p>Founder: <b>Satish Puthran</b> | Email: kitabverse.library@gmail.com</p>
+</header>
+
+<div class="topbar">
+<button onclick="changeFont(-1)">A-</button><button onclick="changeFont(0)">A</button><button onclick="changeFont(1)">A+</button>
+<button onclick="toggleNight()">🌙 Night Mode</button>
+<button onclick="speakPage()">🔊 Listen</button>
+<button onclick="stopSpeak()">⏹️ Stop</button>
+<a href="member-login.html">👤 Member Login</a>
+<a href="admin-login.html">🔐 Admin Login</a>
+</div>
+
+<div class="quote">
+<h3>📖 Daily Quote</h3>
+<p>"A reader lives a thousand lives before he dies." — George R.R. Martin</p>
+<p>🇮🇳 <b>National Anthem:</b> <a href="https://commons.wikimedia.org/wiki/File:Jana_Gana_Mana_(vocal).ogg" target="_blank">▶️ Play Jana Gana Mana (Wikimedia Commons)</a></p>
+<p>👥 Visitors: <b id="visitors">0</b> | 📚 Total Books: <b id="bookCount">0</b></p>
+</div>
+
+<!-- BARCODE SCANNER - HOMEPAGE -->
+<div class="scanBox">
+<h2>📷 Scan Book</h2>
+<p>Have a book in hand? Hold the barcode in front of the camera — you'll find the book right away.</p>
+<button onclick="startScan()" style="padding:12px 20px;background:#0b6e4f;color:#fff;border:none;border-radius:20px;cursor:pointer">📷 Start Camera Scanner</button>
+<button onclick="stopScan()" style="padding:12px 20px;background:#b00020;color:#fff;border:none;border-radius:20px;cursor:pointer">⏹️ Stop</button>
+<div id="reader" style="display:none"></div>
+<p id="scanMsg"></p>
+<div id="scanResult"></div>
+<p style="font-size:13px">Or type the ISBN manually:<br><input id="manualISBN" placeholder="ISBN-10 / ISBN-13" style="max-width:300px"> <button onclick="searchByISBN()" style="padding:10px 16px;background:#6b4d00;color:#fff;border:none;border-radius:8px;cursor:pointer">🔍 Search</button></p>
+</div>
+
+<h2>🔍 Search Books - Title / Author / DDC / Call No. / ISBN</h2>
+<input id="search" placeholder="Search books..." onkeyup="renderBooks()">
+<select id="filterSubject" onchange="renderBooks()">
+<option value="">All Subjects</option><option>Biography</option><option>Literature - English</option><option>Social Science</option><option>Kannada Literature</option><option>Language - English</option><option>Journal / Magazine</option><option>Philosophy</option><option>Law</option><option>Arts</option><option>Indian History</option>
+</select>
+
+<h2>📚 Our Catalogue</h2>
+<p>DDC / Call No. will be updated by Admin.</p>
+<div id="catalogue"></div>
+
+<div class="quote">
+<h3>🤝 Join / Donate / Feedback</h3>
+<p>Want to donate a book? Want to become a member? <a href="contact.html">Contact Us</a> | Email: <b>kitabverse.library@gmail.com</b></p>
+<p><a href="member-login.html">👤 Member Login</a> | <a href="admin-login.html">🔐 Admin Login</a> | <a href="admin-dashboard.html">📊 Admin Dashboard (Login Required)</a></p>
+</div>
+
+<footer>
+<p><b>KitabVerse — Quick Links</b></p>
+<p><a href="about.html">About Us</a> | <a href="contact.html">Contact Us</a> | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms & Conditions</a> | <a href="disclaimer.html">Disclaimer</a></p>
+<p><a href="member-login.html">Member Login</a> | <a href="admin-login.html">Admin Login</a> | <a href="admin-dashboard.html">Admin Dashboard</a></p>
+<p>© 2026 KitabVerse | Founder: Satish Puthran, Mumbai | Last Updated: Date Will Be Announced On Launch | Version 1.0 - LOCKED</p>
+<p>Books, covers, availability are SAMPLE / DEMO. Real catalogue after launch. See <a href="disclaimer.html">Disclaimer</a>.</p>
+</footer>
+
+<script>
+let v=parseInt(localStorage.getItem('kv_visitors')||'0')+1; localStorage.setItem('kv_visitors',v); document.getElementById('visitors').innerText=v;
+let fs=100; function changeFont(d){ if(d===0) fs=100; else fs=Math.min(200,Math.max(70,fs+d*10)); document.body.style.fontSize=fs+'%'; }
+function toggleNight(){ document.body.classList.toggle('night'); }
+function speakPage(){ let t=document.body.innerText.substring(0,5000); let u=new SpeechSynthesisUtterance(t); u.lang='en-IN'; speechSynthesis.speak(u); }
+function stopSpeak(){ speechSynthesis.cancel(); }
+
+// --- BLANK CATALOGUE - WILL ONLY BE POPULATED VIA ADMIN ENTRY ---
+// Save in Dashboard -> Automatically appears here. Both use the same kv_books key.
+let books=JSON.parse(localStorage.getItem('kv_books')||'[]');
+function coverHTML(b){ if(b.cover) return '<img class="cover" src="'+b.cover+'" alt="Book Cover">'; return '<div class="cover" style="display:flex;align-items:center;justify-content:center;font-size:30px">📕</div>'; }
+function bookCard(b,i){ return '<div class="book">'+coverHTML(b)+'<div><b>'+(i+1)+'. '+b.t+'</b><br>Author: '+b.a+' | Publisher: '+(b.p||'-')+'<br>Subject: '+b.s+' | DDC: '+b.ddc+' | Call No.: '+b.call+'<br>ISBN: '+(b.isbn||'N/A')+'</div></div>'; }
+function renderBooks(){
+  let q=(document.getElementById('search').value||'').toLowerCase(); let f=document.getElementById('filterSubject').value; let html='';
+  books.forEach((b,i)=>{ if(f && b.s!==f) return; let txt=(b.t+' '+b.a+' '+b.s+' '+b.ddc+' '+b.call+' '+b.isbn).toLowerCase(); if(q && !txt.includes(q)) return; html+=bookCard(b,i); });
+  if(books.length===0) document.getElementById('catalogue').innerHTML='<p>📚 <b>Catalogue is currently being updated.</b><br>Our book entries will appear here soon with covers. Please visit again shortly.<br>Enquiry: <a href="contact.html">Contact Us</a></p>';
+  else document.getElementById('catalogue').innerHTML=html||'<p>No books found.</p>';
+  document.getElementById('bookCount').innerText=books.length;
+}
+renderBooks();
+
+// --- HOMEPAGE SCANNER ---
+let html5Qr=null;
+function startScan(){
+  document.getElementById('reader').style.display='block';
+  document.getElementById('scanMsg').innerHTML='📷 Camera is on - Hold the barcode in front...';
+  html5Qr=new Html5Qrcode("reader");
+  html5Qr.start({facingMode:"environment"},{fps:10,qrbox:{width:250,height:150}},
+    (decoded)=>{ document.getElementById('scanMsg').innerHTML='✅ Scanned: '+decoded; searchByISBN(decoded); stopScan(); }, ()=>{}
+  ).catch(e=>{ document.getElementById('scanMsg').innerHTML='❌ Could not open camera: '+e+' - Please use manual ISBN entry.'; });
+}
+function stopScan(){ if(html5Qr){ html5Qr.stop().then(()=>{document.getElementById('reader').style.display='none';}).catch(()=>{}); html5Qr=null; } }
+function searchByISBN(val){
+  let isbn=(val||document.getElementById('manualISBN').value||'').replace(/[^0-9X]/gi,'');
+  if(!isbn){ document.getElementById('scanResult').innerHTML='❌ Enter or scan an ISBN'; return; }
+  let found=books.find(b=> (b.isbn||'').replace(/[^0-9X]/gi,'')===isbn);
+  if(found){ document.getElementById('scanResult').innerHTML='<h3>✅ Book Found!</h3>'+bookCard(found, books.indexOf(found)); }
+  else { document.getElementById('scanResult').innerHTML='❌ This ISBN <b>'+isbn+'</b> was not found in the catalogue. The catalogue is currently being updated. <a href="contact.html">Send an enquiry</a>'; }
+}
+</script>
+</body></html>
