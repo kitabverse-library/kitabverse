@@ -167,8 +167,7 @@ footer a{color:#CBD5E1;font-size:13px;margin:0 8px}
 <div id="sec-settings" class="hidden"><div class="card"><h3>⚙️ Settings</h3><p>Library Settings.</p></div></div>
 <div id="sec-visitor" class="hidden"><div class="card"><h3>👁️ Visitor Counter</h3><p>Visitor Statistics.</p></div></div>
 
-<!-- LOGIN MODAL - ADMIN SIMPLE / MEMBER RESTRICTED -->
-<div id="loginModal" class="hidden" style="position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;z-index:200;padding:16px">
+<div id="loginModal"
 <div style="background:#fff;border-radius:16px;padding:22px;max-width:420px;width:100%">
 <h3 id="loginTitle">Login</h3>
 <label>Email</label>
@@ -225,3 +224,11 @@ function previewDonorId(){let city=document.getElementById('cityCode').value||'M
 function saveDonor(){let name=document.getElementById('donorName').value.trim();let city=document.getElementById('cityCode').value.trim().toUpperCase();if(!city){alert('Please enter City Code');return;}if(!name){alert('Please enter Full Name');return;}let d=getNextDonorId(city);localStorage.setItem(d.key, d.next.toString());document.getElementById('donorId').value=d.id;let msg=document.getElementById('donorMsg');msg.style.display='block';msg.innerHTML=`✅ Donor Saved! Donor ID: <b>${d.id}</b>`;document.getElementById('donorName').value='';}
 document.getElementById('autoDate').value=new Date().toLocaleDateString('en-IN');
 previewDonorId();
+  document.getElementById('borrowDays').addEventListener('change',e=>{let days=parseInt(e.target.value);let d=new Date();d.setDate(d.getDate()+days);document.getElementById('dueDate').value=d.toLocaleDateString('en-IN');});
+const sample=[["Speaking Shadows","Satish Puthran","📘"],["The Guide","R.K. Narayan","📗"],["Wings of Fire","A.P.J. Abdul Kalam","📙"],["Tulu Tales","Tulu Collection","📕"]];
+let fh=document.getElementById('featuredBooks'), th=document.getElementById('trendingBooks');
+sample.forEach((b)=>{fh.innerHTML+=`<div class="book"><div class="book-cover">${b[2]}<span>${b[0]}</span></div><b>${b[0]}</b><small>${b[1]}</small><br><button class="btn btn-gold" style="padding:6px 12px;margin-top:6px">Borrow</button></div>`;});
+sample.slice().reverse().forEach((b)=>{th.innerHTML+=`<div class="book"><div class="book-cover">${b[2]}<span>${b[0]}</span></div><b>${b[0]}</b><small>${b[1]}</small></div>`;});
+</script>
+</body>
+</html>
