@@ -362,7 +362,7 @@ async function openDictionary(){
 }
 </script>
 <!-- KITABVERSE SECURE LOGIN -->
-<div id="loginModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:9999;align-items:center;justify-content:center;">
+<div id="kvloginModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:9999;align-items:center;justify-content:center;">
 <div style="background:#fff;padding:20px;border-radius:12px;width:90%;max-width:360px;text-align:center;">
 <h2>🔐 KitabVerse Login</h2>
 <input id="kvEmail" type="email" placeholder="Email" style="width:100%;padding:10px;margin:8px 0;">
@@ -397,7 +397,7 @@ window.kvSendOtp = async()=>{
  }catch(e){document.getElementById('kvMsg').innerText=e.message;}
 };
 window.kvGoogle = async()=>{ try{await signInWithPopup(auth,new GoogleAuthProvider()); location.reload();}catch(e){alert(e.message);} };
-window.openLogin = ()=>{document.getElementById('loginModal').style.display="flex";};
+window.openLogin = ()=>{document.getElementById('kvloginModal').style.display="flex";};
 </script>
 </body>
 </html>
