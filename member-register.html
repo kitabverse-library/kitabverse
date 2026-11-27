@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KitabVerse - Membership Registration</title>
+<style>
+body{font-family:Arial;background:#f5f0e6;padding:15px}
+.card{max-width:520px;margin:auto;background:#fff;padding:22px;border-radius:14px;box-shadow:0 4px 20px #0002}
+h2{text-align:center;color:#6b3f00} label{display:block;margin-top:12px;font-weight:bold;font-size:14px}
+input,select{width:100%;padding:11px;margin-top:5px;border:1px solid #ccc;border-radius:8px;font-size:15px;box-sizing:border-box}
+button{width:100%;padding:13px;margin-top:18px;background:#6b3f00;color:#fff;border:0;border-radius:10px;font-size:16px;font-weight:bold}
+.idbox{background:#fff8e1!important;font-weight:bold;color:#6b3f00}
+.success{background:#e8f5e9;padding:12px;border-radius:8px;margin-top:12px;display:none;text-align:center}
+</style></head><body>
+<div class="card">
+<h2>📚 KitabVerse<br>Membership Registration</h2>
+<p style="text-align:center;font-size:13px;color:#666">Professional Membership • Mumbai</p>
+
+<label>Membership ID (Auto Generated):</label>
+<input id="memberId" class="idbox" readonly>
+
+<label>* Full Name:</label>
+<input id="fullName" required placeholder="e.g. Satish Puthran">
+
+<label>* WhatsApp Number with City / Country Code:</label>
+<input id="whatsapp" required placeholder="e.g. +91 98765 43210">
+
+<label>* Location / Area:</label>
+<select id="area" onchange="updateId()">
+<option value="MUM">Mumbai - MUM</option>
+<option value="DEL">Delhi - DEL</option>
+<option value="BLR">Bengaluru - BLR</option>
+<option value="CHN">Chennai - CHN</option>
+<option value="KOL">Kolkata - KOL</option>
+<option value="HYD">Hyderabad - HYD</option>
+<option value="PUN">Pune - PUN</option>
+<option value="GOA">Goa - GOA</option>
+<option value="OTH">Other - OTH</option>
+</select>
+
+<label>* Country:</label>
+<select id="country"><option>India</option><option>UAE</option><option>UK</option><option>USA</option><option>Canada</option><option>Other</option></select>
+
+<label>* E-mail id:</label>
+<input id="email" type="email" required placeholder="name@gmail.com">
+
+<label>Instagram id (optional):</label>
+<input id="insta" placeholder="@username">
+
+<label>* Date (Auto):</label>
+<input id="regDate" readonly>
+
+<button onclick="register()">Register Member & Generate ID</button>
+<div id="ok" class="success"></div>
+<p style="text-align:center;font-size:13px;margin-top:12px"><a href="member-login.html">Already Member? Login Here →</a></p>
+</div>
+
+<script>
+const d=new Date(), dd=String(d.getDate()).padStart(2,'0'), mm=String(d.getMonth()+1).padStart(2,'0'), yyyy=d.getFullYear();
+document.getElementById('regDate').value=`${dd}/${mm}/${yyyy}`;
+function getNext(){
+  let n=parseInt(localStorage.getItem('kv_last_num')||'0')+1;
+  return n;
+}
+function updateId(){
+  const area=document.getElementById('area').value;
+  const next=String(getNext()).padStart(6,'0');
+  document.getElementById('memberId').value=`KV-${area}-${yyyy}-${next}`;
+}
+updateId();
+function register(){
+  const name=document.getElementById('fullName').value.trim();
+  const wa=document.getElementById('whatsapp').value.trim();
+  const email=document.getElementById('email').value.trim();
+  if(!name||!wa||!email){alert('Please fill * Full Name, WhatsApp & Email');return;}
+  const id=document.getElementById('memberId').value;
+  const next=getNext();
+  localStorage.setItem('kv_last_num',next);
+  // Save member for login demo
+  let members=JSON.parse(localStorage.getItem('kv_members')||'[]');
+  members.push({id,name,wa,email,insta:document.getElementById('insta').value,country:document.getElementById('country').value,area:document.getElementById('area').value,date:document.getElementById('regDate').value,pin:'1234'});
+  localStorage.setItem('kv_members',JSON.stringify(members));
+  document.getElementById('ok').style.display='block';
+  document.getElementById('ok').innerHTML=`✅ Registered!<br><b>${id}</b><br>Name: ${name}<br>Your PIN for Login: <b>1234</b><br>Share this ID on WhatsApp!`;
+  updateId();
+}
+</script></body></html>
