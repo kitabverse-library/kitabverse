@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KitabVerse - Member Login</title>
+<style>
+body{font-family:Arial;background:#f5f0e6;padding:15px}
+.card{max-width:480px;margin:auto;background:#fff;padding:22px;border-radius:14px;box-shadow:0 4px 20px #0002}
+h2{text-align:center;color:#6b3f00} label{display:block;margin-top:12px;font-weight:bold;font-size:14px}
+input{width:100%;padding:11px;margin-top:5px;border:1px solid #ccc;border-radius:8px;font-size:15px;box-sizing:border-box}
+button{width:100%;padding:12px;margin-top:14px;background:#6b3f00;color:#fff;border:0;border-radius:10px;font-size:15px;font-weight:bold}
+.tab{display:flex;gap:8px} .tab button{background:#eee;color:#333} .tab button.active{background:#6b3f00;color:#fff}
+.box{margin-top:10px} .msg{margin-top:12px;text-align:center;font-weight:bold}
+</style></head><body>
+<div class="card">
+<h2>📚 KitabVerse<br>Member Login</h2>
+<div class="tab">
+<button id="t1" class="active" onclick="show('pin')">Member ID + PIN</button>
+<button id="t2" onclick="show('gmail')">Gmail + OTP</button>
+</div>
+
+<!-- OPTION 1 -->
+<div id="login-pin" class="box">
+<label>Membership ID:</label><input id="mid" placeholder="KV-MUM-2026-000001">
+<label>PIN (Given by KitabVerse):</label><input id="pin" type="password" placeholder="e.g. 1234">
+<button onclick="loginPin()">Login with PIN</button>
+<p style="font-size:12px;color:#666;text-align:center">Demo PIN for new members: 1234</p>
+</div>
+
+<!-- OPTION 2 -->
+<div id="login-gmail" class="box" style="display:none">
+<label>Gmail ID:</label><input id="gmail" placeholder="name@gmail.com">
+<button onclick="sendOtp()">Send OTP</button>
+<label>Enter OTP:</label><input id="otp" placeholder="123456">
+<button onclick="loginOtp()">Login with OTP</button>
+<p style="font-size:12px;color:#666;text-align:center">Demo OTP: 123456</p>
+</div>
+
+<div id="msg" class="msg"></div>
+<p style="text-align:center;font-size:13px"><a href="member-register.html">New Member? Register Here →</a></p>
+</div>
+
+<script>
+function show(type){
+  document.getElementById('login-pin').style.display=type=='pin'?'block':'none';
+  document.getElementById('login-gmail').style.display=type=='gmail'?'block':'none';
+  document.getElementById('t1').className=type=='pin'?'active':'';
+  document.getElementById('t2').className=type=='gmail'?'active':'';
+}
+function loginPin(){
+  const id=document.getElementById('mid').value.trim().toUpperCase();
+  const pin=document.getElementById('pin').value.trim();
+  let members=JSON.parse(localStorage.getItem('kv_members')||'[]');
+  let m=members.find(x=>x.id.toUpperCase()==id && x.pin==pin);
+  // Allow demo: if no member yet but ID format correct + PIN 1234
+  if(m || (id.startsWith('KV-') && pin=='1234')){
+    document.getElementById('msg').style.color='green';
+    document.getElementById('msg').innerHTML='✅ Login Success! Welcome '+(m?m.name:'Member')+'<br>ID: '+id;
+  } else {
+    document.getElementById('msg').style.color='red';
+    document.getElementById('msg').innerHTML='❌ Invalid ID or PIN. Check WhatsApp PIN from KitabVerse.';
+  }
+}
+function sendOtp(){
+  const g=document.getElementById('gmail').value.trim();
+  if(!g.includes('@')){alert('Enter valid Gmail');return;}
+  alert('OTP Sent to '+g+' (Demo OTP: 123456)');
+}
+function loginOtp(){
+  const otp=document.getElementById('otp').value.trim();
+  if(otp=='123456'){
+    document.getElementById('msg').style.color='green';
+    document.getElementById('msg').innerHTML='✅ Login Success with Gmail + OTP!';
+  } else {
+    document.getElementById('msg').style.color='red';
+    document.getElementById('msg').innerHTML='❌ Wrong OTP. Try 123456';
+  }
+}
+</script></body></html>
