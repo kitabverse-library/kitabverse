@@ -301,13 +301,22 @@ function startVoiceSearch(){
   };
   rec.onerror = function(){ document.getElementById('voiceStatus').innerText = 'Voice not heard. Try again.'; };
 }
-function enableTouch(){
-  document.body.style.touchAction = 'pan-y';
-  let btns = document.querySelectorAll('button');
-  btns.forEach(b=>{ b.style.padding='14px 20px'; b.style.fontSize='16px'; b.style.minHeight='48px'; });
-  document.getElementById('voiceStatus').innerText = '👆 Touchscreen Mode ON — Big buttons, swipe enabled.';
-  alert('Touchscreen Mode ON — Big Touch Buttons Activated');
+let touchOn = false;
+function toggleTouch(){
+  touchOn = !touchOn;
+  let btn = document.getElementById('touchBtn');
+  let allBtns = document.querySelectorAll('button');
+  if(touchOn){
+    allBtns.forEach(b=>{ b.style.padding='14px 20px'; b.style.fontSize='16px'; b.style.minHeight='48px'; });
+    btn.innerText = '👆 Touchscreen — ON';
+    document.getElementById('voiceStatus').innerText = '👆 Touchscreen ON — Big buttons.';
+  } else {
+    allBtns.forEach(b=>{ b.style.padding=''; b.style.fontSize=''; b.style.minHeight=''; });
+    btn.innerText = '👆 Touchscreen — OFF';
+    document.getElementById('voiceStatus').innerText = 'Touchscreen OFF — Normal buttons.';
+  }
 }
+function enableTouch(){ toggleTouch(); }
 // Swipe to change section
 let touchX = null;
 document.addEventListener('touchstart', e=>{ touchX = e.touches[0].clientX; }, {passive:true});
