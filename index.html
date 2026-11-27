@@ -361,5 +361,43 @@ async function openDictionary(){
   }
 }
 </script>
+<!-- KITABVERSE SECURE LOGIN -->
+<div id="loginModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:9999;align-items:center;justify-content:center;">
+<div style="background:#fff;padding:20px;border-radius:12px;width:90%;max-width:360px;text-align:center;">
+<h2>🔐 KitabVerse Login</h2>
+<input id="kvEmail" type="email" placeholder="Email" style="width:100%;padding:10px;margin:8px 0;">
+<input id="kvPass" type="password" placeholder="Your Password" style="width:100%;padding:10px;margin:8px 0;">
+<p id="kvCaptchaQ" style="font-weight:bold;"></p>
+<input id="kvCaptchaAns" type="number" placeholder="Answer - I am not robot" style="width:100%;padding:10px;">
+<input id="kvOtp" type="number" placeholder="Enter OTP - 123456" style="width:100%;padding:10px;margin:8px 0;display:none;">
+<button onclick="kvSendOtp()" style="width:100%;padding:12px;background:#FF6B35;color:#fff;border:0;border-radius:8px;margin-top:8px;">Send OTP & Login</button>
+<button onclick="kvGoogle()" style="width:100%;padding:12px;background:#fff;border:1px solid #ccc;border-radius:8px;margin-top:8px;">Login with Google</button>
+<p id="kvMsg" style="color:red;font-size:13px;"></p>
+</div></div>
+
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {getAuth,signInWithEmailAndPassword,signInWithPopup,GoogleAuthProvider} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+const firebaseConfig = { apiKey:"AIzaSyA3RtkFn390udz28cGyS0_zGdMmc-YVCu8", authDomain:"kitabverse.firebaseapp.com", projectId:"kitabverse" };
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+let a=Math.floor(Math.random()*9)+1, b=Math.floor(Math.random()*9)+1, kvOtpCode="123456";
+document.getElementById('kvCaptchaQ').innerText = `I am not robot: ${a} + ${b} = ?`;
+window.kvSendOtp = async()=>{
+ let ans=document.getElementById('kvCaptchaAns').value;
+ let otpBox=document.getElementById('kvOtp');
+ if(otpBox.style.display==="none"){
+   if(parseInt(ans)!==a+b){document.getElementById('kvMsg').innerText="Wrong CAPTCHA - Try Again";return;}
+   document.getElementById('kvMsg').innerText="OTP Sent to your Email: 123456 (Demo - Live OTP in Step 4)";
+   otpBox.style.display="block"; return;
+ }
+ if(otpBox.value!==kvOtpCode){document.getElementById('kvMsg').innerText="Wrong OTP";return;}
+ try{ await signInWithEmailAndPassword(auth,document.getElementById('kvEmail').value,document.getElementById('kvPass').value);
+ document.getElementById('kvMsg').innerText="Login Success!"; location.reload();
+ }catch(e){document.getElementById('kvMsg').innerText=e.message;}
+};
+window.kvGoogle = async()=>{ try{await signInWithPopup(auth,new GoogleAuthProvider()); location.reload();}catch(e){alert(e.message);} };
+window.openLogin = ()=>{document.getElementById('loginModal').style.display="flex";};
+</script>
 </body>
 </html>
