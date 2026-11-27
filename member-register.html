@@ -80,7 +80,7 @@ function register(){
   members.push({id,name,wa,email,insta:document.getElementById('insta').value,country:document.getElementById('country').value,area:document.getElementById('area').value,date:document.getElementById('regDate').value,pin:pin});
   localStorage.setItem('kv_members',JSON.stringify(members));
   document.getElementById('ok').style.display='block';
-  document.getElementById('ok').innerHTML=`✅ Registered!<br><b>${id}</b><br>Name: ${name}<br>Your PIN for Login: <b>+pin+</b><br>Share this ID on WhatsApp!`;
+  document.getElementById('ok').innerHTML=`✅ Registered!<br><b>${id}</b><br>Name: ${name}<br>Your PIN for Login: <b>${id}</b><br>Share this ID on WhatsApp!`;
   updateId();
 }
 </script></body></html>
