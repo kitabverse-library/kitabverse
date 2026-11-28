@@ -1,59 +1,76 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>KitabVerse Dashboard</title>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KitabVerse - Admin Dashboard</title>
 <style>
-body{font-family:Arial;background:#fff8e1;padding:20px;text-align:center}
-.box{background:white;padding:20px;border-radius:15px;max-width:500px;margin:auto;box-shadow:0 0 10px #ccc}
-button{padding:12px 20px;background:#ff9800;color:white;border:none;border-radius:8px;font-size:16px;margin:5px}
-table{width:100%;border-collapse:collapse;margin-top:15px}
-td,th{border:1px solid #ddd;padding:8px;font-size:14px}
-</style>
-</head>
-<body>
-<div class="box">
-<h2>📚 KitabVerse Dashboard</h2>
-<div id="info"></div>
-<div id="adminArea" style="display:none">
-<h3>👥 All Members</h3>
-<div id="allMembers"></div>
-<h3>👀 Visitors: <span id="vcount">0</span></h3>
-<button onclick="resetVisitors()">🔄 Reset Visitor Counter</button>
+body{font-family:Arial;background:#f5f0e6;padding:15px}
+.card{max-width:650px;margin:auto;background:#fff;padding:20px;border-radius:14px;box-shadow:0 4px 20px #0002}
+h2{text-align:center;color:#6b3f00}
+.stats{display:flex;gap:10px;margin:15px 0}
+.stat{flex:1;background:#fff7e6;padding:12px;border-radius:10px;text-align:center;border:1px solid #f0d9a0}
+.stat b{font-size:22px;color:#6b3f00}
+input{width:100%;padding:11px;border:1px solid #ccc;border-radius:8px;box-sizing:border-box;font-size:15px}
+.member{border:1px solid #eee;padding:12px;border-radius:10px;margin-top:10px;background:#fafafa}
+.member b{color:#6b3f00}
+button{padding:8px 12px;border:0;border-radius:8px;background:#6b3f00;color:#fff;margin-top:8px}
+.badge{background:#e8f5e9;color:#2e7d32;padding:3px 8px;border-radius:20px;font-size:12px}
+</style></head><body>
+<div class="card">
+<h2>📚 KitabVerse<br>Admin Dashboard</h2>
+<p style="text-align:center;color:#666;font-size:13px">Live From Firebase • kitabverse</p>
+<div class="stats">
+<div class="stat"><b id="total">0</b><br>Total Members</div>
+<div class="stat"><b id="totalLogins">0</b><br>Total Logins</div>
+<div class="stat"><b id="today">0</b><br>Today Joined</div>
 </div>
-<br>
-<button onclick="logout()">Logout</button>
+<input id="search" placeholder="🔍 Search by Name / ID / Phone..." oninput="render()">
+<button onclick="loadMembers()" style="width:100%;padding:11px">🔄 Refresh Members</button>
+<div id="list"><p style="text-align:center;color:#888">Loading members from Firebase...</p></div>
+<p style="text-align:center;margin-top:15px"><a href="member-register.html">+ New Registration</a> | <a href="index.html">Home</a></p>
 </div>
 
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script>
-let user = JSON.parse(localStorage.getItem('kv_loggedin'));
-if(!user){ window.location.href='member-login.html'; }
+const firebaseConfig = {
+  apiKey: "AIzaSyA3RtkFn390udz28cGyS0_zGdMmc-YVCu8",
+  authDomain: "kitabverse.firebaseapp.com",
+  projectId: "kitabverse",
+  storageBucket: "kitabverse.firebasestorage.app",
+  messagingSenderId: "918701492498",
+  appId: "1:918701492498:web:f2bdae6a46b1a2b3edcbcb"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+let all=[];
 
-let visitors = localStorage.getItem('kv_visitors') || 0;
-document.getElementById('vcount').innerText = visitors;
-
-if(user.id === 'ADMIN-001'){
-  document.getElementById('info').innerHTML = `<b>Welcome Admin Sir!</b><br>Admin ID: ADMIN-001`;
-  document.getElementById('adminArea').style.display='block';
-  let members = JSON.parse(localStorage.getItem('kv_members') || '[]');
-  let html = `<table><tr><th>ID</th><th>Name</th><th>PIN</th></tr>`;
-  members.forEach(m=>{ html += `<tr><td>${m.id}</td><td>${m.name}</td><td>${m.pin}</td></tr>` });
-  html += `</table>`;
-  if(members.length===0) html = 'No members yet';
-  document.getElementById('allMembers').innerHTML = html;
-} else {
-  document.getElementById('info').innerHTML = `<b>Welcome ${user.name}!</b><br><br>ID: <b>${user.id}</b><br>Name: ${user.name}<br>Phone: ${user.phone || ''}<br>Your PIN: <b>${user.pin}</b><br><br>✅ You are a KitabVerse Member`;
+async function loadMembers(){
+  document.getElementById('list').innerHTML='<p style="text-align:center">Loading...</p>';
+  try{
+    const snap = await db.collection('members').orderBy('createdAt','desc').get();
+    all=[]; snap.forEach(d=>all.push(d.data()));
+    let local=JSON.parse(localStorage.getItem('kv_members')||'[]');
+    local.forEach(m=>{ if(!all.find(x=>x.memberId===m.memberId)) all.push(m); });
+    render();
+  }catch(e){ document.getElementById('list').innerHTML='Error: '+e.message; }
 }
-
-function resetVisitors(){
-  localStorage.setItem('kv_visitors','0');
-  document.getElementById('vcount').innerText='0';
-  alert('Visitor Counter Reset to 0!');
+function render(){
+  const q=(document.getElementById('search').value||'').toLowerCase();
+  const filtered=all.filter(m=> (m.name+' '+m.memberId+' '+m.whatsapp+' '+m.email).toLowerCase().includes(q));
+  document.getElementById('total').innerText=all.length;
+  let sum=0; all.forEach(m=> sum += (m.loginCount||0));
+  document.getElementById('totalLogins').innerText=sum;
+  const today=new Date(); const td=`${String(today.getDate()).padStart(2,'0')}/${String(today.getMonth()+1).padStart(2,'0')}/${today.getFullYear()}`;
+  document.getElementById('today').innerText=all.filter(m=>m.date===td).length;
+  if(!filtered.length){ document.getElementById('list').innerHTML='<p style="text-align:center;color:#888;margin-top:15px">No members found.</p>'; return; }
+  document.getElementById('list').innerHTML=filtered.map(m=>`
+    <div class="member">
+      <b>${m.memberId}</b> — ${m.name} <span class="badge">👀 ${m.loginCount||0} Logins</span><br>
+      📱 ${m.whatsapp} | 📍 ${m.area} | 🌍 ${m.country}<br>
+      ✉️ ${m.email}<br>
+      📅 Joined: ${m.date} | PIN: <b>${m.pin||'----'}</b><br>
+      🕒 Last Login: <b>${m.lastLogin||'Never Logged In Yet'}</b><br>
+      <button onclick="alert('MEMBER TRUTH PROOF\\n\\nName: ${m.name}\\nID: ${m.memberId}\\nTotal Logins: ${m.loginCount||0}\\nLast Login: ${m.lastLogin||'Never'}')">📊 Show Proof To Member</button>
+    </div>`).join('');
 }
-function logout(){
-  localStorage.removeItem('kv_loggedin');
-  window.location.href='member-login.html';
-}
-</script>
-</body>
-</html>
+loadMembers();
+</script></body></html>
