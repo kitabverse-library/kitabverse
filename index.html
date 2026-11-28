@@ -397,7 +397,7 @@ window.kvSendOtp = async()=>{
  }catch(e){document.getElementById('kvMsg').innerText=e.message;}
 };
 window.kvGoogle = async()=>{ try{await signInWithPopup(auth,new GoogleAuthProvider()); location.reload();}catch(e){alert(e.message);} };
-window.openLogin = ()=>{document.getElementById('kvloginModal').style.display="flex";};
+window.openLogin = () => {window.location.href='member-login.html';};
 </script>
 </body>
 </html>
