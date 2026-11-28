@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KitabVerse Dashboard</title>
+<style>
+body{font-family:Arial;background:#fff8e1;padding:20px;text-align:center}
+.box{background:white;padding:20px;border-radius:15px;max-width:500px;margin:auto;box-shadow:0 0 10px #ccc}
+button{padding:12px 20px;background:#ff9800;color:white;border:none;border-radius:8px;font-size:16px;margin:5px}
+table{width:100%;border-collapse:collapse;margin-top:15px}
+td,th{border:1px solid #ddd;padding:8px;font-size:14px}
+</style>
+</head>
+<body>
+<div class="box">
+<h2>📚 KitabVerse Dashboard</h2>
+<div id="info"></div>
+<div id="adminArea" style="display:none">
+<h3>👥 All Members</h3>
+<div id="allMembers"></div>
+<h3>👀 Visitors: <span id="vcount">0</span></h3>
+<button onclick="resetVisitors()">🔄 Reset Visitor Counter</button>
+</div>
+<br>
+<button onclick="logout()">Logout</button>
+</div>
+
+<script>
+let user = JSON.parse(localStorage.getItem('kv_loggedin'));
+if(!user){ window.location.href='member-login.html'; }
+
+let visitors = localStorage.getItem('kv_visitors') || 0;
+document.getElementById('vcount').innerText = visitors;
+
+if(user.id === 'ADMIN-001'){
+  document.getElementById('info').innerHTML = `<b>Welcome Admin Sir!</b><br>Admin ID: ADMIN-001`;
+  document.getElementById('adminArea').style.display='block';
+  let members = JSON.parse(localStorage.getItem('kv_members') || '[]');
+  let html = `<table><tr><th>ID</th><th>Name</th><th>PIN</th></tr>`;
+  members.forEach(m=>{ html += `<tr><td>${m.id}</td><td>${m.name}</td><td>${m.pin}</td></tr>` });
+  html += `</table>`;
+  if(members.length===0) html = 'No members yet';
+  document.getElementById('allMembers').innerHTML = html;
+} else {
+  document.getElementById('info').innerHTML = `<b>Welcome ${user.name}!</b><br><br>ID: <b>${user.id}</b><br>Name: ${user.name}<br>Phone: ${user.phone || ''}<br>Your PIN: <b>${user.pin}</b><br><br>✅ You are a KitabVerse Member`;
+}
+
+function resetVisitors(){
+  localStorage.setItem('kv_visitors','0');
+  document.getElementById('vcount').innerText='0';
+  alert('Visitor Counter Reset to 0!');
+}
+function logout(){
+  localStorage.removeItem('kv_loggedin');
+  window.location.href='member-login.html';
+}
+</script>
+</body>
+</html>
