@@ -286,13 +286,13 @@ function startCompass(){
 // Auto-start compass when page opens
 window.addEventListener('load', ()=>{ startCompass(); getLocation(); });
 function handleOrient(e){let deg=e.webkitCompassHeading||e.alpha;if(deg==null)return;deg=Math.round(deg);document.getElementById('needle').style.transform='translate(-50%,-50%) rotate('+deg+'deg)';document.getElementById('compassDeg').innerText=deg+'°';document.getElementById('compassDir').innerText=getDir(deg);}
-function resetVisitorAdmin(){let w=prompt('Admin Only — Enter WhatsApp Number for Reset Confirmation:');if(!w) return;if(confirm('Reset Visitor Counter to 000001? Confirmation will be sent on WhatsApp: '+w)){localStorage.setItem('kv_visitor','1');document.getElementById('todayCount').innerText='000001';document.getElementById('totalCount').innerText='000001';document.getElementById('visitorBig').innerText='000001';alert('Visitor Counter Reset to 000001. WhatsApp confirmation sent to '+w);}}
+function resetVisitorAdmin(){let w=prompt('Admin Only — Enter WhatsApp Number for Reset Confirmation:');if(!w) return;if(confirm('Reset Visitor Counter to 000001? Confirmation will be sent on WhatsApp: '+w)){localStorage.setItem('kv_visitor','1');document.getElementById('todayCount').innerText='000001';document.getElementById('totalCount').innerText='000001';document.getElementById('visitorBig').innerText='000001';alert('Visitor Counter Reset to 000000. WhatsApp confirmation sent to '+w);}}
 function getNextDonorId(city){city=(city||'MUM').toUpperCase().trim()||'MUM';let year=new Date().getFullYear();let key=`KV-${city}-${year}-counter`;let last=parseInt(localStorage.getItem(key)||'0');let next=last+1;let num=String(next).padStart(3,'0');return {id:`KV-${city}-${year}-${num}`, key, next};}
 function previewDonorId(){let city=document.getElementById('cityCode').value||'MUM';let d=getNextDonorId(city);document.getElementById('donorId').value=d.id;}
 function saveDonor(){let name=document.getElementById('donorName').value.trim();let city=document.getElementById('cityCode').value.trim().toUpperCase();if(!city){alert('Please enter City Code');return;}if(!name){alert('Please enter Full Name');return;}let d=getNextDonorId(city);localStorage.setItem(d.key, d.next.toString());document.getElementById('donorId').value=d.id;let msg=document.getElementById('donorMsg');msg.style.display='block';msg.innerHTML=`✅ Donor Saved! Donor ID: <b>${d.id}</b>`;document.getElementById('donorName').value='';}
 document.getElementById('autoDate').value=new Date().toLocaleDateString('en-IN');
 previewDonorId();
-if(!localStorage.getItem('kv_visitor')) localStorage.setItem('kv_visitor','1');
+if(!localStorage.getItem('kv_visitor')) localStorage.setItem('kv_visitor','0');
 let vc=String(localStorage.getItem('kv_visitor')).padStart(6,'0');
 document.getElementById('todayCount').innerText=vc;document.getElementById('totalCount').innerText=vc;
 document.getElementById('borrowDays').addEventListener('change',e=>{let days=parseInt(e.target.value);let d=new Date();d.setDate(d.getDate()+days);document.getElementById('dueDate').value=d.toLocaleDateString('en-IN');});
