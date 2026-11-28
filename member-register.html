@@ -4,27 +4,26 @@
 <style>
 body{font-family:Arial;background:#f5f0e6;padding:15px}
 .card{max-width:520px;margin:auto;background:#fff;padding:22px;border-radius:14px;box-shadow:0 4px 20px #0002}
-h2{text-align:center;color:#6b3f00} label{display:block;margin-top:12px;font-weight:bold;font-size:14px}
-input,select{width:100%;padding:11px;margin-top:5px;border:1px solid #ccc;border-radius:8px;font-size:15px;box-sizing:border-box}
-button{width:100%;padding:13px;margin-top:18px;background:#6b3f00;color:#fff;border:0;border-radius:10px;font-size:16px;font-weight:bold}
-.idbox{background:#fff8e1!important;font-weight:bold;color:#6b3f00}
-.success{background:#e8f5e9;padding:12px;border-radius:8px;margin-top:12px;display:none;text-align:center}
+h2{text-align:center;color:#6b3f00}label{display:block;margin-top:12px;font-weight:bold;font-size:14px}
+input,select{width:100%;padding:11px;margin-top:5px;border:1px solid #ccc;border-radius:8px;font-size:16px;box-sizing:border-box}
+button{width:100%;padding:13px;margin-top:18px;background:#6b3f00;color:#fff;border:0;border-radius:10px;font-size:16px}
+#ok{color:#0f7a3d;background:#e8f5e9;padding:12px;border-radius:8px;margin-top:12px;display:none;text-align:center}
 </style></head><body>
 <div class="card">
 <h2>📚 KitabVerse<br>Membership Registration</h2>
 <p style="text-align:center;font-size:13px;color:#666">Professional Membership • Mumbai</p>
 
-<label>Membership ID (Auto Generated):</label>
-<input id="memberId" class="idbox" readonly>
+<label>Membership ID (Auto Generated)</label>
+<input id="memberId" readonly placeholder="Will generate on Register">
 
 <label>* Full Name:</label>
 <input id="fullName" required placeholder="e.g. Satish Puthran">
 
-<label>* WhatsApp Number with City / Country Code:</label>
+<label>* WhatsApp Number With City / Country Code:</label>
 <input id="whatsapp" required placeholder="e.g. +91 98765 43210">
 
 <label>* Location / Area:</label>
-<select id="area" onchange="updateId()">
+<select id="area">
 <option value="MUM">Mumbai - MUM</option>
 <option value="DEL">Delhi - DEL</option>
 <option value="BLR">Bengaluru - BLR</option>
@@ -37,50 +36,73 @@ button{width:100%;padding:13px;margin-top:18px;background:#6b3f00;color:#fff;bor
 </select>
 
 <label>* Country:</label>
-<select id="country"><option>India</option><option>UAE</option><option>UK</option><option>USA</option><option>Canada</option><option>Other</option></select>
+<select id="country"><option>India</option><option>UAE</option><option>UK</option><option>USA</option><option>Canada</option></select>
 
 <label>* E-mail id:</label>
 <input id="email" type="email" required placeholder="name@gmail.com">
 
 <label>Instagram id (optional):</label>
-<input id="insta" placeholder="@username">
+<input id="insta" placeholder="Username">
 
 <label>* Date (Auto):</label>
 <input id="regDate" readonly>
 
 <button onclick="register()">Register Member & Generate ID</button>
-<div id="ok" class="success"></div>
-<p style="text-align:center;font-size:13px;margin-top:12px"><a href="member-login.html">Already Member? Login Here →</a></p>
+<div id="ok"></div>
+<p style="text-align:center;font-size:13px;margin-top:12px"><a href="member-login.html">Already Member? Login Here</a></p>
 </div>
 
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script>
-const d=new Date(), dd=String(d.getDate()).padStart(2,'0'), mm=String(d.getMonth()+1).padStart(2,'0'), yyyy=d.getFullYear();
+const firebaseConfig = {
+  apiKey: "AIzaSyA3RtkFn390udz28cGyS0_zGdMmc-YVCu8",
+  authDomain: "kitabverse.firebaseapp.com",
+  projectId: "kitabverse",
+  storageBucket: "kitabverse.firebasestorage.app",
+  messagingSenderId: "918701492498",
+  appId: "1:918701492498:web:f2bdae6a46b1a2b3edcbcb"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+const d=new Date();
+const dd=String(d.getDate()).padStart(2,'0'), mm=String(d.getMonth()+1).padStart(2,'0'), yyyy=d.getFullYear();
 document.getElementById('regDate').value=`${dd}/${mm}/${yyyy}`;
-function getNext(){
-  let n=parseInt(localStorage.getItem('kv_last_num')||'0')+1;
-  return n;
-}
-function updateId(){
-  const area=document.getElementById('area').value;
-  const next=String(getNext()).padStart(6,'0');
-  document.getElementById('memberId').value=`KV-${area}-${yyyy}-${next}`;
-}
-updateId();
-function register(){
+
+async function register(){
   const name=document.getElementById('fullName').value.trim();
   const wa=document.getElementById('whatsapp').value.trim();
   const email=document.getElementById('email').value.trim();
   if(!name||!wa||!email){alert('Please fill * Full Name, WhatsApp & Email');return;}
-  const id=document.getElementById('memberId').value;
-  const next=getNext();
-  localStorage.setItem('kv_last_num',next);
-  // Save member for login demo
+
+  const area=document.getElementById('area').value;
+  // FIX: Generate ID ONLY ONCE here, not on page load
+  let next=parseInt(localStorage.getItem('kv_last_num')||'0')+1;
+  const nextStr=String(next).padStart(6,'0');
+  const id=`KV-${area}-${yyyy}-${nextStr}`;
   const pin=String(Math.floor(1000+Math.random()*9000));
-  let members=JSON.parse(localStorage.getItem('kv_members')||'[]');
-  members.push({id,name,wa,email,insta:document.getElementById('insta').value,country:document.getElementById('country').value,area:document.getElementById('area').value,date:document.getElementById('regDate').value,pin:pin});
-  localStorage.setItem('kv_members',JSON.stringify(members));
-  document.getElementById('ok').style.display='block';
-  document.getElementById('ok').innerHTML=`✅ Registered!<br><b>${id}</b><br>Name: ${name}<br>Your PIN for Login: <b>${id}</b><br>Share this ID on WhatsApp!`;
-  updateId();
+
+  const data={
+    memberId:id, name:name, whatsapp:wa, area:area,
+    country:document.getElementById('country').value,
+    email:email, insta:document.getElementById('insta').value,
+    date:`${dd}/${mm}/${yyyy}`, pin:pin, createdAt:new Date().toISOString()
+  };
+
+  try{
+    // SAVE TO FIREBASE - This is what was missing!
+    await db.collection('members').doc(id).set(data);
+    // Also keep local backup
+    localStorage.setItem('kv_last_num',next);
+    let members=JSON.parse(localStorage.getItem('kv_members')||'[]');
+    members.push(data); localStorage.setItem('kv_members',JSON.stringify(members));
+
+    document.getElementById('memberId').value=id;
+    document.getElementById('ok').style.display='block';
+    document.getElementById('ok').innerHTML=`✅ Registered!<br><b>${id}</b><br>Name: ${name}<br>Your PIN for Login: <b>${pin}</b><br><small>Saved in Firebase ✅</small>`;
+  }catch(e){
+    alert('Firebase Error: '+e.message+'\n\nGo to Firebase > Firestore > Rules > Allow read,write if true > Publish');
+  }
 }
 </script></body></html>
