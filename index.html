@@ -231,7 +231,7 @@ function cutAdminQuote(){let el=document.getElementById('adminQuote');navigator.
 function pasteAdminQuote(){navigator.clipboard.readText().then(t=>{if(t) document.getElementById('adminQuote').innerText=t;});}
 function deleteAdminQuote(){if(confirm('Delete this quote?')) document.getElementById('adminQuote').innerText="";}
 function showSection(id,el){document.querySelectorAll('main > div[id^="sec-"]').forEach(d=>d.classList.add('hidden'));document.getElementById('sec-'+id).classList.remove('hidden');document.querySelectorAll('aside a').forEach(a=>a.classList.remove('active'));if(el) el.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
-function scrollBooks(d){let a=document.getElementById('featuredBooks');let b=document.getElementById('trendingBooks');if(a)a.scrollBy({left:d*300,behavior:'smooth'});if(b)b.scrollBy({left:d*300,behavior:'smooth'});}
+function scrollBooks(d){window.scrollBy({top:d*500,behavior:'smooth'});}
 let currentLoginType='member';
 function openLogin(type){
   currentLoginType=type;
