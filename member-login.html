@@ -3,50 +3,71 @@
 <title>KitabVerse - Member Login</title>
 <style>
 body{font-family:Arial;background:#f5f0e6;padding:15px}
-.card{max-width:480px;margin:auto;background:#fff;padding:22px;border-radius:14px;box-shadow:0 4px 20px #0002}
-h2{text-align:center;color:#6b3f00} label{display:block;margin-top:12px;font-weight:bold;font-size:14px}
-input{width:100%;padding:11px;margin-top:5px;border:1px solid #ccc;border-radius:8px;font-size:15px;box-sizing:border-box}
-button{width:100%;padding:12px;margin-top:14px;background:#6b3f00;color:#fff;border:0;border-radius:10px;font-size:15px;font-weight:bold}
-.tab{display:flex;gap:8px} .tab button{background:#eee;color:#333} .tab button.active{background:#6b3f00;color:#fff}
-.box{margin-top:10px} .msg{margin-top:12px;text-align:center;font-weight:bold}
+.card{max-width:480px;margin:auto;background:#fff;padding:20px;border-radius:14px;box-shadow:0 4px 20px #0002}
+h2{text-align:center;color:#6b3f00}
+input{width:100%;padding:11px;margin-top:5px;border:1px solid #ccc;border-radius:8px;box-sizing:border-box}
+button{width:100%;padding:12px;margin-top:14px;border:0;border-radius:8px;background:#6b3f00;color:#fff;font-size:16px}
+.msg{margin-top:12px;text-align:center;font-weight:bold}
 </style></head><body>
 <div class="card">
 <h2>📚 KitabVerse<br>Member Login</h2>
-<div class="tab">
-<button id="t1" class="active">Member ID + PIN</button>
-</div>
-
-<!-- OPTION 1 -->
-<div id="login-pin" class="box">
 <label>Membership ID:</label><input id="mid" placeholder="KV-MUM-2026-000001">
-<label>PIN (Given by KitabVerse):</label><input id="pin" type="password" placeholder="">
+<label>PIN (Given on WhatsApp):</label><input id="pin" type="password" placeholder="">
 <button onclick="loginPin()">Login with PIN</button>
-</div>
-
 <div id="msg" class="msg"></div>
 <p style="text-align:center;font-size:13px"><a href="member-register.html">New Member? Register Here →</a></p>
 </div>
 
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script>
-function loginPin(){
+const firebaseConfig = {
+  apiKey: "AIzaSyA3RtkFn390udz28cGyS0_zGdMmc-YVCu8",
+  authDomain: "kitabverse.firebaseapp.com",
+  projectId: "kitabverse",
+  storageBucket: "kitabverse.firebasestorage.app",
+  messagingSenderId: "918701492498",
+  appId: "1:918701492498:web:f2bdae6a46b1a2b3edcbcb"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+async function loginPin(){
   const id=document.getElementById('mid').value.trim().toUpperCase();
   const pin=document.getElementById('pin').value.trim();
+  const msg=document.getElementById('msg');
 
-  // ADMIN LOGIN - No Registration Needed
   if(id==='ADMIN-001' && pin==='9999'){
     localStorage.setItem('kv_loggedin', JSON.stringify({id:'ADMIN-001', name:'Admin', pin:'9999'}));
-    window.location.href='member-dashboard.html';
-    return;
+    window.location.href='member-dashboard.html'; return;
   }
+  if(!id || !pin){ msg.style.color='red'; msg.innerHTML='Enter ID and PIN'; return; }
+  msg.style.color='#666'; msg.innerHTML='Checking...';
 
-  let members=JSON.parse(localStorage.getItem('kv_members')||'[]');
-  let m=members.find(x=>x.id===id && x.pin===pin);
-  if(m){
+  try{
+    // Find member by memberId in Firebase
+    const snap = await db.collection('members').where('memberId','==',id).where('pin','==',pin).get();
+    if(snap.empty){
+      // Try old localStorage as backup
+      let members=JSON.parse(localStorage.getItem('kv_members')||'[]');
+      let m=members.find(x=>x.memberId===id && x.pin===pin);
+      if(!m){ msg.style.color='red'; msg.innerHTML='❌ Invalid ID or PIN. Check WhatsApp PIN from KitabVerse.'; return; }
+      localStorage.setItem('kv_loggedin', JSON.stringify(m));
+      window.location.href='member-dashboard.html'; return;
+    }
+    let doc = snap.docs[0];
+    let m = doc.data();
+
+    // ⭐ COUNT THIS LOGIN - THIS IS AFTER WHICH LINE YOU ASKED
+    // This runs ONLY after login is successful, before going to dashboard
+    await db.collection('members').doc(doc.id).update({
+      loginCount: firebase.firestore.FieldValue.increment(1),
+      lastLogin: new Date().toLocaleString('en-IN'),
+      lastLoginTime: firebase.firestore.FieldValue.serverTimestamp()
+    });
+
     localStorage.setItem('kv_loggedin', JSON.stringify(m));
     window.location.href='member-dashboard.html';
-  } else {
-    document.getElementById('msg').style.color='red';
-    document.getElementById('msg').innerHTML='❌ Invalid ID or PIN. Check WhatsApp PIN from KitabVerse.';
-  }
+  }catch(e){ msg.style.color='red'; msg.innerHTML='Error: '+e.message; }
 }
 </script></body></html>
