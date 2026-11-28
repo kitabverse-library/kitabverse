@@ -31,14 +31,22 @@ button{width:100%;padding:12px;margin-top:14px;background:#6b3f00;color:#fff;bor
 function loginPin(){
   const id=document.getElementById('mid').value.trim().toUpperCase();
   const pin=document.getElementById('pin').value.trim();
+
+  // ADMIN LOGIN - No Registration Needed
+  if(id==='ADMIN-001' && pin==='9999'){
+    localStorage.setItem('kv_loggedin', JSON.stringify({id:'ADMIN-001', name:'Admin', pin:'9999'}));
+    window.location.href='member-dashboard.html';
+    return;
+  }
+
   let members=JSON.parse(localStorage.getItem('kv_members')||'[]');
-  let m=members.find(x=>x.id.toUpperCase()==id && x.pin==pin);
-    document.getElementById('msg').style.color='green';
-    document.getElementById('msg').innerHTML='✅ Login Success! Welcome '+(m?m.name:'Member')+'<br>ID: '+id;
+  let m=members.find(x=>x.id===id && x.pin===pin);
+  if(m){
+    localStorage.setItem('kv_loggedin', JSON.stringify(m));
+    window.location.href='member-dashboard.html';
   } else {
     document.getElementById('msg').style.color='red';
     document.getElementById('msg').innerHTML='❌ Invalid ID or PIN. Check WhatsApp PIN from KitabVerse.';
   }
 }
-
 </script></body></html>
